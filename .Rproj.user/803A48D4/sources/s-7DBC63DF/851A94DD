@@ -3,7 +3,7 @@
     "path": "C:/Users/JDC/AnaPinheiro/Tutorial-Shiny/index.Rmd",
     "project_path": "index.Rmd",
     "type": "r_markdown",
-    "hash": "1686099422",
+    "hash": "723681908",
     "contents": "",
     "dirty": false,
     "created": 1636220272808.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "3,22",
-        "scrollLine": "0"
+        "cursorPosition": "22,19",
+        "scrollLine": "17"
     },
     "folds": "",
-    "lastKnownWriteTime": 1636221627,
+    "lastKnownWriteTime": 1636222486,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1636221627486,
+    "last_content_update": 1636222486581,
     "read_only": false,
     "read_only_alternatives": []
 }

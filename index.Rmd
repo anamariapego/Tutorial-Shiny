@@ -20,7 +20,7 @@ github-repo: rstudio/bookdown-demo
 
 ---
 
-Conhecimentos básico sna liguaguem R. 
+Conhecimento básico na liguaguem R. 
 
 Será útil se você tiver algum conhecimento básico sobre HTML, CSS e JavaScript, pórem não serão obrigatórios.
 
