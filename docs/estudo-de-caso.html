@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 9 Estudo de Caso | Tutorial Básico de Shiny</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 9 Estudo de Caso | Tutorial Básico de Shiny" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 9 Estudo de Caso | Tutorial Básico de Shiny" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Author: Ana M. P. Pinheiro" />
+
+
+<meta name="date" content="2021-11-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="módulos-shiny.html"/>
+<link rel="next" href="módulos-e-aparência.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tutorial Shiny</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Pré-requisitos</a></li>
+<li class="chapter" data-level="1" data-path="introdução.html"><a href="introdução.html"><i class="fa fa-check"></i><b>1</b> Introdução</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introdução.html"><a href="introdução.html#o-que-é-shiny"><i class="fa fa-check"></i><b>1.1</b> <strong>O que é Shiny?</strong></a></li>
+<li class="chapter" data-level="1.2" data-path="introdução.html"><a href="introdução.html#alguns-recursos-do-shiny"><i class="fa fa-check"></i><b>1.2</b> <strong>Alguns recursos do Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="aplicativo-shiny.html"><a href="aplicativo-shiny.html"><i class="fa fa-check"></i><b>2</b> <strong>Aplicativo Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="aplicativo-shiny.html"><a href="aplicativo-shiny.html#construindo-um-aplicativo-shiny"><i class="fa fa-check"></i><b>2.1</b> <strong>Construindo um aplicativo Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="função-ui.html"><a href="função-ui.html"><i class="fa fa-check"></i><b>3</b> <strong>Função UI</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="função-ui.html"><a href="função-ui.html#comportamento-da-ui"><i class="fa fa-check"></i><b>3.1</b> <strong>Comportamento da UI</strong></a></li>
+<li class="chapter" data-level="3.2" data-path="função-ui.html"><a href="função-ui.html#inputs"><i class="fa fa-check"></i><b>3.2</b> <strong>Inputs</strong></a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="função-ui.html"><a href="função-ui.html#alguns-exemplos-de-inputs"><i class="fa fa-check"></i><b>3.2.1</b> <strong>Alguns exemplos de Inputs</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="função-server.html"><a href="função-server.html"><i class="fa fa-check"></i><b>4</b> <strong>Função Server</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="função-server.html"><a href="função-server.html#outputs"><i class="fa fa-check"></i><b>4.1</b> <strong>Outputs</strong></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="função-server.html"><a href="função-server.html#alguns-exemplos-de-outputs"><i class="fa fa-check"></i><b>4.1.1</b> <strong>Alguns exemplos de Outputs</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="uma-breve-história-da-programação-reativa.html"><a href="uma-breve-história-da-programação-reativa.html"><i class="fa fa-check"></i><b>5</b> <strong>Uma breve história da programação reativa</strong></a></li>
+<li class="chapter" data-level="6" data-path="programação-reativa.html"><a href="programação-reativa.html"><i class="fa fa-check"></i><b>6</b> <strong>Programação reativa</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="programação-reativa.html"><a href="programação-reativa.html#introdução-1"><i class="fa fa-check"></i><b>6.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="programação-reativa.html"><a href="programação-reativa.html#programação-reativa-1"><i class="fa fa-check"></i><b>6.2</b> <strong>Programação reativa</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="programação-reativa.html"><a href="programação-reativa.html#programação-declarativa-vs-imperativa"><i class="fa fa-check"></i><b>6.3</b> <strong>Programação declarativa vs imperativa</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="expressões-reativas.html"><a href="expressões-reativas.html"><i class="fa fa-check"></i><b>7</b> <strong>Expressões reativas</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="expressões-reativas.html"><a href="expressões-reativas.html#observers"><i class="fa fa-check"></i><b>7.1</b> <strong>Observers</strong></a></li>
+<li class="chapter" data-level="7.2" data-path="expressões-reativas.html"><a href="expressões-reativas.html#diferenças-entre-expressões-reativas-e-observers"><i class="fa fa-check"></i><b>7.2</b> <strong>Diferenças entre expressões reativas e Observers</strong></a></li>
+<li class="chapter" data-level="7.3" data-path="expressões-reativas.html"><a href="expressões-reativas.html#valores-reativos"><i class="fa fa-check"></i><b>7.3</b> <strong>Valores reativos</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="módulos-shiny.html"><a href="módulos-shiny.html"><i class="fa fa-check"></i><b>8</b> <strong>Módulos Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="módulos-shiny.html"><a href="módulos-shiny.html#introdução-2"><i class="fa fa-check"></i><b>8.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="8.2" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-simples"><i class="fa fa-check"></i><b>8.2</b> <strong>Módulo simples</strong></a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-ui"><i class="fa fa-check"></i><b>8.2.1</b> <strong>Módulo UI</strong></a></li>
+<li class="chapter" data-level="8.2.2" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-server"><i class="fa fa-check"></i><b>8.2.2</b> <strong>Módulo Server</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="módulos-shiny.html"><a href="módulos-shiny.html#entradas-e-saídas"><i class="fa fa-check"></i><b>8.3</b> <strong>Entradas e Saídas</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html"><i class="fa fa-check"></i><b>9</b> <strong>Estudo de Caso</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#introdução-3"><i class="fa fa-check"></i><b>9.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="9.2" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#descrição-dos-dados"><i class="fa fa-check"></i><b>9.2</b> <strong>Descrição dos dados</strong></a></li>
+<li class="chapter" data-level="9.3" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#transformação-e-limpeza-dos-dados"><i class="fa fa-check"></i><b>9.3</b> <strong>Transformação e limpeza dos dados</strong></a></li>
+<li class="chapter" data-level="9.4" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#exploração-dos-dados"><i class="fa fa-check"></i><b>9.4</b> <strong>Exploração dos dados</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#desenvolvendo-o-aplicativo-shiny"><i class="fa fa-check"></i><b>9.5</b> <strong>Desenvolvendo o aplicativo Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#adicionando-a-narrativa"><i class="fa fa-check"></i><b>9.5.1</b> <strong>Adicionando a Narrativa</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="módulos-e-aparência.html"><a href="módulos-e-aparência.html"><i class="fa fa-check"></i><b>10</b> <strong>Módulos e aparência</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="módulos-e-aparência.html"><a href="módulos-e-aparência.html#aplicativo-shiny-1"><i class="fa fa-check"></i><b>10.1</b> <strong>Aplicativo Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="extensões-shiny.html"><a href="extensões-shiny.html"><i class="fa fa-check"></i><b>11</b> <strong>Extensões Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="extensões-shiny.html"><a href="extensões-shiny.html#comunidades"><i class="fa fa-check"></i><b>11.1</b> <strong>Comunidades</strong></a></li>
+<li class="chapter" data-level="11.2" data-path="extensões-shiny.html"><a href="extensões-shiny.html#pacotes"><i class="fa fa-check"></i><b>11.2</b> <strong>Pacotes</strong></a></li>
+<li class="chapter" data-level="11.3" data-path="extensões-shiny.html"><a href="extensões-shiny.html#livros"><i class="fa fa-check"></i><b>11.3</b> <strong>Livros</strong></a></li>
+<li class="chapter" data-level="11.4" data-path="extensões-shiny.html"><a href="extensões-shiny.html#vídeos"><i class="fa fa-check"></i><b>11.4</b> <strong>Vídeos</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>12</b> <strong>Referências</strong></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/anamariapego/Tutorial-Shiny" target="blank">View book source</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tutorial Básico de Shiny</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="estudo-de-caso" class="section level1" number="9">
+<h1><span class="header-section-number"> 9</span> <strong>Estudo de Caso</strong></h1>
+<hr />
+<div id="introdução-3" class="section level2" number="9.1">
+<h2><span class="header-section-number">9.1</span> <strong>Introdução</strong></h2>
+<p>Vamos fazer um estudo de caso, para ajudá-los a fixar os conteúdos anteriores. Agora veremos um aplicativo Shiny mais rico que explora um conjunto de dados e reúne muitas das ideias que vimos até agora. Vamos fazer uma pequena análise de dados fora do shiny,em seguida, transformá-lo em um aplicativo, começando de forma simples e progressivamente acrescentando mais detalhes.</p>
+<p>Vamos complementar o Shiny com outros pacotes:</p>
+<ul>
+<li><code>tidyverse</code> para análise geral dos dados(uma coleção de pacotes R projetados para data science).</li>
+<li><code>shinydashboard</code> estrutura shiny dashboard.</li>
+<li><code>shinydashboardPlus</code> extensões do pacote shinydashboard.</li>
+<li><code>shinyjs</code> operações comuns em JavaScript via código R.</li>
+<li><code>ggplot2</code> para visualização gráfica.</li>
+<li><code>forcats</code> para lidar com variáveis categóricas.</li>
+</ul>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="estudo-de-caso.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;tidyverse&quot;)</span></span>
+<span id="cb31-2"><a href="estudo-de-caso.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;ggplot2&quot;)</span></span>
+<span id="cb31-3"><a href="estudo-de-caso.html#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;shinydashboard&quot;)</span></span>
+<span id="cb31-4"><a href="estudo-de-caso.html#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;shinydashboardPlus&quot;)</span></span>
+<span id="cb31-5"><a href="estudo-de-caso.html#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;shinyjs&quot;)</span></span>
+<span id="cb31-6"><a href="estudo-de-caso.html#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;forcats&quot;)</span></span>
+<span id="cb31-7"><a href="estudo-de-caso.html#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="estudo-de-caso.html#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb31-9"><a href="estudo-de-caso.html#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb31-10"><a href="estudo-de-caso.html#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb31-11"><a href="estudo-de-caso.html#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinydashboard)</span>
+<span id="cb31-12"><a href="estudo-de-caso.html#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinydashboardPlus)</span>
+<span id="cb31-13"><a href="estudo-de-caso.html#cb31-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinyjs)</span>
+<span id="cb31-14"><a href="estudo-de-caso.html#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span></code></pre></div>
+</div>
+<div id="descrição-dos-dados" class="section level2" number="9.2">
+<h2><span class="header-section-number">9.2</span> <strong>Descrição dos dados</strong></h2>
+<p>Vamos explorar/analisar os dados do Sistema Nacional de Vigilância de Lesões Eletrônicas (NEISS), coletados pela Comissão de Segurança de Produtos de Consumo. Este é um estudo de longo prazo que registra todos os acidentes observados em uma amostra representativa de hospitais nos Estados Unidos. É um conjunto de dados interessante para explorar porque todos já estão familiarizados com o domínio e cada observação é acompanhada por uma breve narrativa que explica como o acidente ocorreu. Você pode descobrir mais sobre este conjunto de dados <a href="https://github.com/hadley/neiss">aqui</a>.</p>
+<p>Vamos concentrar apenas nos dados do ano de 2017. <a href="https://github.com/hadley/mastering-shiny/blob/master/neiss/data.R">Aqui</a> você pode ver o código que foi usado para extrair os dados para a análise.</p>
+<p>Obtendo os dados para o computador:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="estudo-de-caso.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">&#39;neiss&#39;</span>)</span>
+<span id="cb32-2"><a href="estudo-de-caso.html#cb32-2" aria-hidden="true" tabindex="-1"></a>download <span class="ot">&lt;-</span> <span class="cf">function</span>(name) {</span>
+<span id="cb32-3"><a href="estudo-de-caso.html#cb32-3" aria-hidden="true" tabindex="-1"></a> url <span class="ot">&lt;-</span> <span class="st">&#39;https://github.com/hadley/mastering-shiny/raw/master/neiss/&#39;</span></span>
+<span id="cb32-4"><a href="estudo-de-caso.html#cb32-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">download.file</span>(<span class="fu">paste0</span>(url, name), <span class="fu">paste0</span>(<span class="st">&#39;neiss/&#39;</span>, name), <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb32-5"><a href="estudo-de-caso.html#cb32-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb32-6"><a href="estudo-de-caso.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">download</span>(<span class="st">&#39;injuries.tsv.gz&#39;</span>)</span>
+<span id="cb32-7"><a href="estudo-de-caso.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">download</span>(<span class="st">&#39;population.tsv&#39;</span>)</span>
+<span id="cb32-8"><a href="estudo-de-caso.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">download</span>(<span class="st">&#39;products.tsv&#39;</span>)</span></code></pre></div>
+<p>O dataset <code>injuries</code> tem cerca de 250.000 observações e 10 variáveis.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="estudo-de-caso.html#cb33-1" aria-hidden="true" tabindex="-1"></a>injuries <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(<span class="st">&#39;neiss/injuries.tsv&#39;</span>)</span>
+<span id="cb33-2"><a href="estudo-de-caso.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(injuries)</span>
+<span id="cb33-3"><a href="estudo-de-caso.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(injuries)</span></code></pre></div>
+<p>Descrição das colunas:</p>
+<ul>
+<li><p><code>trmt_date</code> é a data em que a pessoa foi atendida no hospital(e não quando ocorreu o acidente).</p></li>
+<li><p><code>age</code> idade.</p></li>
+<li><p><code>sex</code> gênero.</p></li>
+<li><p><code>race</code> raça.</p></li>
+<li><p><code>body_part</code> localização da lesão no corpo.</p></li>
+<li><p><code>location</code> local onde ocorreu o acidente.</p></li>
+<li><p><code>diag</code> diagnóstico básico da lesão (como fratura ou laceração).</p></li>
+<li><p><code>prod_code</code> principal produto associado à lesão.</p></li>
+<li><p><code>weight</code> é o peso estatístico que fornece o número estimado de pessoas que sofreriam esse ferimento se este conjunto de dados fosse dimensionado para toda a população dos EUA.</p></li>
+<li><p><code>narrative</code> breve história sobre como ocorreu o acidente.</p></li>
+</ul>
+<p>Vamos emparelhar esse dataset <code>injuries</code> com os outros dois datasets:</p>
+<p><code>products</code> que permite que procuramos o nome do produto no código do produto:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="estudo-de-caso.html#cb34-1" aria-hidden="true" tabindex="-1"></a>products <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(<span class="st">&#39;neiss/products.tsv&#39;</span>)</span>
+<span id="cb34-2"><a href="estudo-de-caso.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(products)</span></code></pre></div>
+<p>E o outro dataset é o <code>population</code> que informa a população dos EUA em 2017 para cada combinação de idade e sexo:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="estudo-de-caso.html#cb35-1" aria-hidden="true" tabindex="-1"></a>population <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(<span class="st">&#39;neiss/population.tsv&#39;</span>)</span>
+<span id="cb35-2"><a href="estudo-de-caso.html#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(population)</span></code></pre></div>
+</div>
+<div id="transformação-e-limpeza-dos-dados" class="section level2" number="9.3">
+<h2><span class="header-section-number">9.3</span> <strong>Transformação e limpeza dos dados</strong></h2>
+<p>É uma boa prática antes de qualquer análise ou criação de um aplicativo Shiny, darmos uma atenção aos nossos dados. Verificar qual tipo de dado estamos lidando, se tem valores missings, se precisa criar ou remover variáveis, entre outras possibilidades de transformações e limpezas dos dados. Essa é a parte menos glamurosa de qualquer projeto, porém essa etapa é muito importante, pois garante um boa análise, uma boa visualização dos dados.</p>
+<p>Agora vamos fazer as transformações e limpezas necessárias aos dados.</p>
+<p>Vamos verificar os tipos de dados:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="estudo-de-caso.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(injuries) </span>
+<span id="cb36-2"><a href="estudo-de-caso.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(products)</span>
+<span id="cb36-3"><a href="estudo-de-caso.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(population)</span></code></pre></div>
+<p>Presença de valores missing:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="estudo-de-caso.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(injuries))</span>
+<span id="cb37-2"><a href="estudo-de-caso.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(products))</span>
+<span id="cb37-3"><a href="estudo-de-caso.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(population))</span></code></pre></div>
+<p>Nos três datasets não há presença de valores missing. E para o nosso aplicativo não será necessário transformação/limpeza dos dados, só se ao decorrer do desenvolvimento da análise precisar.</p>
+</div>
+<div id="exploração-dos-dados" class="section level2" number="9.4">
+<h2><span class="header-section-number">9.4</span> <strong>Exploração dos dados</strong></h2>
+<p>Vamos explorar um pouco os dados, antes de criar o aplicativo.</p>
+<p>Vamos extrair um conjunto de dados dos dados originais, extrair apenas as lesões relacionadas aos esportes. E escolher um desses esporte para fazer a análise.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="estudo-de-caso.html#cb38-1" aria-hidden="true" tabindex="-1"></a>esportes <span class="ot">&lt;-</span> <span class="fu">subset</span>(injuries, prod_code <span class="sc">==</span> <span class="dv">1200</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1205</span><span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1211</span> <span class="sc">|</span></span>
+<span id="cb38-2"><a href="estudo-de-caso.html#cb38-2" aria-hidden="true" tabindex="-1"></a>                   prod_code <span class="sc">==</span> <span class="dv">1233</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1267</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1333</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">3265</span><span class="sc">|</span></span>
+<span id="cb38-3"><a href="estudo-de-caso.html#cb38-3" aria-hidden="true" tabindex="-1"></a>                     prod_code <span class="sc">==</span> <span class="dv">3274</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">5034</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">5040</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">5041</span>)</span></code></pre></div>
+<p>Começaremos examinando apenas as lesões relacionada a um tipo de esporte: <strong>basquete</strong>. Vamos retirar os ferimentos associado a ele:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="estudo-de-caso.html#cb39-1" aria-hidden="true" tabindex="-1"></a>basquete <span class="ot">&lt;-</span> <span class="fu">subset</span>(esportes, prod_code <span class="sc">==</span> <span class="dv">1205</span>)</span>
+<span id="cb39-2"><a href="estudo-de-caso.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(basquete)</span></code></pre></div>
+<p>Observando a localização, parte do corpo e o diagnóstico das lesões relacionadas ao basquete. Observe que o peso pela variável <code>weight</code> para que as contagens possam ser interpretadas como o total estimado de lesões em todo os EUA.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="estudo-de-caso.html#cb40-1" aria-hidden="true" tabindex="-1"></a>basquete <span class="sc">%&gt;%</span>  <span class="fu">count</span>(location, <span class="at">wt =</span> weight, <span class="at">sort =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb40-2"><a href="estudo-de-caso.html#cb40-2" aria-hidden="true" tabindex="-1"></a>basquete <span class="sc">%&gt;%</span>  <span class="fu">count</span>(body_part, <span class="at">wt =</span> weight, <span class="at">sort =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb40-3"><a href="estudo-de-caso.html#cb40-3" aria-hidden="true" tabindex="-1"></a>basquete <span class="sc">%&gt;%</span>  <span class="fu">count</span>(diag, <span class="at">wt =</span> weight, <span class="at">sort =</span> <span class="cn">TRUE</span>) </span></code></pre></div>
+<p>Percebemos que os ferimentos envolvendo basquete ocorrem com frequência em lugares de esportes, óbvio. As partes do corpo mais envolvidas são: tornozelo, dedo, joelho, cabeça; e os diagnósticos parecem bem variados.</p>
+<p>Podemos explorar o padrão de acordo com a idade e o sexo.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="estudo-de-caso.html#cb41-1" aria-hidden="true" tabindex="-1"></a>padrao <span class="ot">&lt;-</span> basquete <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="estudo-de-caso.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age, sex, <span class="at">wt =</span> weight)</span>
+<span id="cb41-3"><a href="estudo-de-caso.html#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="estudo-de-caso.html#cb41-4" aria-hidden="true" tabindex="-1"></a>padrao <span class="sc">%&gt;%</span> </span>
+<span id="cb41-5"><a href="estudo-de-caso.html#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(age, n, <span class="at">colour =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb41-6"><a href="estudo-de-caso.html#cb41-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb41-7"><a href="estudo-de-caso.html#cb41-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Number of injuries&#39;</span>) <span class="sc">+</span></span>
+<span id="cb41-8"><a href="estudo-de-caso.html#cb41-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Age&#39;</span>)</span></code></pre></div>
+<p><img src="Tutorial-Shiny_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>Vemos um pico atingindo entre 10 aos 20 anos de idade, e esse pico é maior ainda para os homens.</p>
+<p>Vamos examinar algumas das narrativas.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="estudo-de-caso.html#cb42-1" aria-hidden="true" tabindex="-1"></a>basquete <span class="sc">%&gt;%</span> </span>
+<span id="cb42-2"><a href="estudo-de-caso.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-3"><a href="estudo-de-caso.html#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(narrative)</span></code></pre></div>
+</div>
+<div id="desenvolvendo-o-aplicativo-shiny" class="section level2" number="9.5">
+<h2><span class="header-section-number">9.5</span> <strong>Desenvolvendo o aplicativo Shiny</strong></h2>
+<p>Aqui, vou construir um protótipo simples do aplicativo Shiny, construindo passo a passo para que você possa entender o funcionamento da mecância básica.</p>
+<p><strong>Função UI:</strong></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="estudo-de-caso.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraindo um conjunto de dados do dataset products que representa os nomes e os códigos dos esportes</span></span>
+<span id="cb43-2"><a href="estudo-de-caso.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="estudo-de-caso.html#cb43-3" aria-hidden="true" tabindex="-1"></a>produtcs1 <span class="ot">&lt;-</span> <span class="fu">subset</span>(products, prod_code <span class="sc">==</span> <span class="dv">1200</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1205</span><span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1211</span> </span>
+<span id="cb43-4"><a href="estudo-de-caso.html#cb43-4" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1233</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1267</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1333</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">3265</span> </span>
+<span id="cb43-5"><a href="estudo-de-caso.html#cb43-5" aria-hidden="true" tabindex="-1"></a>                    <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">3274</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">5034</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">5040</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">5041</span>)</span>
+<span id="cb43-6"><a href="estudo-de-caso.html#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="estudo-de-caso.html#cb43-7" aria-hidden="true" tabindex="-1"></a>prod_codes <span class="ot">&lt;-</span> <span class="fu">setNames</span>(produtcs1<span class="sc">$</span>prod_code, produtcs1<span class="sc">$</span>title)</span>
+<span id="cb43-8"><a href="estudo-de-caso.html#cb43-8" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb43-9"><a href="estudo-de-caso.html#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb43-10"><a href="estudo-de-caso.html#cb43-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">6</span>,</span>
+<span id="cb43-11"><a href="estudo-de-caso.html#cb43-11" aria-hidden="true" tabindex="-1"></a>           <span class="fu">selectInput</span>(<span class="st">&#39;code&#39;</span>, <span class="st">&#39;Esportes&#39;</span>, <span class="at">choices =</span> prod_codes))</span>
+<span id="cb43-12"><a href="estudo-de-caso.html#cb43-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb43-13"><a href="estudo-de-caso.html#cb43-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb43-14"><a href="estudo-de-caso.html#cb43-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">tableOutput</span>(<span class="st">&#39;diag&#39;</span>)),</span>
+<span id="cb43-15"><a href="estudo-de-caso.html#cb43-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">tableOutput</span>(<span class="st">&#39;body_part&#39;</span>)),</span>
+<span id="cb43-16"><a href="estudo-de-caso.html#cb43-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">tableOutput</span>(<span class="st">&#39;location&#39;</span>))</span>
+<span id="cb43-17"><a href="estudo-de-caso.html#cb43-17" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb43-18"><a href="estudo-de-caso.html#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb43-19"><a href="estudo-de-caso.html#cb43-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">12</span>, <span class="fu">plotOutput</span>(<span class="st">&#39;plot&#39;</span>))</span>
+<span id="cb43-20"><a href="estudo-de-caso.html#cb43-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb43-21"><a href="estudo-de-caso.html#cb43-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>A função <code>setNames</code> e a função <code>selectInput</code> irá mostra o nome do esporte na UI e retorna o código ao <strong>server</strong>. O código vai criar uma página HTML, dividida em três linhas:</p>
+<ul>
+<li>primeira linha com uma coluna, que tem uma caixa de seleção para que o usuário possa escolher o esporte.</li>
+<li>segunda linha com três colunas, que serão ocupadas pelas tabelas.</li>
+<li>terceira linha com uma coluna, que será ocupada pelo gráfico.</li>
+</ul>
+<p><strong>Função server:</strong></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="estudo-de-caso.html#cb44-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session){</span>
+<span id="cb44-2"><a href="estudo-de-caso.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  esporte_escolhido <span class="ot">&lt;-</span> <span class="fu">reactive</span>(esportes <span class="sc">%&gt;%</span> <span class="fu">filter</span>(prod_code <span class="sc">==</span> input<span class="sc">$</span>code))</span>
+<span id="cb44-3"><a href="estudo-de-caso.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>diag <span class="ot">&lt;-</span> <span class="fu">renderTable</span>(</span>
+<span id="cb44-4"><a href="estudo-de-caso.html#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">esporte_escolhido</span>() <span class="sc">%&gt;%</span>  <span class="fu">count</span>(diag, <span class="at">wt =</span> weight, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb44-5"><a href="estudo-de-caso.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb44-6"><a href="estudo-de-caso.html#cb44-6" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>body_part <span class="ot">&lt;-</span> <span class="fu">renderTable</span>(</span>
+<span id="cb44-7"><a href="estudo-de-caso.html#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">esporte_escolhido</span>() <span class="sc">%&gt;%</span> <span class="fu">count</span>(body_part, <span class="at">wt =</span> weight, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb44-8"><a href="estudo-de-caso.html#cb44-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb44-9"><a href="estudo-de-caso.html#cb44-9" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>location <span class="ot">&lt;-</span> <span class="fu">renderTable</span>(</span>
+<span id="cb44-10"><a href="estudo-de-caso.html#cb44-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">esporte_escolhido</span>() <span class="sc">%&gt;%</span>  <span class="fu">count</span>(location, <span class="at">wt =</span> weight, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb44-11"><a href="estudo-de-caso.html#cb44-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb44-12"><a href="estudo-de-caso.html#cb44-12" aria-hidden="true" tabindex="-1"></a>  padrao <span class="ot">&lt;-</span> <span class="fu">reactive</span>({esporte_escolhido <span class="sc">%&gt;%</span> <span class="fu">count</span>(age, sex, <span class="at">wt =</span> weight)})</span>
+<span id="cb44-13"><a href="estudo-de-caso.html#cb44-13" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb44-14"><a href="estudo-de-caso.html#cb44-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">esporte_escolhido</span> () <span class="sc">%&gt;%</span></span>
+<span id="cb44-15"><a href="estudo-de-caso.html#cb44-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">count</span>(age, sex, <span class="at">wt =</span> weight) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-16"><a href="estudo-de-caso.html#cb44-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(age, n, <span class="at">colour =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb44-17"><a href="estudo-de-caso.html#cb44-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb44-18"><a href="estudo-de-caso.html#cb44-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Number of injuries&#39;</span>) <span class="sc">+</span></span>
+<span id="cb44-19"><a href="estudo-de-caso.html#cb44-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Age&#39;</span>)</span>
+<span id="cb44-20"><a href="estudo-de-caso.html#cb44-20" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb44-21"><a href="estudo-de-caso.html#cb44-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-22"><a href="estudo-de-caso.html#cb44-22" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<div id="adicionando-a-narrativa" class="section level3" number="9.5.1">
+<h3><span class="header-section-number">9.5.1</span> <strong>Adicionando a Narrativa</strong></h3>
+<p>Agora vamos adicionar uma maneira de acessar as narrativas. Adicionamos mais uma linha na função <strong>ui</strong>, com um botão de ação para desencadear uma nova história e exibir a narrativa em <code>textPutput()</code>:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="estudo-de-caso.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fluidRow</span>(</span>
+<span id="cb45-2"><a href="estudo-de-caso.html#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">2</span>, <span class="fu">actionButton</span>(<span class="st">&#39;nar&#39;</span>, <span class="st">&#39;Narrative&#39;</span>)),</span>
+<span id="cb45-3"><a href="estudo-de-caso.html#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">10</span>, <span class="fu">textOutput</span>(<span class="st">&#39;narrativa&#39;</span>))</span>
+<span id="cb45-4"><a href="estudo-de-caso.html#cb45-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>O <code>eventReative()</code> cria uma expresão reatica que só é atualizado quando o botão é clicado ou quando os dados subjacentes são alterados.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="estudo-de-caso.html#cb46-1" aria-hidden="true" tabindex="-1"></a>narrative_sample <span class="ot">&lt;-</span> <span class="fu">eventReactive</span>(</span>
+<span id="cb46-2"><a href="estudo-de-caso.html#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(input<span class="sc">$</span>nar, <span class="fu">selected</span>()),</span>
+<span id="cb46-3"><a href="estudo-de-caso.html#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selected</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(narrative) <span class="sc">%&gt;%</span> <span class="fu">sample</span>(<span class="dv">1</span>)</span>
+<span id="cb46-4"><a href="estudo-de-caso.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb46-5"><a href="estudo-de-caso.html#cb46-5" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>narrativa <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="fu">narrative_sample</span>())</span></code></pre></div>
+<p>O código completo do nosso aplivativo:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="estudo-de-caso.html#cb47-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb47-2"><a href="estudo-de-caso.html#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb47-3"><a href="estudo-de-caso.html#cb47-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">6</span>,</span>
+<span id="cb47-4"><a href="estudo-de-caso.html#cb47-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">selectInput</span>(<span class="st">&#39;code&#39;</span>, <span class="st">&#39;Sports&#39;</span>, <span class="at">choices =</span> prod_codes))</span>
+<span id="cb47-5"><a href="estudo-de-caso.html#cb47-5" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb47-6"><a href="estudo-de-caso.html#cb47-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb47-7"><a href="estudo-de-caso.html#cb47-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">tableOutput</span>(<span class="st">&#39;diag&#39;</span>)),</span>
+<span id="cb47-8"><a href="estudo-de-caso.html#cb47-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">tableOutput</span>(<span class="st">&#39;body_part&#39;</span>)),</span>
+<span id="cb47-9"><a href="estudo-de-caso.html#cb47-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">4</span>, <span class="fu">tableOutput</span>(<span class="st">&#39;location&#39;</span>))</span>
+<span id="cb47-10"><a href="estudo-de-caso.html#cb47-10" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb47-11"><a href="estudo-de-caso.html#cb47-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fluidRow</span>(</span>
+<span id="cb47-12"><a href="estudo-de-caso.html#cb47-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">2</span>, <span class="fu">actionButton</span>(<span class="st">&#39;nar&#39;</span>, <span class="st">&#39;Narrative&#39;</span>)),</span>
+<span id="cb47-13"><a href="estudo-de-caso.html#cb47-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">10</span>, <span class="fu">textOutput</span>(<span class="st">&#39;narrativa&#39;</span>))</span>
+<span id="cb47-14"><a href="estudo-de-caso.html#cb47-14" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb47-15"><a href="estudo-de-caso.html#cb47-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb47-16"><a href="estudo-de-caso.html#cb47-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">12</span>, <span class="fu">plotOutput</span>(<span class="st">&#39;plot&#39;</span>)))</span>
+<span id="cb47-17"><a href="estudo-de-caso.html#cb47-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-18"><a href="estudo-de-caso.html#cb47-18" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session){</span>
+<span id="cb47-19"><a href="estudo-de-caso.html#cb47-19" aria-hidden="true" tabindex="-1"></a>   esporte_escolhido <span class="ot">&lt;-</span> <span class="fu">reactive</span>(esportes <span class="sc">%&gt;%</span> <span class="fu">filter</span>(prod_code <span class="sc">==</span> input<span class="sc">$</span>code))</span>
+<span id="cb47-20"><a href="estudo-de-caso.html#cb47-20" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>diag <span class="ot">&lt;-</span> <span class="fu">renderTable</span>(</span>
+<span id="cb47-21"><a href="estudo-de-caso.html#cb47-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">esporte_escolhido</span>() <span class="sc">%&gt;%</span>  <span class="fu">count</span>(diag, <span class="at">wt =</span> weight, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-22"><a href="estudo-de-caso.html#cb47-22" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb47-23"><a href="estudo-de-caso.html#cb47-23" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>body_part <span class="ot">&lt;-</span> <span class="fu">renderTable</span>(</span>
+<span id="cb47-24"><a href="estudo-de-caso.html#cb47-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">esporte_escolhido</span>() <span class="sc">%&gt;%</span> <span class="fu">count</span>(body_part, <span class="at">wt =</span> weight, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-25"><a href="estudo-de-caso.html#cb47-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb47-26"><a href="estudo-de-caso.html#cb47-26" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>location <span class="ot">&lt;-</span> <span class="fu">renderTable</span>(</span>
+<span id="cb47-27"><a href="estudo-de-caso.html#cb47-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">esporte_escolhido</span>() <span class="sc">%&gt;%</span>  <span class="fu">count</span>(location, <span class="at">wt =</span> weight, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-28"><a href="estudo-de-caso.html#cb47-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb47-29"><a href="estudo-de-caso.html#cb47-29" aria-hidden="true" tabindex="-1"></a>  padrao <span class="ot">&lt;-</span> <span class="fu">reactive</span>({esporte_escolhido <span class="sc">%&gt;%</span> <span class="fu">count</span>(age, sex, <span class="at">wt =</span> weight)})</span>
+<span id="cb47-30"><a href="estudo-de-caso.html#cb47-30" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb47-31"><a href="estudo-de-caso.html#cb47-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">esporte_escolhido</span> () <span class="sc">%&gt;%</span></span>
+<span id="cb47-32"><a href="estudo-de-caso.html#cb47-32" aria-hidden="true" tabindex="-1"></a>      <span class="fu">count</span>(age, sex, <span class="at">wt =</span> weight) <span class="sc">%&gt;%</span> </span>
+<span id="cb47-33"><a href="estudo-de-caso.html#cb47-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(age, n, <span class="at">colour =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb47-34"><a href="estudo-de-caso.html#cb47-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb47-35"><a href="estudo-de-caso.html#cb47-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">&#39;Number of injuries&#39;</span>) <span class="sc">+</span></span>
+<span id="cb47-36"><a href="estudo-de-caso.html#cb47-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Age&#39;</span>)</span>
+<span id="cb47-37"><a href="estudo-de-caso.html#cb47-37" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb47-38"><a href="estudo-de-caso.html#cb47-38" aria-hidden="true" tabindex="-1"></a>  narrative_sample <span class="ot">&lt;-</span> <span class="fu">eventReactive</span>(</span>
+<span id="cb47-39"><a href="estudo-de-caso.html#cb47-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(input<span class="sc">$</span>nar, <span class="fu">esporte_escolhido</span>()),</span>
+<span id="cb47-40"><a href="estudo-de-caso.html#cb47-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">esporte_escolhido</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(narrative) <span class="sc">%&gt;%</span> <span class="fu">sample</span>(<span class="dv">1</span>)</span>
+<span id="cb47-41"><a href="estudo-de-caso.html#cb47-41" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb47-42"><a href="estudo-de-caso.html#cb47-42" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>narrativa <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="fu">narrative_sample</span>())</span>
+<span id="cb47-43"><a href="estudo-de-caso.html#cb47-43" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-44"><a href="estudo-de-caso.html#cb47-44" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<p>Essa é a primeira versão do aplicativo shiny:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-49"></span>
+<img src="www/img/versao1.png" alt="Primeira versão do aplicativo" width="100%" />
+<p class="caption">
+Figure 9.1: Primeira versão do aplicativo
+</p>
+</div>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="módulos-shiny.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="módulos-e-aparência.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/09-estudo-caso.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Tutorial-Shiny.pdf", "Tutorial-Shiny.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

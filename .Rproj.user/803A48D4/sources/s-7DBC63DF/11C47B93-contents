@@ -1,0 +1,201 @@
+# **Expressões reativas**
+
+---
+  
+Em todo tipo de programação, é uma prática ruim ter código duplicado; pode ser um desperdício computacional e, mais importante, aumenta a dificuldade de manter ou depurar o código. No script R tradicional, usamos duas técnicas para lidar com código duplicado: capturamos o valor usando uma variável ou capturamos o cálculo com uma função. Infelizmente, nenhuma dessas abordagens funciona aqui, e precisamos de um novo mecanismo: **expressões reativas**.
+
+As **expressões reativas** são importantes porque fornecem ao Shiny mais informações para que ele possa fazer menos recomputações quando as entradas mudam, tornando os aplicativos mais eficientes, e tornam mais fácil para os humanos entenderem o aplicativo.
+
+Como entradas, você pode usar os resultados de uma expressão reativa em uma saída. Assim como as saídas, as expressões reativas dependem das entradas e sabem automaticamente quando precisam ser atualizadas.
+
+Você cria uma expressão reativa envolvendo um bloco de código `reactive({...})` e atribuindo a uma variável, e você usa uma expressão reativa chamando  como uma função. Mas, embora pareça que você está chamando uma função, uma expressão reativa tem uma diferença importante: ela só é executada na primeira vez que é chamada e, em seguida, armazena seu resultado em cache até que precise ser atualizado.
+
+Observer o exemplo a seguir: 
+
+
+```{r, results='hide'}
+library(shiny)
+
+ui <- fluidPage(
+  selectInput('dataset', label = 'Dataset', choices = ls('package:datasets')),
+  verbatimTextOutput('summary'),
+  tableOutput('table')
+)
+server <- function(input, output, session) {
+  output$summary <- renderPrint({
+    dataset <- get(input$dataset, 'package:datasets')
+    summary(dataset)
+  })
+  output$table <- renderTable({
+    dataset <- get(input$dataset, 'package:datasets')
+    dataset
+  })
+}
+shinyApp(ui = ui, server = server)
+```
+
+
+Podemos reduzir esse código atualizando o `server()` para usar expressões reativas. O aplicativo se comporta de forma idêntica, mas funciona com um pouco mais de eficiência, pois só precisa recuperar o conjunto de dados uma vez, não duas.
+
+
+```{r, results = 'hider'}
+
+server <- function(input, output, session) {
+  # Criando a expressão reativa
+  dataset <- reactive({
+    get(input$dataset, 'package:datasets')
+  })
+  output$summary <- renderPrint({
+    #  Use a expressão reativa chamando como uma função
+    summary(dataset())
+  })
+  output$table <- renderTable({
+    dataset()
+  })
+}
+```
+
+
+## **Observers**
+
+Você pode  salvar um arquivo em uma unidade de rede compartilhada, enviar dados para uma API da web, atualizar um banco de dados ou imprimir uma mensagem de depuração no console. Essas ações não afetam a aparência do aplicativo Shiny, portanto, você não deve usar uma saída e uma função `render`. Em vez disso, você precisa usar uma função **observer**.
+
+
+Um `observer` é como uma expressão reativa, pois pode ler valores reativos e chamar expressões reativas, e será reexecutado automaticamente quando essas dependências forem alteradas. Mas, ao contrário das expressões reativas, não produz um resultado e não pode ser usado como entrada para outras expressões reativas. Assim, os observers são úteis apenas por seus efeitos colaterais.
+
+Outro contraste entre expressões reativas e observers é sua estratégia de execução. Expressões reativas usam avaliação preguiçosa; ou seja, quando suas dependências mudam, eles não são executados imediatamente, mas esperam até serem chamados por outra pessoa. Na verdade, se eles não forem chamados, eles nunca serão executados novamente. Em contraste, os observers usam avaliação ansiosa; assim que suas dependências mudam, eles se programam para uma nova execução.
+
+`observeEvent()` retorna um objeto de classe de referência do observe.
+
+`eventReactive()` retorna um objeto de expressão reativa 
+
+Essas duas funções são muitos semelhantes e tem dois argumentos importantes:
+
+`eventExpre`  que é a entrada ou espressões  da qual depender. 
+
+`handlerExpr` que é o código que será executado. 
+
+
+```{r, results='hide'}
+library(shiny)
+
+ui <- fluidPage(
+  textInput('nome', 'Qual é o seu nome?'),
+  textOutput('saudacao')
+)
+server <- function(input, output, session) {
+  string <- reactive(paste0('Hello ', input$nome, '!'))
+  
+  output$saudacao <- renderText(string())
+  observeEvent(input$nome, {
+    message('Saudacao realizada')
+  })
+}
+shinyApp(ui = ui, server = server)
+
+```
+
+
+Observe que a cada letra introduzida na caixa de texto a mensagem *Saudacao realizada* será enviada no console.
+
+
+## **Diferenças entre expressões reativas e Observers**
+
+As expressões reativas e os observers são semelhantes no sentido de que armazenam expressões que podem ser executadas, mas têm algumas diferenças fundamentais.
+
+- **Observers** respondem a eventos de descarga reativa , mas as expressões reativas  não. Se você deseja que uma expressão reativa seja executada, ela deve ter um observador como descendente no gráfico de dependência reativa.
+
+- As **expressões reativas** retornam valores, mas os observers não.
+
+## **Valores reativos**
+
+Os valores reativos contêm valores, que podem ser lidos por outros objetos reativos. O objeto `input` é um objeto `ReactiveValues` que se parece com uma lista e contém muitos valores reativos individuais. Os valores em `input` são definidos pela entrada do navegador da web.
+
+Existem dois tipos de valores reativos:
+
+- `reactiveVal()` cria um único valor reativo. 
+
+- `reactiveValues()` cria Uma lista de valores reativos. 
+
+
+```{r, results='hide'}
+library(shiny)
+
+# reactiveVal()
+x <- reactiveVal(10)
+print(x)
+#  reactiveVal: [1] '10'
+
+x(20)
+print(x)
+#  reactiveVal: [1] '20'
+
+# reactiveValues()
+l1 <- reactiveValues(a = 1, b = 2)
+isolate(l1$a)
+#  [1] 1
+isolate(l1$b)
+#  [1] 2
+```
+
+
+Eles têm interfaces ligeiramente diferentes para obter e definir valores. No entanto, embora pareçam diferentes, eles se comportam da mesma forma, portanto, você pode escolher entre eles com base na sua preferência. 
+
+Observer o seguinte exemplo: 
+
+
+```{r, results='hide'}
+x1 <- x2 <- 20
+x2 <- 30
+print(x1) # valor inalterado
+#  [1] 20
+```
+
+
+Obervando o código acima, pode se  dizer que são valores reativos? 
+Se sua resposta é *NÃO*, parabéns você acertou. Os valores reativos sempre mantêm uma referência de volta para o mesmo valor, de modo que a modificação de qualquer cópia modifica todos os valores: 
+
+
+```{r, results='hide'}
+z1 <- z2 <- reactiveValues(a = 10)
+z2$a <- 20
+isolate(z1$a)
+# [1] 20
+
+```
+
+
+Agora vamos combinar as funções `reactiveValues` e `observeEvent` que pode ser aplicados em alguns casos úteis, resolvendo problemas que não muitos desafiadores. 
+
+
+```{r, results='hide'}
+library(shiny)
+ui <- fluidPage(
+  'Total de pontos:',
+  textOutput('total', inline = TRUE),
+  actionButton('ponto5', 'Adiciona 5 ponto'),
+  actionButton('ponto10', 'Adiciona 10 pontos'),
+  actionButton('remove', 'Remove 1 ponto')
+)
+server <- function(input, output, session){
+  value <- reactiveValues(total = 0)
+  
+  observeEvent(input$ponto5, {
+    value$total <- value$total + 5
+  })
+  observeEvent(input$ponto10, {
+    value$total <- value$total + 10
+  })
+  observeEvent(input$remove, {
+    value$total <- value$total - 1
+  })
+  output$total <- renderText({
+    value$total
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+
+No exemplo temos dois botões que permitem aumentar os valores e um botão que permite diminuir os valores. A função `reactiveValues` foi usada para armazena o valor atual e a função `observeEvent` para aumentar e diminuir o valor quando um botão é presioando. A principal complexidade adicional aqui é que o novo valor de `total()` depende do valor anterior.

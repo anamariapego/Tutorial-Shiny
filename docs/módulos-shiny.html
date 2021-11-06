@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 8 Módulos Shiny | Tutorial Básico de Shiny</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 8 Módulos Shiny | Tutorial Básico de Shiny" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 8 Módulos Shiny | Tutorial Básico de Shiny" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Author: Ana M. P. Pinheiro" />
+
+
+<meta name="date" content="2021-11-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="expressões-reativas.html"/>
+<link rel="next" href="estudo-de-caso.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tutorial Shiny</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Pré-requisitos</a></li>
+<li class="chapter" data-level="1" data-path="introdução.html"><a href="introdução.html"><i class="fa fa-check"></i><b>1</b> Introdução</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introdução.html"><a href="introdução.html#o-que-é-shiny"><i class="fa fa-check"></i><b>1.1</b> <strong>O que é Shiny?</strong></a></li>
+<li class="chapter" data-level="1.2" data-path="introdução.html"><a href="introdução.html#alguns-recursos-do-shiny"><i class="fa fa-check"></i><b>1.2</b> <strong>Alguns recursos do Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="aplicativo-shiny.html"><a href="aplicativo-shiny.html"><i class="fa fa-check"></i><b>2</b> <strong>Aplicativo Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="aplicativo-shiny.html"><a href="aplicativo-shiny.html#construindo-um-aplicativo-shiny"><i class="fa fa-check"></i><b>2.1</b> <strong>Construindo um aplicativo Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="função-ui.html"><a href="função-ui.html"><i class="fa fa-check"></i><b>3</b> <strong>Função UI</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="função-ui.html"><a href="função-ui.html#comportamento-da-ui"><i class="fa fa-check"></i><b>3.1</b> <strong>Comportamento da UI</strong></a></li>
+<li class="chapter" data-level="3.2" data-path="função-ui.html"><a href="função-ui.html#inputs"><i class="fa fa-check"></i><b>3.2</b> <strong>Inputs</strong></a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="função-ui.html"><a href="função-ui.html#alguns-exemplos-de-inputs"><i class="fa fa-check"></i><b>3.2.1</b> <strong>Alguns exemplos de Inputs</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="função-server.html"><a href="função-server.html"><i class="fa fa-check"></i><b>4</b> <strong>Função Server</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="função-server.html"><a href="função-server.html#outputs"><i class="fa fa-check"></i><b>4.1</b> <strong>Outputs</strong></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="função-server.html"><a href="função-server.html#alguns-exemplos-de-outputs"><i class="fa fa-check"></i><b>4.1.1</b> <strong>Alguns exemplos de Outputs</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="uma-breve-história-da-programação-reativa.html"><a href="uma-breve-história-da-programação-reativa.html"><i class="fa fa-check"></i><b>5</b> <strong>Uma breve história da programação reativa</strong></a></li>
+<li class="chapter" data-level="6" data-path="programação-reativa.html"><a href="programação-reativa.html"><i class="fa fa-check"></i><b>6</b> <strong>Programação reativa</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="programação-reativa.html"><a href="programação-reativa.html#introdução-1"><i class="fa fa-check"></i><b>6.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="programação-reativa.html"><a href="programação-reativa.html#programação-reativa-1"><i class="fa fa-check"></i><b>6.2</b> <strong>Programação reativa</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="programação-reativa.html"><a href="programação-reativa.html#programação-declarativa-vs-imperativa"><i class="fa fa-check"></i><b>6.3</b> <strong>Programação declarativa vs imperativa</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="expressões-reativas.html"><a href="expressões-reativas.html"><i class="fa fa-check"></i><b>7</b> <strong>Expressões reativas</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="expressões-reativas.html"><a href="expressões-reativas.html#observers"><i class="fa fa-check"></i><b>7.1</b> <strong>Observers</strong></a></li>
+<li class="chapter" data-level="7.2" data-path="expressões-reativas.html"><a href="expressões-reativas.html#diferenças-entre-expressões-reativas-e-observers"><i class="fa fa-check"></i><b>7.2</b> <strong>Diferenças entre expressões reativas e Observers</strong></a></li>
+<li class="chapter" data-level="7.3" data-path="expressões-reativas.html"><a href="expressões-reativas.html#valores-reativos"><i class="fa fa-check"></i><b>7.3</b> <strong>Valores reativos</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="módulos-shiny.html"><a href="módulos-shiny.html"><i class="fa fa-check"></i><b>8</b> <strong>Módulos Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="módulos-shiny.html"><a href="módulos-shiny.html#introdução-2"><i class="fa fa-check"></i><b>8.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="8.2" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-simples"><i class="fa fa-check"></i><b>8.2</b> <strong>Módulo simples</strong></a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-ui"><i class="fa fa-check"></i><b>8.2.1</b> <strong>Módulo UI</strong></a></li>
+<li class="chapter" data-level="8.2.2" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-server"><i class="fa fa-check"></i><b>8.2.2</b> <strong>Módulo Server</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="módulos-shiny.html"><a href="módulos-shiny.html#entradas-e-saídas"><i class="fa fa-check"></i><b>8.3</b> <strong>Entradas e Saídas</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html"><i class="fa fa-check"></i><b>9</b> <strong>Estudo de Caso</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#introdução-3"><i class="fa fa-check"></i><b>9.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="9.2" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#descrição-dos-dados"><i class="fa fa-check"></i><b>9.2</b> <strong>Descrição dos dados</strong></a></li>
+<li class="chapter" data-level="9.3" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#transformação-e-limpeza-dos-dados"><i class="fa fa-check"></i><b>9.3</b> <strong>Transformação e limpeza dos dados</strong></a></li>
+<li class="chapter" data-level="9.4" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#exploração-dos-dados"><i class="fa fa-check"></i><b>9.4</b> <strong>Exploração dos dados</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#desenvolvendo-o-aplicativo-shiny"><i class="fa fa-check"></i><b>9.5</b> <strong>Desenvolvendo o aplicativo Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#adicionando-a-narrativa"><i class="fa fa-check"></i><b>9.5.1</b> <strong>Adicionando a Narrativa</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="módulos-e-aparência.html"><a href="módulos-e-aparência.html"><i class="fa fa-check"></i><b>10</b> <strong>Módulos e aparência</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="módulos-e-aparência.html"><a href="módulos-e-aparência.html#aplicativo-shiny-1"><i class="fa fa-check"></i><b>10.1</b> <strong>Aplicativo Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="extensões-shiny.html"><a href="extensões-shiny.html"><i class="fa fa-check"></i><b>11</b> <strong>Extensões Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="extensões-shiny.html"><a href="extensões-shiny.html#comunidades"><i class="fa fa-check"></i><b>11.1</b> <strong>Comunidades</strong></a></li>
+<li class="chapter" data-level="11.2" data-path="extensões-shiny.html"><a href="extensões-shiny.html#pacotes"><i class="fa fa-check"></i><b>11.2</b> <strong>Pacotes</strong></a></li>
+<li class="chapter" data-level="11.3" data-path="extensões-shiny.html"><a href="extensões-shiny.html#livros"><i class="fa fa-check"></i><b>11.3</b> <strong>Livros</strong></a></li>
+<li class="chapter" data-level="11.4" data-path="extensões-shiny.html"><a href="extensões-shiny.html#vídeos"><i class="fa fa-check"></i><b>11.4</b> <strong>Vídeos</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>12</b> <strong>Referências</strong></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/anamariapego/Tutorial-Shiny" target="blank">View book source</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tutorial Básico de Shiny</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="módulos-shiny" class="section level1" number="8">
+<h1><span class="header-section-number"> 8</span> <strong>Módulos Shiny</strong></h1>
+<hr />
+<div id="introdução-2" class="section level2" number="8.1">
+<h2><span class="header-section-number">8.1</span> <strong>Introdução</strong></h2>
+<p>Agora vamos falar sobre o sistema de módulos do Shiny, que permite extrair a interface do usuário acoplada e o código do servidor em componentes isolados e reutilizáveis, além de deixar seu aplicativo mais limpo e organizado.</p>
+<p>À medida que os aplicativos Shiny ficam maiores e mais complicados, usamos módulos para gerenciar a complexidade crescente do código do aplicativo Shiny.</p>
+<p>Um módulo é um par de funções <strong>ui</strong> e funções <strong>server</strong>. A mágica dos módulos vem porque essas funções são construídas de uma maneira especial que cria um “namespace.” Até agora, ao escrever um aplicativo, os nomes dos controles <code>id</code> são globais: todas as partes de sua função <strong>server</strong> podem ver todas as partes de sua ui. Os módulos oferecem a capacidade de criar controles que só podem ser vistos de dentro do módulo. Isso é chamado de namespace porque cria “espaços” de “nomes” que são isolados do resto do aplicativo.</p>
+<p>Módulos Shiny têm duas grandes vantagens:</p>
+<ul>
+<li><p>O namespacing torna mais fácil entender como seu aplicativo funciona porque você pode escrever, analisar e testar componentes individuais de forma isolada.</p></li>
+<li><p>Como os módulos são funções, eles ajudam a reutilizar o código; tudo o que você pode fazer com uma função, você pode fazer com um módulo.</p></li>
+</ul>
+</div>
+<div id="módulo-simples" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> <strong>Módulo simples</strong></h2>
+<p>Vamos criar um aplicativo bem simples que desenha um histograma, que servirá para ilustrar a mecânica básica do funcionamento do módulo.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="módulos-shiny.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb24-2"><a href="módulos-shiny.html#cb24-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb24-3"><a href="módulos-shiny.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">&#39;var&#39;</span>, <span class="st">&#39;Variável&#39;</span>, <span class="fu">names</span>(iris)),</span>
+<span id="cb24-4"><a href="módulos-shiny.html#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">numericInput</span>(<span class="st">&#39;bins&#39;</span>, <span class="st">&#39;bins&#39;</span>, <span class="dv">10</span>, <span class="at">min =</span> <span class="dv">1</span>),</span>
+<span id="cb24-5"><a href="módulos-shiny.html#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">&#39;hist&#39;</span>)</span>
+<span id="cb24-6"><a href="módulos-shiny.html#cb24-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-7"><a href="módulos-shiny.html#cb24-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb24-8"><a href="módulos-shiny.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">reactive</span>(iris[[input<span class="sc">$</span>var]])</span>
+<span id="cb24-9"><a href="módulos-shiny.html#cb24-9" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>hist <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb24-10"><a href="módulos-shiny.html#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hist</span>(<span class="fu">data</span>(), <span class="at">breaks =</span> input<span class="sc">$</span>bins, <span class="at">main =</span> input<span class="sc">$</span>var)</span>
+<span id="cb24-11"><a href="módulos-shiny.html#cb24-11" aria-hidden="true" tabindex="-1"></a>  }, <span class="at">res =</span> <span class="dv">96</span>)</span>
+<span id="cb24-12"><a href="módulos-shiny.html#cb24-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-13"><a href="módulos-shiny.html#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<p>Como um aplicativo, o módulo é composto por duas partes:</p>
+<ul>
+<li><p>A função de interface do usuário do módulo que gera a especificação <code>ui</code>.</p></li>
+<li><p>A função de servidor do módulo que executa o código dentro da função <code>server</code>.</p></li>
+</ul>
+<p>As duas funções possuem formulários padrão. Ambos pegam um argumento <code>id</code> e o usam para definir o namespace do módulo. Para criar um módulo, precisamos extrair o código da <strong>ui</strong> do aplicativo e do servidor e colocá-lo na ui do módulo.</p>
+<div id="módulo-ui" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> <strong>Módulo UI</strong></h3>
+<p>No módulo UI existem duas etapas:</p>
+<ul>
+<li><p>Coloca o código <strong>ui</strong> dentro de uma função que tenha um argumento <code>id</code>.</p></li>
+<li><p>Envolva cada ID exsitente em uma chamada <code>NS()</code>.</p></li>
+</ul>
+<p><strong>Obs:</strong> a função <code>NS()</code> cria IDs com namepace a partir de IDs vazios, os aplicativos Shiny usam IDs para identificar entradas e saídas. Esses IDs devem ser exclusivos em um aplicativo, pois o uso acidental do mesmo ID de entrada/saída mais de uma vez resultará em um comportamento inesperado. A solução tradicional para evitar conflitos de nomes são os namespaces; um namespace está para um ID como um diretório está para um arquivo. Use a função <code>NS()</code> para transformar um ID simples em um espaço de nomes, combinando-os com os intermediários <code>ns.sep</code>.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="módulos-shiny.html#cb25-1" aria-hidden="true" tabindex="-1"></a>histUI <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb25-2"><a href="módulos-shiny.html#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tagList</span>(</span>
+<span id="cb25-3"><a href="módulos-shiny.html#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selectInput</span>(<span class="fu">NS</span>(id, <span class="st">&#39;var&#39;</span>), <span class="st">&#39;Variável&#39;</span>, <span class="at">choices =</span> <span class="fu">names</span>(iris)),</span>
+<span id="cb25-4"><a href="módulos-shiny.html#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">numericInput</span>(<span class="fu">NS</span>(id, <span class="st">&#39;bins&#39;</span>), <span class="st">&#39;bins&#39;</span>, <span class="at">value =</span> <span class="dv">10</span>, <span class="at">min =</span> <span class="dv">1</span>),</span>
+<span id="cb25-5"><a href="módulos-shiny.html#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plotOutput</span>(<span class="fu">NS</span>(id, <span class="st">&#39;hist&#39;</span>))</span>
+<span id="cb25-6"><a href="módulos-shiny.html#cb25-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb25-7"><a href="módulos-shiny.html#cb25-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Aqui, os componentes da <strong>ui</strong> foram retornado em a <code>tagList()</code>, que é um tipo especial de função de layout que permite agrupar vários componentes sem realmente sugerir como eles serão dispostos. É responsabilidade de quem está ligando <code>histUI()</code> envolver o resultado em uma função de layout como <code>column()</code> ou de <code>fluidRow()</code> acordo com suas necessidades.</p>
+</div>
+<div id="módulo-server" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> <strong>Módulo Server</strong></h3>
+<p>A função <strong>server</strong> é empacotada dentro de outra função que deve ter um argumento <code>id</code>. Esta função chama <code>moduleServer()</code> com o <code>id</code> e uma função que se parece com uma função de servidor normal:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="módulos-shiny.html#cb26-1" aria-hidden="true" tabindex="-1"></a>histServer <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb26-2"><a href="módulos-shiny.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">moduleServer</span>(id, <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb26-3"><a href="módulos-shiny.html#cb26-3" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">reactive</span>(iris[[input<span class="sc">$</span>var]])</span>
+<span id="cb26-4"><a href="módulos-shiny.html#cb26-4" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>hist <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb26-5"><a href="módulos-shiny.html#cb26-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">hist</span>(<span class="fu">data</span>(), <span class="at">breaks =</span> input<span class="sc">$</span>bins, <span class="at">main =</span> input<span class="sc">$</span>var)</span>
+<span id="cb26-6"><a href="módulos-shiny.html#cb26-6" aria-hidden="true" tabindex="-1"></a>    }, <span class="at">res =</span> <span class="dv">96</span>)</span>
+<span id="cb26-7"><a href="módulos-shiny.html#cb26-7" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb26-8"><a href="módulos-shiny.html#cb26-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Observe que <code>moduleServer()</code> cuida do namespace automaticamente: dentro de<code>moduleServer(id)</code>, <code>input$var</code> e <code>input$bins</code> consulta as entradas com nomes <code>NS(id, 'var')</code> e <code>NS(id, 'bins')</code>.</p>
+<p><strong>Aplicativo atualizado</strong></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="módulos-shiny.html#cb27-1" aria-hidden="true" tabindex="-1"></a>histogramApp <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb27-2"><a href="módulos-shiny.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb27-3"><a href="módulos-shiny.html#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">histUI</span>(<span class="st">&#39;hist1&#39;</span>)</span>
+<span id="cb27-4"><a href="módulos-shiny.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-5"><a href="módulos-shiny.html#cb27-5" aria-hidden="true" tabindex="-1"></a>  server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb27-6"><a href="módulos-shiny.html#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">histServer</span>(<span class="st">&#39;hist1&#39;</span>)</span>
+<span id="cb27-7"><a href="módulos-shiny.html#cb27-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb27-8"><a href="módulos-shiny.html#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)  </span>
+<span id="cb27-9"><a href="módulos-shiny.html#cb27-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-10"><a href="módulos-shiny.html#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="módulos-shiny.html#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="fu">histogramApp</span>() <span class="co"># chamando o aplicativo</span></span></code></pre></div>
+</div>
+</div>
+<div id="entradas-e-saídas" class="section level2" number="8.3">
+<h2><span class="header-section-number">8.3</span> <strong>Entradas e Saídas</strong></h2>
+<p>Os módulos podem representar entrada, saída ou ambos. Eles podem ser tão simples quanto uma única saída ou tão complicados quanto uma interface com várias guias repleta de controles/saídas orientados por múltiplas expressões reativas e observers.</p>
+<p>Ás vezes, um módulo com apenas um argumento <code>id</code> para o módulo <strong>ui</strong> e o <strong>server</strong> é útil porque permite isolar o código complexo em seu próprio arquivo. Isso é particularmente útil para aplicativos que agregam componentes independentes, como um painel corporativo onde cada guia mostra relatórios personalizados para cada linha de negócios. Aqui, os módulos permitem que você desenvolva cada peça em seu próprio arquivo sem ter que se preocupar com o conflito de IDs entre os componentes.</p>
+<p>Muitas vezes, no entanto, o módulo <strong>ui</strong> e o <strong>server</strong> precisarão de argumentos adicionais. Adicionar argumentos à <strong>ui</strong> do módulo oferece maior controle sobre a aparência do módulo, permitindo que você use o mesmo módulo em mais lugares em seu aplicativo. Mas a <strong>ui</strong> do módulo é apenas uma função R regular, portanto, há relativamente pouco a aprender que seja específico do Shiny. Ao contrário do código Shiny regular, conectar módulos requer que você seja explícito sobre entradas e saídas. Inicialmente, isso vai parecer cansativo. E é certamente mais trabalhoso do que a associação de forma livre usual de Shiny. Mas os módulos impõem linhas específicas de comunicação por um motivo: eles são um pouco mais trabalhosos de criar, mas muito mais fáceis de entender e permitem que você crie aplicativos substancialmente mais complexos.</p>
+<p>Para ver como as entradas e saídas funcionam, vamos fazer um aplicativo simples, mas que ilustra alguns dos princípios básicos. Vamos criar um módulo que permite ao usuário selecionar um conjunto de dados a partir dos dados integradosfornecidos pelo pacote de conjuntos de dados.</p>
+<p><strong>Obs</strong>: a função de um módulo <strong>ui</strong> deve ser um nome que é o sufixo <code>Input</code>, <code>Output</code> ou <code>UI</code>; por exemplo, <code>datasetInput</code>, <code>selecNumOutput</code>, ou <code>analiseUI</code>.</p>
+<p>Módulo UI:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="módulos-shiny.html#cb28-1" aria-hidden="true" tabindex="-1"></a>datasetInput <span class="ot">&lt;-</span> <span class="cf">function</span>(id, <span class="at">filter =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb28-2"><a href="módulos-shiny.html#cb28-2" aria-hidden="true" tabindex="-1"></a>  names <span class="ot">&lt;-</span> <span class="fu">ls</span>(<span class="st">&#39;package:datasets&#39;</span>)</span>
+<span id="cb28-3"><a href="módulos-shiny.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(filter)) {</span>
+<span id="cb28-4"><a href="módulos-shiny.html#cb28-4" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">lapply</span>(names, get, <span class="st">&#39;package:datasets&#39;</span>)</span>
+<span id="cb28-5"><a href="módulos-shiny.html#cb28-5" aria-hidden="true" tabindex="-1"></a>    names <span class="ot">&lt;-</span> names[<span class="fu">vapply</span>(data, filter, <span class="fu">logical</span>(<span class="dv">1</span>))]</span>
+<span id="cb28-6"><a href="módulos-shiny.html#cb28-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb28-7"><a href="módulos-shiny.html#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="fu">NS</span>(id, <span class="st">&#39;dataset&#39;</span>), <span class="st">&#39;Escolha um conjunto de dados:&#39;</span>, <span class="at">choices =</span> names)</span>
+<span id="cb28-8"><a href="módulos-shiny.html#cb28-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Aqui, usamos um argumento adicional que possa limitar as opções do conjuntos de dados integrados que são data.frame (filter = is.data.frame) ou matrizes (filter = is.matrix). Este argumento filtra opcionalmente os objetos encontrados no pacote de conjuntos de dados e, em seguida, criamos um <code>selectInput</code>.</p>
+<p>Módulo Server:</p>
+<p>Usamos o <code>get</code> para recuperar o conjunto de dados com seu nome.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="módulos-shiny.html#cb29-1" aria-hidden="true" tabindex="-1"></a>datasetServer <span class="ot">&lt;-</span> <span class="cf">function</span>(id) {</span>
+<span id="cb29-2"><a href="módulos-shiny.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">moduleServer</span>(id, <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb29-3"><a href="módulos-shiny.html#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">reactive</span>(<span class="fu">get</span>(input<span class="sc">$</span>dataset, <span class="st">&#39;package:datasets&#39;</span>))</span>
+<span id="cb29-4"><a href="módulos-shiny.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb29-5"><a href="módulos-shiny.html#cb29-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Criando o aplicativo com os módulos <code>datasetInput</code> e <code>datasetServer</code>:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="módulos-shiny.html#cb30-1" aria-hidden="true" tabindex="-1"></a>datasetApp <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">filter =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb30-2"><a href="módulos-shiny.html#cb30-2" aria-hidden="true" tabindex="-1"></a>  ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb30-3"><a href="módulos-shiny.html#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">datasetInput</span>(<span class="st">&#39;dataset&#39;</span>, <span class="at">filter =</span> filter),</span>
+<span id="cb30-4"><a href="módulos-shiny.html#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tableOutput</span>(<span class="st">&#39;data&#39;</span>)</span>
+<span id="cb30-5"><a href="módulos-shiny.html#cb30-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-6"><a href="módulos-shiny.html#cb30-6" aria-hidden="true" tabindex="-1"></a>  server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb30-7"><a href="módulos-shiny.html#cb30-7" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> <span class="fu">datasetServer</span>(<span class="st">&#39;dataset&#39;</span>)</span>
+<span id="cb30-8"><a href="módulos-shiny.html#cb30-8" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>data <span class="ot">&lt;-</span> <span class="fu">renderTable</span>(<span class="fu">head</span>(<span class="fu">data</span>()))</span>
+<span id="cb30-9"><a href="módulos-shiny.html#cb30-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb30-10"><a href="módulos-shiny.html#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span>
+<span id="cb30-11"><a href="módulos-shiny.html#cb30-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-12"><a href="módulos-shiny.html#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="módulos-shiny.html#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="fu">datasetApp</span>() </span></code></pre></div>
+<p>Para usar o valor retornado no módulo <code>datasetServer</code>, só precisamos capturar o seu valor de retorno com (<code>data &lt;- datasetServer('dataset')</code>) e exibimos o conjunto de dados no <code>tableOutput()</code>. É necessário um argumento <code>filter</code> que é passado para o módulo <strong>ui</strong>, facilitando a experiência com esse argumento de entrada.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="expressões-reativas.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="estudo-de-caso.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/08-modulos.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Tutorial-Shiny.pdf", "Tutorial-Shiny.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

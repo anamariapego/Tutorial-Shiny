@@ -1,0 +1,1861 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{book}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Tutorial Básico de Shiny},
+  pdfauthor={Author: Ana M. P. Pinheiro},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{booktabs}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+
+\title{Tutorial Básico de Shiny}
+\author{Author: Ana M. P. Pinheiro}
+\date{2021-11-06}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{pruxe9-requisitos}{%
+\chapter*{Pré-requisitos}\label{pruxe9-requisitos}}
+\addcontentsline{toc}{chapter}{Pré-requisitos}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Conhecimentos básico sna liguaguem R.
+
+Será útil se você tiver algum conhecimento básico sobre HTML, CSS e JavaScript, pórem não serão obrigatórios.
+
+\textbf{Softwares}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://www.r-project.org/}{R} Usar a versão mais recente do R.
+\item
+  \href{https://www.rstudio.com/}{Rstudio} IDE da linguaguem R.
+\item
+  Navegador da web.
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.3\linewidth]{www/img/shiny} 
+
+}
+
+\end{figure}
+
+\hypertarget{introduuxe7uxe3o}{%
+\chapter{Introdução}\label{introduuxe7uxe3o}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{o-que-uxe9-shiny}{%
+\section{\texorpdfstring{\textbf{O que é Shiny?}}{O que é Shiny?}}\label{o-que-uxe9-shiny}}
+
+\href{https://shiny.rstudio.com/}{Shiny} é um framework para a criação de aplicativos da web usando código \textbf{R}, ele foi desenvolvido principalmente por cientistas de dados. Você pode criar aplicativos \textbf{Shiny} bem complicados e interativos sem nenhum conhecimento de HTML, CSS ou JavaScript. O \textbf{Shiny} foi projetado para parecer quase que magicamente fácil quando você está começando, e quanto mais você se aprofunda em como ele funciona, mais você percebe que ele é construído a partir de blocos de construção gerais com fortes princípios de engenharia de software por trás dele. Ele não se limita a criar aplicativos triviais; seus componentes de interface de usuário podem ser facilmente customizados ou estendidos, e seu servidor usa programação reativa para permitir que você crie qualquer tipo de lógica de back-end que desejar.
+
+\hypertarget{alguns-recursos-do-shiny}{%
+\section{\texorpdfstring{\textbf{Alguns recursos do Shiny}}{Alguns recursos do Shiny}}\label{alguns-recursos-do-shiny}}
+
+\begin{itemize}
+\item
+  Fácil de usar e aprender.
+\item
+  O tempo do desenvolvimento é minimizado.
+\item
+  Excelente ferramenta para visualização de dados.
+\item
+  Tem um apoio forte da linguagem \emph{R}.
+\item
+  Cria aplicativos da web úteis com apenas algumas linhas de códigos.
+\item
+  Funciona em qualquer ambiente R (Console R, Rgui para Windows ou Mac, ESS, StatET, RStudio, etc.).
+\item
+  Os aplicativos Shiny são ``ativos'' automaticamente. As saídas mudam instantaneamente conforme os usuários modificam as entradas, sem a necessidade de recarregar o navegador.
+\item
+  As interfaces de usuário Shiny podem ser construídas inteiramente usando R ou podem ser escritas diretamente em HTML, CSS e JavaScript para maior flexibilidade.
+\item
+  Tema de UI padrão atraente baseado no \href{https://getbootstrap.com/2.0.2/}{Twitter Bootstrap}.
+\item
+  Widgets de saída pré-construídos para exibir gráficos, tabelas e saída impressa de objetos R.
+\item
+  Comunicação bidirecional rápida entre o navegador da web e R usando o pacote \href{http://illposed.net/websockets.html}{Websockets}.
+\item
+  Usa um modelo de \href{https://en.wikipedia.org/wiki/Reactive_programming}{Programação Reativa} que elimina o código de manipulação de eventos confuso, para que você possa se concentrar no código que realmente importa.
+\end{itemize}
+
+\href{https://www.rstudio.com/wp-content/uploads/2015/02/shiny-cheatsheet.pdf}{Folha de dica do Shiny}, este é um ótimo recurso para ajudar a você relembrar alguns dos principais componentes de um aplicativo Shiny.
+
+\hypertarget{aplicativo-shiny}{%
+\chapter{\texorpdfstring{\textbf{Aplicativo Shiny}}{Aplicativo Shiny}}\label{aplicativo-shiny}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Um \emph{aplicativo Shiny} contém duas partes:
+
+\begin{itemize}
+\item
+  \textbf{UI}: (abreviação de user interface), que controla a aparência do aplicativo (fron-end).
+\item
+  \textbf{SERVER}: que controla a lógica, contém as instruções de que seu computador precisa para construir seu aplicativo (back-end).
+\end{itemize}
+
+Essa é a essência de um aplicativo Shiny:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages("shiny")}
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \CommentTok{\# front{-}end/interface}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+  \CommentTok{\# back{-}end/lógica}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+A função \textbf{server} monitora a função \textbf{ui}.Sempre que houver uma mudança na \textbf{ui}, o \textbf{server} seguirá algumas instruções (executará algum código R) de acordo e atualizará a exibição dos visuais. Esta é a ideia básica da expressão reativa, que é uma característica distinta do Shiny.
+
+\hypertarget{construindo-um-aplicativo-shiny}{%
+\section{\texorpdfstring{\textbf{Construindo um aplicativo Shiny}}{Construindo um aplicativo Shiny}}\label{construindo-um-aplicativo-shiny}}
+
+Inicialmente vamos criar um aplicativo shiny simples, o Shiny usa programação reativa para atualizar automaticamente as saídas quando as entradas mudam (vamos ver mais a frente sobre esse conceito e entender seu funcionalidade).
+
+Instalação do pacote shiny:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages(\textquotesingle{}shiny\textquotesingle{})}
+\end{Highlighting}
+\end{Shaded}
+
+Carregue o pacote em sua sessão atual do R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\end{Highlighting}
+\end{Shaded}
+
+Agora vamos criar um novo diretório e colocar no nome de \texttt{app.R}, esse arquivo será usado para dizer ao Shiny como o aplicativo deve ficar e como deve se comportar.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+   \StringTok{\textquotesingle{}Hello, world!\textquotesingle{}}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\item
+  \texttt{library(shiny)} carrega o pacote Shiny.
+\item
+  A \textbf{ui} nesse caso é uma página HTML contendo ``Hello World!''.
+\item
+  A função \textbf{server} está vazia, no momento, então o aplicativo não faz nada.
+\item
+  \texttt{shiny(ui\ =\ ui,\ server\ =\ server)} cria e inicia o aplicativo Shiny a partir do \textbf{ui} e do \textbf{server}.
+\end{itemize}
+
+Você pode clica em \texttt{Run\ App} na barra de ferramenta para executar o aplicativo ou usar o atalho \texttt{Ctrl}+\texttt{shift}+ \texttt{Enter}.
+
+Pronto, você criou seu primeiro aplicativo em Shiny.
+
+\hypertarget{funuxe7uxe3o-ui}{%
+\chapter{\texorpdfstring{\textbf{Função UI}}{Função UI}}\label{funuxe7uxe3o-ui}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Vamos adicionar algumas entradas e saídas na função \textbf{ui}. Faremos um aplicativo bem simples que mostre os dataframes integrados incluídos no pacote de conjuntos de dados.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{selectInput}\NormalTok{(}\StringTok{\textquotesingle{}dataset\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \StringTok{\textquotesingle{}Datasets\textquotesingle{}}\NormalTok{, }\AttributeTok{choices =} \FunctionTok{ls}\NormalTok{(}\StringTok{\textquotesingle{}package:datasets\textquotesingle{}}\NormalTok{)),}
+  \FunctionTok{verbatimTextOutput}\NormalTok{(}\StringTok{\textquotesingle{}summary\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{tableOutput}\NormalTok{(}\StringTok{\textquotesingle{}table\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+O código acima retorna uma página contendo uma caixa de seleção dos conjuntos dos dados.
+
+\emph{Funções usadas no trecho acima:}
+
+\begin{itemize}
+\item
+  \texttt{fluidPage()} é um controle de layout que configura a estrututa visual básica da página.
+\item
+  \texttt{selectInput()} é o controle de entrada que permite ao usuário interagir com o aplicativo fornecendo o valor. Nesse caso, é uma caixa de seleção que permite que o usuário escolha um dos conjuntos de dados embutidos que vêm no R.
+\item
+  \texttt{verbatimTextOutput()} e \texttt{tableOutput()} são controles de saída que dizem ao Shiny onde colocar a saída renderizada. \texttt{verbatimTextOutput()} exibe códigos e \texttt{tableOutput()} exibe tabelas.
+\end{itemize}
+
+A \textbf{ui} é de fato um arquivo HTML. As funções, entradas e saídas de layout têm usos diferentes, mas são fundamentalmente os mesmos nos bastidores: são apenas maneiras sofisticadas de gerar HTML e, se você chamar qualquer uma delas fora de um aplicativo Shiny, verá uma página HTML impresso no console.
+
+Vemos apenas a entrada porque ainda não dissemos ao Shiny como a entrada e as saídas estão relacionadas.
+
+\hypertarget{comportamento-da-ui}{%
+\section{\texorpdfstring{\textbf{Comportamento da UI}}{Comportamento da UI}}\label{comportamento-da-ui}}
+
+Agora vamos dizer ao Shiny como a entrada e as saídas estão relacionadas e definir a função \textbf{server}.
+O Shiny usa programação reativa para tornar os aplicativos interativos. Que será apresentada mais a frente com mais detalhes.
+
+Diremos ao Shiny como preencher as saídas \texttt{summary} e \texttt{table} no aplicativo. Substitua sua função \textbf{server} vazia por esta:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{    output}\SpecialCharTok{$}\NormalTok{summary }\OtherTok{\textless{}{-}} \FunctionTok{renderPrint}\NormalTok{(\{}
+\NormalTok{    dataset }\OtherTok{\textless{}{-}} \FunctionTok{get}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{dataset, }\StringTok{\textquotesingle{}package:datasets\textquotesingle{}}\NormalTok{)}
+    \FunctionTok{summary}\NormalTok{(dataset)}
+\NormalTok{  \})}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{table }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(\{}
+\NormalTok{    dataset }\OtherTok{\textless{}{-}} \FunctionTok{get}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{dataset, }\StringTok{\textquotesingle{}package:datasets\textquotesingle{}}\NormalTok{)}
+\NormalTok{    dataset}
+\NormalTok{  \})}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\emph{Funções usadas no trecho acima:}
+
+\begin{itemize}
+\item
+  \texttt{output\$summary} indica que você está fornecendo como será sua saída do Shiny com esse \emph{summary}.
+\item
+  \texttt{renderPrint} usa a função de renderização específica para envolver algum código fornecido por você. Cada função \texttt{render\{Type\}} é projetada para produzir um tipo específico de saída (por exemplo, texto, tabelas e gráficos) e geralmente é associada a uma função Output\{type\}.
+\end{itemize}
+
+Por exemplo, neste aplicativo, \texttt{renderPrint()} é pareado com \texttt{verbatimTextOutput()} para exibir um resumo estatístico com texto de largura fixa e \texttt{renderTable()} é pareado com \texttt{tableOutput()} para mostrar os dados de entrada em uma tabela.
+
+Observe que o resumo e a tabela são atualizados sempre que você altera o conjunto de dados de entrada. Essa dependência é criada implicitamente porque nos referimos \texttt{input\$dataset} nas funções de saída. \texttt{input\$dataset} é preenchido com o valor atual do componente de \textbf{ui} com id dataset e fará com que as saídas sejam atualizadas automaticamente sempre que esse valor mudar.
+
+Esta é a essência da \textbf{reatividade}: \emph{as saídas reagem automaticamente (recalculam) quando suas entradas mudam.}
+
+\hypertarget{inputs}{%
+\section{\texorpdfstring{\textbf{Inputs}}{Inputs}}\label{inputs}}
+
+Todas as funções de entrada tem o mesmo primeiro argumento: \texttt{inputId}. Este é o identificador usado para conectar o front-end ao back-end: se a UI tiver uma entrada com ID `name', a função do servidor irá acessá-la com \texttt{input\$name}.
+
+O \texttt{inputId} tem duas restrições:
+
+\begin{itemize}
+\item
+  Deve ser uma string simples que contém apenas letras, números e sublinhados (sem espaços, travessões, pontos ou outros caracteres especiais permitidos!). Nomeie-o como se fosse uma variável em R.
+\item
+  Deve ser único. Se não for exclusivo, você não terá como referir-se a esse controle na função \textbf{server}.
+\end{itemize}
+
+A maioria das funções de entrada tem um segundo parâmetro chamado \texttt{label}. Isso é usado para criar um rótulo legível para o controle.
+
+O terceiro parâmetro é normalmente \texttt{value}, que quando possível, permite definir o valor padrão. Os parâmetros restantes são exclusivos do controle.
+
+\textbf{Algumas funções padrões do Shiny:}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}@{}}
+\toprule
+Funções & Ações \\
+\midrule
+\endhead
+actionButton & botão de ação. \\
+checkboxGroupInput & um grupo de caixas de seleção. \\
+checkboxInput & uma única caixa de seleção. \\
+dateInput & um calendário para ajudar na seleção de datas. \\
+dateRangeInput & um par de calendários para selecionar um intervalo de datas. \\
+fileInput & um assistente de controle de upload de arquivo. \\
+helpText & texto de ajuda que pode ser adicionado a um formulário de entrada. \\
+numericInput & um campo para inserir números. \\
+radioButtons & um conjunto de botões de opção. \\
+selectInput & uma caixa com opções para selecionar. \\
+sliderInput & uma barra deslizante. \\
+submitButton & um botão de envio. \\
+textInput & um campo para inserir texto. \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{alguns-exemplos-de-inputs}{%
+\subsection{\texorpdfstring{\textbf{Alguns exemplos de Inputs}}{Alguns exemplos de Inputs}}\label{alguns-exemplos-de-inputs}}
+
+\hypertarget{textos-livres}{%
+\subsubsection{\texorpdfstring{\textbf{Textos livres}}{Textos livres}}\label{textos-livres}}
+
+\texttt{textInput()} coleta uma pequena quantidade do texto.
+
+\texttt{passwordInput()} coleta a senha.
+
+\texttt{textAreaInput()} parágrafo de texto.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{textInput}\NormalTok{(}\StringTok{\textquotesingle{}nome\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Qual é o seu nome?\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{passwordInput}\NormalTok{(}\StringTok{\textquotesingle{}senha\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Por favor inserir a senha:\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{textAreaInput}\NormalTok{(}\StringTok{\textquotesingle{}anotacao\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Em que podemos ajudar?\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{entradas-numuxe9ricas}{%
+\subsubsection{\texorpdfstring{\textbf{Entradas numéricas}}{Entradas numéricas}}\label{entradas-numuxe9ricas}}
+
+\texttt{numericInput()} cria uma caixa de texto restrita.
+
+\texttt{sliderInput()} controle deslizante e aqui você pode definir um \emph{intervalo} de valores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{numericInput}\NormalTok{(}\StringTok{\textquotesingle{}num1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Primeiro número\textquotesingle{}}\NormalTok{, }\AttributeTok{value =} \DecValTok{0}\NormalTok{, }\AttributeTok{min =} \DecValTok{0}\NormalTok{, }\AttributeTok{max =} \DecValTok{50}\NormalTok{),}
+  \FunctionTok{sliderInput}\NormalTok{(}\StringTok{\textquotesingle{}num2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Segundo número\textquotesingle{}}\NormalTok{, }\AttributeTok{value =} \DecValTok{25}\NormalTok{, }\AttributeTok{min =} \DecValTok{0}\NormalTok{, }\AttributeTok{max =} \DecValTok{50}\NormalTok{),}
+  \FunctionTok{sliderInput}\NormalTok{(}\StringTok{\textquotesingle{}range\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Intervalo\textquotesingle{}}\NormalTok{, }\AttributeTok{value =} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{20}\NormalTok{), }\AttributeTok{min =} \DecValTok{0}\NormalTok{, }\AttributeTok{max =} \DecValTok{50}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{datas}{%
+\subsubsection{\texorpdfstring{\textbf{Datas}}{Datas}}\label{datas}}
+
+\texttt{dateInput()} seleciona um único dia.
+
+\texttt{dateRangeInput()} seleciona um intervalo de dois dias.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{dateInput}\NormalTok{(}\StringTok{\textquotesingle{}primeiro\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Quando você entrou no seu primeiro emprego?\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{dateRangeInput}\NormalTok{(}\StringTok{\textquotesingle{}tempo\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Por quanto tempo ficou nele?\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+O formato de data, o idioma e o dia em que a semana começa são padronizados para os padrões dos EUA.
+Você pode mudar essas configurações, definindo o \texttt{format}, \texttt{language}e \texttt{weekstart}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{dateInput}\NormalTok{(}\StringTok{\textquotesingle{}primeiro\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Quando entrou no seu primeiro emprego?\textquotesingle{}}\NormalTok{, }\AttributeTok{format =} \StringTok{\textquotesingle{}dd{-}mm{-}yyyy\textquotesingle{}}\NormalTok{, }\AttributeTok{language =} \StringTok{\textquotesingle{}pt{-}BR\textquotesingle{}}\NormalTok{, }\AttributeTok{weekstart=} \DecValTok{0}\NormalTok{),}
+  \FunctionTok{dateRangeInput}\NormalTok{(}\StringTok{\textquotesingle{}tempo\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Por quanto tempo ficou no emprego\textquotesingle{}}\NormalTok{, }\AttributeTok{format =} \StringTok{\textquotesingle{}dd{-}mm{-}yyyy\textquotesingle{}}\NormalTok{, }\AttributeTok{language =} \StringTok{\textquotesingle{}pt{-}BR\textquotesingle{}}\NormalTok{, }\AttributeTok{weekstart=} \DecValTok{0}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{botuxf5es-de-auxe7uxf5es}{%
+\subsubsection{\texorpdfstring{\textbf{Botões de ações}}{Botões de ações}}\label{botuxf5es-de-auxe7uxf5es}}
+
+\texttt{actionButton()} ou \texttt{actionLink()}: permite que o usuário execute uma ação.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{actionButton}\NormalTok{(}\StringTok{\textquotesingle{}click\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Click me!\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{actionLink}\NormalTok{(}\StringTok{\textquotesingle{}click2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Click me!\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+Os links e botões de ações são naturalmente emparelhados com \texttt{observeEvent()} ou \texttt{eventReactive()} em sua função \textbf{server}.
+
+Você pode personalizar a aparência, utilizando o argumento \texttt{class}, usando \texttt{btn-primary}, \texttt{btn-success}, \texttt{btn-info}, \texttt{btn-warning}, ou \texttt{btn-danger}. Você também pode alterar o tamanho, com \texttt{btn-lg}, \texttt{btn-sm}, ou \texttt{btn-xs}. Finalmente, você pode fazer com que os botões ocupem toda a largura do elemento em que estão embutidos \texttt{btn-block}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{actionButton}\NormalTok{(}\StringTok{\textquotesingle{}click\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Click me!\textquotesingle{}}\NormalTok{, }\AttributeTok{class =} \StringTok{\textquotesingle{}btn{-}danger\textquotesingle{}}\NormalTok{),}
+    \FunctionTok{actionButton}\NormalTok{(}\StringTok{\textquotesingle{}click2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Click me!\textquotesingle{}}\NormalTok{, }\AttributeTok{class =} \StringTok{\textquotesingle{}btn{-}lg btn{-}success\textquotesingle{}}\NormalTok{)}
+\NormalTok{  ),}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{actionButton}\NormalTok{(}\StringTok{\textquotesingle{}click3\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Click me!\textquotesingle{}}\NormalTok{, }\AttributeTok{class =} \StringTok{\textquotesingle{}btn{-}block\textquotesingle{}}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+Vimos apenas alguns tipos de entradas \textbf{ui}. Tem muitas outras funções que você pode experimentar.(Mais contéudos no final do tutorial.)
+
+\hypertarget{funuxe7uxe3o-server}{%
+\chapter{\texorpdfstring{\textbf{Função Server}}{Função Server}}\label{funuxe7uxe3o-server}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+A função do \textbf{server} contém três parâmetros: \texttt{input}, \texttt{output}, e \texttt{session}. Como você mesmo nunca chama a função do \textbf{server}, nunca criará esses objetos sozinhos. Em vez disso, eles são criados pelo Shiny quando a sessão começa, conectando-se de volta a uma sessão específica. Como qualquer outra função do R, quando a função \textbf{server} é chamada, ela cria um novo ambiente local que é independente de todas as outras chamadas da função. Isso permite que cada sessão tenha um estado único, além de isolar as variáveis criadas dentro da função. É por isso que quase toda a programação reativa que você fará no Shiny estará dentro da função \textbf{server}.
+
+\begin{itemize}
+\item
+  O \texttt{input} é um objeto semelhante a uma lista que contém todos os dados de entradas enviados do navegador, nomeandos de acordo com o ID de entrada.
+\item
+  O \texttt{output} é bem semelhante ao input; também tem um objeto semelhante a uma lista nomeado de acordo com o ID de saída. A principal diferença é que você o usa para enviar saída em vez de receber entrada. Você sempre usa o objeto \texttt{output} em conjunto com uma função \texttt{render}.
+\end{itemize}
+
+\hypertarget{outputs}{%
+\section{\texorpdfstring{\textbf{Outputs}}{Outputs}}\label{outputs}}
+
+As saídas na \textbf{ui} criam espaços reservados que posteriormente são preenchidos pela função \textbf{server}. Como as entradas, as saídas recebem um ID exclusivo como primeiro argumento: se sua especificação de UI criar uma saída com ID `plot', você a acessará na função de \textbf{server} com \texttt{output\$plot}.
+
+Cada função \texttt{output} no front-end é acoplada a uma função \texttt{render} no back-end. Existem três tipos principais de saída, correspondendo às três coisas que você geralmente inclui em um relatório: \textbf{textos}, \textbf{tabelas} e \textbf{gráficos}.
+
+Os pares de funções \texttt{output} e \texttt{render} que trabalham juntos para adicionar saída de R para o aplicativo shiny:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.33}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.33}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.33}}@{}}
+\toprule
+Função Output & Função render & Cria \\
+\midrule
+\endhead
+htmlOutput/uiOutput & renderUI & um objeto de tag Shiny ou HTML. \\
+imageOutput & renderImage & imagens (salvas como um link para um arquivo de origem). \\
+plotOutput & renderPlot & gráficos. \\
+tableOutput & renderTable & quadro de dados, matriz, outras estruturas semelhantes a tabelas. \\
+textOutput & renderText & cadeias de caracteres. \\
+verbatimTextOutput & renderPrint & qualquer saída impressa. \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{alguns-exemplos-de-outputs}{%
+\subsection{\texorpdfstring{\textbf{Alguns exemplos de Outputs}}{Alguns exemplos de Outputs}}\label{alguns-exemplos-de-outputs}}
+
+\hypertarget{textos}{%
+\subsubsection{\texorpdfstring{\textbf{Textos}}{Textos}}\label{textos}}
+
+\texttt{textOutput()} saída de texto normal.
+
+\texttt{verbatimTextOutput()} código fixo e saída de console.
+
+\texttt{renderText()} combina o resultado em uma única string e geralmente é pareado com \texttt{textOutput}.
+
+\texttt{renderPrint()} imprime o resultado, como se você estivesse em um console R, e geralmente está emparelhado com \texttt{verbatimTextOutput}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{textOutput}\NormalTok{(}\StringTok{\textquotesingle{}texto\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{verbatimTextOutput}\NormalTok{(}\StringTok{\textquotesingle{}codigo\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{texto }\OtherTok{\textless{}{-}} \FunctionTok{renderText}\NormalTok{(}\StringTok{\textquotesingle{}Hello world!\textquotesingle{}}\NormalTok{)}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{codigo }\OtherTok{\textless{}{-}} \FunctionTok{renderPrint}\NormalTok{(}\FunctionTok{summary}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{))}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tabelas}{%
+\subsubsection{\texorpdfstring{\textbf{Tabelas}}{Tabelas}}\label{tabelas}}
+
+Existem duas maneiras de exibir um conjunto de dados em tabelas:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{tableOutput()} e \texttt{renderTable()} cria tabelas de dados estáticas e mostrando todos os dados de uma vez só. É mais útil para resumos pequenos e fixos.
+\end{itemize}
+
+\texttt{dataTableOutput()} e \texttt{renderDataTable()} cria tabelas dinâmicas, mostrando um número fixo de linhas e controles para alterar as linhas a serem visíveis. É mais útil para visualizar um conjunto de dados completo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{tableOutput}\NormalTok{(}\StringTok{\textquotesingle{}linhas\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{dataTableOutput}\NormalTok{(}\StringTok{\textquotesingle{}dados\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{linhas }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}\FunctionTok{head}\NormalTok{(iris))}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{dados }\OtherTok{\textless{}{-}} \FunctionTok{renderDataTable}\NormalTok{(iris, }\AttributeTok{options =} \FunctionTok{list}\NormalTok{(}\AttributeTok{pageLength =} \DecValTok{7}\NormalTok{))}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{gruxe1ficos}{%
+\subsubsection{\texorpdfstring{\textbf{Gráficos}}{Gráficos}}\label{gruxe1ficos}}
+
+Você pode gerar qualquer tipo de gráficos no R(no R base, com pacotes como ggplot2, highcharts e outros) com o \texttt{plotOutput()} e \texttt{renderPlot()}.
+
+Por padrão, \texttt{plotOutput()} ocupará toda a largura de seu contêiner. Você pode substituir esses padrões com os argumentos \texttt{height} e \texttt{width}. Os gráficos são saídas que também podem atuar como entradas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{plotOutput}\NormalTok{(}\StringTok{\textquotesingle{}plot\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{plot }\OtherTok{\textless{}{-}} \FunctionTok{renderPlot}\NormalTok{(}\FunctionTok{plot}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{))}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{uma-breve-histuxf3ria-da-programauxe7uxe3o-reativa}{%
+\chapter{\texorpdfstring{\textbf{Uma breve história da programação reativa}}{Uma breve história da programação reativa}}\label{uma-breve-histuxf3ria-da-programauxe7uxe3o-reativa}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Antes de falarmos da proromação reativa vamos saber um pouco da sua história:
+
+\begin{quote}
+Se você quiser aprender mais sobre programação reativa em outras linguagens, um pouco de história pode ser útil. Você pode ver a gênese da programação reativa há mais de 40 anos no VisiCalc , a primeira planilha:
+\end{quote}
+
+\begin{quote}
+Imaginei um quadro-negro mágico no qual, se você apagasse um número e escrevesse algo novo, todos os outros números mudariam automaticamente, como um processador de texto com números.
+- Dan Bricklin
+\end{quote}
+
+\begin{quote}
+As planilhas estão intimamente relacionadas à programação reativa: você declara a relação entre as células usando fórmulas e, quando uma célula muda, todas as suas dependências são atualizadas automaticamente. Então você provavelmente já fez um monte de programação reativa sem saber!
+\end{quote}
+
+\begin{quote}
+Embora as ideias de reatividade já existam há muito tempo, foi somente no final da década de 1990 que elas foram seriamente estudadas na ciência da computação acadêmica. Investigação em programação reactiva foi expulso por \href{http://conal.net/papers/icfp97/}{Fran}(\textbf{f}unctional \textbf{r}eactive \textbf{an}imation), um novo sistema para a incorporação de mudanças ao longo do tempo e de entrada de utilizador numa linguagem de programação funcional. Isso gerou uma rica literatura, mas teve pouco impacto na prática da programação.
+\end{quote}
+
+\begin{quote}
+Não foi até a década de 2010 que a programação reativa rugiu no mainstream da programação por meio do mundo acelerado das estruturas de interface do usuário JavaScript. Estruturas pioneiras como Knockout , Ember e Meteor (inspiração pessoal de Joe Cheng's para Shiny) demonstraram que a programação reativa pode tornar a programação da interface do usuário muito mais fácil. Em poucos anos, a programação reativa passou a dominar a programação da web por meio de estruturas extremamente populares como React , Vue.js e Angular , que são todas inerentemente reativas ou projetadas para trabalhar lado a lado com back-ends reativos.
+\end{quote}
+
+\begin{quote}
+É importante ter em mente que \textbf{programação reativa} é um termo bastante geral. Embora todas as bibliotecas, estruturas e linguagens de programação reativa estejam amplamente preocupadas em escrever programas que respondam a valores variáveis, elas variam enormemente em sua terminologia, designs e implementações.
+\end{quote}
+
+\hypertarget{programauxe7uxe3o-reativa}{%
+\chapter{\texorpdfstring{\textbf{Programação reativa}}{Programação reativa}}\label{programauxe7uxe3o-reativa}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{introduuxe7uxe3o-1}{%
+\section{\texorpdfstring{\textbf{Introdução}}{Introdução}}\label{introduuxe7uxe3o-1}}
+
+Já foi apresentado a você as principais funções de entradas e saídas que constituem o font-end de um aplicativo Shiny. Agora passaremos para o back-end do aplicativo Shiny: \emph{o código R que dá vida a sua interface de usuário.}
+
+É fácil criar apliactivos interativos com o Shiny, mas para obter o máximo que ele oferece, você precisar entender a estrutura e o funcionamento de \textbf{programação reativa} usada pelo Shiny.
+
+No Shiny, você expressa a lógica do \textbf{server} usando programação reativa. A programação reativa é um paradigma de \textbf{programação elegante} e \textbf{poderosa}, mas pode ser desorientador no início porque é um paradigma muito diferente de escrever um script. A ideia principal da programação reativa é especificar um gráfico de dependências para que, quando uma entrada for alterada, todas as saídas relacionadas sejam atualizadas automaticamente. Isso torna o fluxo de um aplicativo consideravelmente mais simples.
+
+\hypertarget{programauxe7uxe3o-reativa-1}{%
+\section{\texorpdfstring{\textbf{Programação reativa}}{Programação reativa}}\label{programauxe7uxe3o-reativa-1}}
+
+A verdadeira magia do Shiny acontece quando você tem um aplicatvos com entradas e saídas. Veremos um simples exemplo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{textInput}\NormalTok{(}\StringTok{\textquotesingle{}nome\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Qual é o seu nome?\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{textOutput}\NormalTok{(}\StringTok{\textquotesingle{}saudacao\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{saudacao }\OtherTok{\textless{}{-}} \FunctionTok{renderText}\NormalTok{(\{}
+    \FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}Olá \textquotesingle{}}\NormalTok{, input}\SpecialCharTok{$}\NormalTok{nome, }\StringTok{\textquotesingle{}!\textquotesingle{}}\NormalTok{)}
+\NormalTok{  \})}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+Observe com a saída se altera de acordo com a entrada. Esta é a grande ideia do Shiny: você não precisa dizer a uma saída quando atualizar, porque o Shiny descobre isso automaticamente.
+
+\textbf{Como funciona? O que exatamente está acontecendo no corpo da função?}
+
+O código não diz ao Shiny para criar a string e enviá-la ao navegador, mas em vez disso, ele informa ao Shiny como ele poderia criar a string se necessário. Depende do Shiny quando e se o código deve ser executado. Ele pode ser executado assim que o aplicativo for iniciado ou pode ser um pouco mais tarde; ele pode ser executado muitas vezes ou nunca! Isso não quer dizer que Shiny seja caprichoso, apenas que é responsabilidade dele decidir quando o código é executado.
+
+\hypertarget{programauxe7uxe3o-declarativa-vs-imperativa}{%
+\section{\texorpdfstring{\textbf{Programação declarativa vs imperativa}}{Programação declarativa vs imperativa}}\label{programauxe7uxe3o-declarativa-vs-imperativa}}
+
+\begin{itemize}
+\item
+  Na \textbf{programação declarativa} você expressa objetivos de nível superior ou descreve restrições importantes e confia em outra pessoa para decidir como e/ou quando traduzir isso em ação. Este é o estilo de programação que você usa no Shiny.
+\item
+  Na \textbf{programação imperativa} você emite um comando específico e ele é executado imediatamente. Este é o estilo de programação com o qual você está acostumado em seus scripts de análise: você comanda o R para carregar seus dados, transformá-los, visualizá-los e salvar os resultados no disco.
+\end{itemize}
+
+Na maioria das vezes, a programação declarativa é tremendamente libertadora: você descreve seus objetivos gerais e o software descobre como alcançá-los sem intervenção adicional. A desvantagem é o momento ocasional em que você sabe exatamente o que quer, mas não consegue descobrir como enquadrá-lo de uma forma que o sistema declarativo entenda.
+
+\hypertarget{expressuxf5es-reativas}{%
+\chapter{\texorpdfstring{\textbf{Expressões reativas}}{Expressões reativas}}\label{expressuxf5es-reativas}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Em todo tipo de programação, é uma prática ruim ter código duplicado; pode ser um desperdício computacional e, mais importante, aumenta a dificuldade de manter ou depurar o código. No script R tradicional, usamos duas técnicas para lidar com código duplicado: capturamos o valor usando uma variável ou capturamos o cálculo com uma função. Infelizmente, nenhuma dessas abordagens funciona aqui, e precisamos de um novo mecanismo: \textbf{expressões reativas}.
+
+As \textbf{expressões reativas} são importantes porque fornecem ao Shiny mais informações para que ele possa fazer menos recomputações quando as entradas mudam, tornando os aplicativos mais eficientes, e tornam mais fácil para os humanos entenderem o aplicativo.
+
+Como entradas, você pode usar os resultados de uma expressão reativa em uma saída. Assim como as saídas, as expressões reativas dependem das entradas e sabem automaticamente quando precisam ser atualizadas.
+
+Você cria uma expressão reativa envolvendo um bloco de código \texttt{reactive(\{...\})} e atribuindo a uma variável, e você usa uma expressão reativa chamando como uma função. Mas, embora pareça que você está chamando uma função, uma expressão reativa tem uma diferença importante: ela só é executada na primeira vez que é chamada e, em seguida, armazena seu resultado em cache até que precise ser atualizado.
+
+Observer o exemplo a seguir:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{selectInput}\NormalTok{(}\StringTok{\textquotesingle{}dataset\textquotesingle{}}\NormalTok{, }\AttributeTok{label =} \StringTok{\textquotesingle{}Dataset\textquotesingle{}}\NormalTok{, }\AttributeTok{choices =} \FunctionTok{ls}\NormalTok{(}\StringTok{\textquotesingle{}package:datasets\textquotesingle{}}\NormalTok{)),}
+  \FunctionTok{verbatimTextOutput}\NormalTok{(}\StringTok{\textquotesingle{}summary\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{tableOutput}\NormalTok{(}\StringTok{\textquotesingle{}table\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{summary }\OtherTok{\textless{}{-}} \FunctionTok{renderPrint}\NormalTok{(\{}
+\NormalTok{    dataset }\OtherTok{\textless{}{-}} \FunctionTok{get}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{dataset, }\StringTok{\textquotesingle{}package:datasets\textquotesingle{}}\NormalTok{)}
+    \FunctionTok{summary}\NormalTok{(dataset)}
+\NormalTok{  \})}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{table }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(\{}
+\NormalTok{    dataset }\OtherTok{\textless{}{-}} \FunctionTok{get}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{dataset, }\StringTok{\textquotesingle{}package:datasets\textquotesingle{}}\NormalTok{)}
+\NormalTok{    dataset}
+\NormalTok{  \})}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+Podemos reduzir esse código atualizando o \texttt{server()} para usar expressões reativas. O aplicativo se comporta de forma idêntica, mas funciona com um pouco mais de eficiência, pois só precisa recuperar o conjunto de dados uma vez, não duas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+  \CommentTok{\# Criando a expressão reativa}
+\NormalTok{  dataset }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(\{}
+    \FunctionTok{get}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{dataset, }\StringTok{\textquotesingle{}package:datasets\textquotesingle{}}\NormalTok{)}
+\NormalTok{  \})}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{summary }\OtherTok{\textless{}{-}} \FunctionTok{renderPrint}\NormalTok{(\{}
+    \CommentTok{\#  Use a expressão reativa chamando como uma função}
+    \FunctionTok{summary}\NormalTok{(}\FunctionTok{dataset}\NormalTok{())}
+\NormalTok{  \})}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{table }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(\{}
+    \FunctionTok{dataset}\NormalTok{()}
+\NormalTok{  \})}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{observers}{%
+\section{\texorpdfstring{\textbf{Observers}}{Observers}}\label{observers}}
+
+Você pode salvar um arquivo em uma unidade de rede compartilhada, enviar dados para uma API da web, atualizar um banco de dados ou imprimir uma mensagem de depuração no console. Essas ações não afetam a aparência do aplicativo Shiny, portanto, você não deve usar uma saída e uma função \texttt{render}. Em vez disso, você precisa usar uma função \textbf{observer}.
+
+Um \texttt{observer} é como uma expressão reativa, pois pode ler valores reativos e chamar expressões reativas, e será reexecutado automaticamente quando essas dependências forem alteradas. Mas, ao contrário das expressões reativas, não produz um resultado e não pode ser usado como entrada para outras expressões reativas. Assim, os observers são úteis apenas por seus efeitos colaterais.
+
+Outro contraste entre expressões reativas e observers é sua estratégia de execução. Expressões reativas usam avaliação preguiçosa; ou seja, quando suas dependências mudam, eles não são executados imediatamente, mas esperam até serem chamados por outra pessoa. Na verdade, se eles não forem chamados, eles nunca serão executados novamente. Em contraste, os observers usam avaliação ansiosa; assim que suas dependências mudam, eles se programam para uma nova execução.
+
+\texttt{observeEvent()} retorna um objeto de classe de referência do observe.
+
+\texttt{eventReactive()} retorna um objeto de expressão reativa
+
+Essas duas funções são muitos semelhantes e tem dois argumentos importantes:
+
+\texttt{eventExpre} que é a entrada ou espressões da qual depender.
+
+\texttt{handlerExpr} que é o código que será executado.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{textInput}\NormalTok{(}\StringTok{\textquotesingle{}nome\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Qual é o seu nome?\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{textOutput}\NormalTok{(}\StringTok{\textquotesingle{}saudacao\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{  string }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}Hello \textquotesingle{}}\NormalTok{, input}\SpecialCharTok{$}\NormalTok{nome, }\StringTok{\textquotesingle{}!\textquotesingle{}}\NormalTok{))}
+  
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{saudacao }\OtherTok{\textless{}{-}} \FunctionTok{renderText}\NormalTok{(}\FunctionTok{string}\NormalTok{())}
+  \FunctionTok{observeEvent}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{nome, \{}
+    \FunctionTok{message}\NormalTok{(}\StringTok{\textquotesingle{}Saudacao realizada\textquotesingle{}}\NormalTok{)}
+\NormalTok{  \})}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+Observe que a cada letra introduzida na caixa de texto a mensagem \emph{Saudacao realizada} será enviada no console.
+
+\hypertarget{diferenuxe7as-entre-expressuxf5es-reativas-e-observers}{%
+\section{\texorpdfstring{\textbf{Diferenças entre expressões reativas e Observers}}{Diferenças entre expressões reativas e Observers}}\label{diferenuxe7as-entre-expressuxf5es-reativas-e-observers}}
+
+As expressões reativas e os observers são semelhantes no sentido de que armazenam expressões que podem ser executadas, mas têm algumas diferenças fundamentais.
+
+\begin{itemize}
+\item
+  \textbf{Observers} respondem a eventos de descarga reativa , mas as expressões reativas não. Se você deseja que uma expressão reativa seja executada, ela deve ter um observador como descendente no gráfico de dependência reativa.
+\item
+  As \textbf{expressões reativas} retornam valores, mas os observers não.
+\end{itemize}
+
+\hypertarget{valores-reativos}{%
+\section{\texorpdfstring{\textbf{Valores reativos}}{Valores reativos}}\label{valores-reativos}}
+
+Os valores reativos contêm valores, que podem ser lidos por outros objetos reativos. O objeto \texttt{input} é um objeto \texttt{ReactiveValues} que se parece com uma lista e contém muitos valores reativos individuais. Os valores em \texttt{input} são definidos pela entrada do navegador da web.
+
+Existem dois tipos de valores reativos:
+
+\begin{itemize}
+\item
+  \texttt{reactiveVal()} cria um único valor reativo.
+\item
+  \texttt{reactiveValues()} cria Uma lista de valores reativos.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+
+\CommentTok{\# reactiveVal()}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{reactiveVal}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(x)}
+\CommentTok{\#  reactiveVal: [1] \textquotesingle{}10\textquotesingle{}}
+
+\FunctionTok{x}\NormalTok{(}\DecValTok{20}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(x)}
+\CommentTok{\#  reactiveVal: [1] \textquotesingle{}20\textquotesingle{}}
+
+\CommentTok{\# reactiveValues()}
+\NormalTok{l1 }\OtherTok{\textless{}{-}} \FunctionTok{reactiveValues}\NormalTok{(}\AttributeTok{a =} \DecValTok{1}\NormalTok{, }\AttributeTok{b =} \DecValTok{2}\NormalTok{)}
+\FunctionTok{isolate}\NormalTok{(l1}\SpecialCharTok{$}\NormalTok{a)}
+\CommentTok{\#  [1] 1}
+\FunctionTok{isolate}\NormalTok{(l1}\SpecialCharTok{$}\NormalTok{b)}
+\CommentTok{\#  [1] 2}
+\end{Highlighting}
+\end{Shaded}
+
+Eles têm interfaces ligeiramente diferentes para obter e definir valores. No entanto, embora pareçam diferentes, eles se comportam da mesma forma, portanto, você pode escolher entre eles com base na sua preferência.
+
+Observer o seguinte exemplo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x1 }\OtherTok{\textless{}{-}}\NormalTok{ x2 }\OtherTok{\textless{}{-}} \DecValTok{20}
+\NormalTok{x2 }\OtherTok{\textless{}{-}} \DecValTok{30}
+\FunctionTok{print}\NormalTok{(x1) }\CommentTok{\# valor inalterado}
+\CommentTok{\#  [1] 20}
+\end{Highlighting}
+\end{Shaded}
+
+Obervando o código acima, pode se dizer que são valores reativos?
+Se sua resposta é \emph{NÃO}, parabéns você acertou. Os valores reativos sempre mantêm uma referência de volta para o mesmo valor, de modo que a modificação de qualquer cópia modifica todos os valores:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z1 }\OtherTok{\textless{}{-}}\NormalTok{ z2 }\OtherTok{\textless{}{-}} \FunctionTok{reactiveValues}\NormalTok{(}\AttributeTok{a =} \DecValTok{10}\NormalTok{)}
+\NormalTok{z2}\SpecialCharTok{$}\NormalTok{a }\OtherTok{\textless{}{-}} \DecValTok{20}
+\FunctionTok{isolate}\NormalTok{(z1}\SpecialCharTok{$}\NormalTok{a)}
+\CommentTok{\# [1] 20}
+\end{Highlighting}
+\end{Shaded}
+
+Agora vamos combinar as funções \texttt{reactiveValues} e \texttt{observeEvent} que pode ser aplicados em alguns casos úteis, resolvendo problemas que não muitos desafiadores.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \StringTok{\textquotesingle{}Total de pontos:\textquotesingle{}}\NormalTok{,}
+  \FunctionTok{textOutput}\NormalTok{(}\StringTok{\textquotesingle{}total\textquotesingle{}}\NormalTok{, }\AttributeTok{inline =} \ConstantTok{TRUE}\NormalTok{),}
+  \FunctionTok{actionButton}\NormalTok{(}\StringTok{\textquotesingle{}ponto5\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Adiciona 5 ponto\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{actionButton}\NormalTok{(}\StringTok{\textquotesingle{}ponto10\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Adiciona 10 pontos\textquotesingle{}}\NormalTok{),}
+  \FunctionTok{actionButton}\NormalTok{(}\StringTok{\textquotesingle{}remove\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Remove 1 ponto\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session)\{}
+\NormalTok{  value }\OtherTok{\textless{}{-}} \FunctionTok{reactiveValues}\NormalTok{(}\AttributeTok{total =} \DecValTok{0}\NormalTok{)}
+  
+  \FunctionTok{observeEvent}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{ponto5, \{}
+\NormalTok{    value}\SpecialCharTok{$}\NormalTok{total }\OtherTok{\textless{}{-}}\NormalTok{ value}\SpecialCharTok{$}\NormalTok{total }\SpecialCharTok{+} \DecValTok{5}
+\NormalTok{  \})}
+  \FunctionTok{observeEvent}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{ponto10, \{}
+\NormalTok{    value}\SpecialCharTok{$}\NormalTok{total }\OtherTok{\textless{}{-}}\NormalTok{ value}\SpecialCharTok{$}\NormalTok{total }\SpecialCharTok{+} \DecValTok{10}
+\NormalTok{  \})}
+  \FunctionTok{observeEvent}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{remove, \{}
+\NormalTok{    value}\SpecialCharTok{$}\NormalTok{total }\OtherTok{\textless{}{-}}\NormalTok{ value}\SpecialCharTok{$}\NormalTok{total }\SpecialCharTok{{-}} \DecValTok{1}
+\NormalTok{  \})}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{total }\OtherTok{\textless{}{-}} \FunctionTok{renderText}\NormalTok{(\{}
+\NormalTok{    value}\SpecialCharTok{$}\NormalTok{total}
+\NormalTok{  \})}
+\NormalTok{\}}
+
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+No exemplo temos dois botões que permitem aumentar os valores e um botão que permite diminuir os valores. A função \texttt{reactiveValues} foi usada para armazena o valor atual e a função \texttt{observeEvent} para aumentar e diminuir o valor quando um botão é presioando. A principal complexidade adicional aqui é que o novo valor de \texttt{total()} depende do valor anterior.
+
+\hypertarget{muxf3dulos-shiny}{%
+\chapter{\texorpdfstring{\textbf{Módulos Shiny}}{Módulos Shiny}}\label{muxf3dulos-shiny}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{introduuxe7uxe3o-2}{%
+\section{\texorpdfstring{\textbf{Introdução}}{Introdução}}\label{introduuxe7uxe3o-2}}
+
+Agora vamos falar sobre o sistema de módulos do Shiny, que permite extrair a interface do usuário acoplada e o código do servidor em componentes isolados e reutilizáveis, além de deixar seu aplicativo mais limpo e organizado.
+
+À medida que os aplicativos Shiny ficam maiores e mais complicados, usamos módulos para gerenciar a complexidade crescente do código do aplicativo Shiny.
+
+Um módulo é um par de funções \textbf{ui} e funções \textbf{server}. A mágica dos módulos vem porque essas funções são construídas de uma maneira especial que cria um ``namespace''. Até agora, ao escrever um aplicativo, os nomes dos controles \texttt{id} são globais: todas as partes de sua função \textbf{server} podem ver todas as partes de sua ui. Os módulos oferecem a capacidade de criar controles que só podem ser vistos de dentro do módulo. Isso é chamado de namespace porque cria ``espaços'' de ``nomes'' que são isolados do resto do aplicativo.
+
+Módulos Shiny têm duas grandes vantagens:
+
+\begin{itemize}
+\item
+  O namespacing torna mais fácil entender como seu aplicativo funciona porque você pode escrever, analisar e testar componentes individuais de forma isolada.
+\item
+  Como os módulos são funções, eles ajudam a reutilizar o código; tudo o que você pode fazer com uma função, você pode fazer com um módulo.
+\end{itemize}
+
+\hypertarget{muxf3dulo-simples}{%
+\section{\texorpdfstring{\textbf{Módulo simples}}{Módulo simples}}\label{muxf3dulo-simples}}
+
+Vamos criar um aplicativo bem simples que desenha um histograma, que servirá para ilustrar a mecânica básica do funcionamento do módulo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(shiny)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{selectInput}\NormalTok{(}\StringTok{\textquotesingle{}var\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Variável\textquotesingle{}}\NormalTok{, }\FunctionTok{names}\NormalTok{(iris)),}
+  \FunctionTok{numericInput}\NormalTok{(}\StringTok{\textquotesingle{}bins\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bins\textquotesingle{}}\NormalTok{, }\DecValTok{10}\NormalTok{, }\AttributeTok{min =} \DecValTok{1}\NormalTok{),}
+  \FunctionTok{plotOutput}\NormalTok{(}\StringTok{\textquotesingle{}hist\textquotesingle{}}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{  data }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(iris[[input}\SpecialCharTok{$}\NormalTok{var]])}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{hist }\OtherTok{\textless{}{-}} \FunctionTok{renderPlot}\NormalTok{(\{}
+    \FunctionTok{hist}\NormalTok{(}\FunctionTok{data}\NormalTok{(), }\AttributeTok{breaks =}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{bins, }\AttributeTok{main =}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{var)}
+\NormalTok{  \}, }\AttributeTok{res =} \DecValTok{96}\NormalTok{)}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+Como um aplicativo, o módulo é composto por duas partes:
+
+\begin{itemize}
+\item
+  A função de interface do usuário do módulo que gera a especificação \texttt{ui}.
+\item
+  A função de servidor do módulo que executa o código dentro da função \texttt{server}.
+\end{itemize}
+
+As duas funções possuem formulários padrão. Ambos pegam um argumento \texttt{id} e o usam para definir o namespace do módulo. Para criar um módulo, precisamos extrair o código da \textbf{ui} do aplicativo e do servidor e colocá-lo na ui do módulo.
+
+\hypertarget{muxf3dulo-ui}{%
+\subsection{\texorpdfstring{\textbf{Módulo UI}}{Módulo UI}}\label{muxf3dulo-ui}}
+
+No módulo UI existem duas etapas:
+
+\begin{itemize}
+\item
+  Coloca o código \textbf{ui} dentro de uma função que tenha um argumento \texttt{id}.
+\item
+  Envolva cada ID exsitente em uma chamada \texttt{NS()}.
+\end{itemize}
+
+\textbf{Obs:} a função \texttt{NS()} cria IDs com namepace a partir de IDs vazios, os aplicativos Shiny usam IDs para identificar entradas e saídas. Esses IDs devem ser exclusivos em um aplicativo, pois o uso acidental do mesmo ID de entrada/saída mais de uma vez resultará em um comportamento inesperado. A solução tradicional para evitar conflitos de nomes são os namespaces; um namespace está para um ID como um diretório está para um arquivo. Use a função \texttt{NS()} para transformar um ID simples em um espaço de nomes, combinando-os com os intermediários \texttt{ns.sep}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{histUI }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(id) \{}
+  \FunctionTok{tagList}\NormalTok{(}
+    \FunctionTok{selectInput}\NormalTok{(}\FunctionTok{NS}\NormalTok{(id, }\StringTok{\textquotesingle{}var\textquotesingle{}}\NormalTok{), }\StringTok{\textquotesingle{}Variável\textquotesingle{}}\NormalTok{, }\AttributeTok{choices =} \FunctionTok{names}\NormalTok{(iris)),}
+    \FunctionTok{numericInput}\NormalTok{(}\FunctionTok{NS}\NormalTok{(id, }\StringTok{\textquotesingle{}bins\textquotesingle{}}\NormalTok{), }\StringTok{\textquotesingle{}bins\textquotesingle{}}\NormalTok{, }\AttributeTok{value =} \DecValTok{10}\NormalTok{, }\AttributeTok{min =} \DecValTok{1}\NormalTok{),}
+    \FunctionTok{plotOutput}\NormalTok{(}\FunctionTok{NS}\NormalTok{(id, }\StringTok{\textquotesingle{}hist\textquotesingle{}}\NormalTok{))}
+\NormalTok{  )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Aqui, os componentes da \textbf{ui} foram retornado em a \texttt{tagList()}, que é um tipo especial de função de layout que permite agrupar vários componentes sem realmente sugerir como eles serão dispostos. É responsabilidade de quem está ligando \texttt{histUI()} envolver o resultado em uma função de layout como \texttt{column()} ou de \texttt{fluidRow()} acordo com suas necessidades.
+
+\hypertarget{muxf3dulo-server}{%
+\subsection{\texorpdfstring{\textbf{Módulo Server}}{Módulo Server}}\label{muxf3dulo-server}}
+
+A função \textbf{server} é empacotada dentro de outra função que deve ter um argumento \texttt{id}. Esta função chama \texttt{moduleServer()} com o \texttt{id} e uma função que se parece com uma função de servidor normal:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{histServer }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(id) \{}
+  \FunctionTok{moduleServer}\NormalTok{(id, }\ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{    data }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(iris[[input}\SpecialCharTok{$}\NormalTok{var]])}
+\NormalTok{    output}\SpecialCharTok{$}\NormalTok{hist }\OtherTok{\textless{}{-}} \FunctionTok{renderPlot}\NormalTok{(\{}
+      \FunctionTok{hist}\NormalTok{(}\FunctionTok{data}\NormalTok{(), }\AttributeTok{breaks =}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{bins, }\AttributeTok{main =}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{var)}
+\NormalTok{    \}, }\AttributeTok{res =} \DecValTok{96}\NormalTok{)}
+\NormalTok{  \})}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Observe que \texttt{moduleServer()} cuida do namespace automaticamente: dentro de\texttt{moduleServer(id)}, \texttt{input\$var} e \texttt{input\$bins} consulta as entradas com nomes \texttt{NS(id,\ \textquotesingle{}var\textquotesingle{})} e \texttt{NS(id,\ \textquotesingle{}bins\textquotesingle{})}.
+
+\textbf{Aplicativo atualizado}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{histogramApp }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{() \{}
+\NormalTok{  ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+    \FunctionTok{histUI}\NormalTok{(}\StringTok{\textquotesingle{}hist1\textquotesingle{}}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+    \FunctionTok{histServer}\NormalTok{(}\StringTok{\textquotesingle{}hist1\textquotesingle{}}\NormalTok{)}
+\NormalTok{  \}}
+  \FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)  }
+\NormalTok{\}}
+
+\FunctionTok{histogramApp}\NormalTok{() }\CommentTok{\# chamando o aplicativo}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{entradas-e-sauxeddas}{%
+\section{\texorpdfstring{\textbf{Entradas e Saídas}}{Entradas e Saídas}}\label{entradas-e-sauxeddas}}
+
+Os módulos podem representar entrada, saída ou ambos. Eles podem ser tão simples quanto uma única saída ou tão complicados quanto uma interface com várias guias repleta de controles/saídas orientados por múltiplas expressões reativas e observers.
+
+Ás vezes, um módulo com apenas um argumento \texttt{id} para o módulo \textbf{ui} e o \textbf{server} é útil porque permite isolar o código complexo em seu próprio arquivo. Isso é particularmente útil para aplicativos que agregam componentes independentes, como um painel corporativo onde cada guia mostra relatórios personalizados para cada linha de negócios. Aqui, os módulos permitem que você desenvolva cada peça em seu próprio arquivo sem ter que se preocupar com o conflito de IDs entre os componentes.
+
+Muitas vezes, no entanto, o módulo \textbf{ui} e o \textbf{server} precisarão de argumentos adicionais. Adicionar argumentos à \textbf{ui} do módulo oferece maior controle sobre a aparência do módulo, permitindo que você use o mesmo módulo em mais lugares em seu aplicativo. Mas a \textbf{ui} do módulo é apenas uma função R regular, portanto, há relativamente pouco a aprender que seja específico do Shiny. Ao contrário do código Shiny regular, conectar módulos requer que você seja explícito sobre entradas e saídas. Inicialmente, isso vai parecer cansativo. E é certamente mais trabalhoso do que a associação de forma livre usual de Shiny. Mas os módulos impõem linhas específicas de comunicação por um motivo: eles são um pouco mais trabalhosos de criar, mas muito mais fáceis de entender e permitem que você crie aplicativos substancialmente mais complexos.
+
+Para ver como as entradas e saídas funcionam, vamos fazer um aplicativo simples, mas que ilustra alguns dos princípios básicos. Vamos criar um módulo que permite ao usuário selecionar um conjunto de dados a partir dos dados integradosfornecidos pelo pacote de conjuntos de dados.
+
+\textbf{Obs}: a função de um módulo \textbf{ui} deve ser um nome que é o sufixo \texttt{Input}, \texttt{Output} ou \texttt{UI}; por exemplo, \texttt{datasetInput}, \texttt{selecNumOutput}, ou \texttt{analiseUI}.
+
+Módulo UI:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datasetInput }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(id, }\AttributeTok{filter =} \ConstantTok{NULL}\NormalTok{) \{}
+\NormalTok{  names }\OtherTok{\textless{}{-}} \FunctionTok{ls}\NormalTok{(}\StringTok{\textquotesingle{}package:datasets\textquotesingle{}}\NormalTok{)}
+  \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{is.null}\NormalTok{(filter)) \{}
+\NormalTok{    data }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(names, get, }\StringTok{\textquotesingle{}package:datasets\textquotesingle{}}\NormalTok{)}
+\NormalTok{    names }\OtherTok{\textless{}{-}}\NormalTok{ names[}\FunctionTok{vapply}\NormalTok{(data, filter, }\FunctionTok{logical}\NormalTok{(}\DecValTok{1}\NormalTok{))]}
+\NormalTok{  \}}
+  \FunctionTok{selectInput}\NormalTok{(}\FunctionTok{NS}\NormalTok{(id, }\StringTok{\textquotesingle{}dataset\textquotesingle{}}\NormalTok{), }\StringTok{\textquotesingle{}Escolha um conjunto de dados:\textquotesingle{}}\NormalTok{, }\AttributeTok{choices =}\NormalTok{ names)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Aqui, usamos um argumento adicional que possa limitar as opções do conjuntos de dados integrados que são data.frame (filter = is.data.frame) ou matrizes (filter = is.matrix). Este argumento filtra opcionalmente os objetos encontrados no pacote de conjuntos de dados e, em seguida, criamos um \texttt{selectInput}.
+
+Módulo Server:
+
+Usamos o \texttt{get} para recuperar o conjunto de dados com seu nome.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datasetServer }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(id) \{}
+  \FunctionTok{moduleServer}\NormalTok{(id, }\ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+    \FunctionTok{reactive}\NormalTok{(}\FunctionTok{get}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{dataset, }\StringTok{\textquotesingle{}package:datasets\textquotesingle{}}\NormalTok{))}
+\NormalTok{  \})}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Criando o aplicativo com os módulos \texttt{datasetInput} e \texttt{datasetServer}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{datasetApp }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}\AttributeTok{filter =} \ConstantTok{NULL}\NormalTok{) \{}
+\NormalTok{  ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+    \FunctionTok{datasetInput}\NormalTok{(}\StringTok{\textquotesingle{}dataset\textquotesingle{}}\NormalTok{, }\AttributeTok{filter =}\NormalTok{ filter),}
+    \FunctionTok{tableOutput}\NormalTok{(}\StringTok{\textquotesingle{}data\textquotesingle{}}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session) \{}
+\NormalTok{    data }\OtherTok{\textless{}{-}} \FunctionTok{datasetServer}\NormalTok{(}\StringTok{\textquotesingle{}dataset\textquotesingle{}}\NormalTok{)}
+\NormalTok{    output}\SpecialCharTok{$}\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}\FunctionTok{head}\NormalTok{(}\FunctionTok{data}\NormalTok{()))}
+\NormalTok{  \}}
+  \FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\NormalTok{\}}
+
+\FunctionTok{datasetApp}\NormalTok{() }
+\end{Highlighting}
+\end{Shaded}
+
+Para usar o valor retornado no módulo \texttt{datasetServer}, só precisamos capturar o seu valor de retorno com (\texttt{data\ \textless{}-\ datasetServer(\textquotesingle{}dataset\textquotesingle{})}) e exibimos o conjunto de dados no \texttt{tableOutput()}. É necessário um argumento \texttt{filter} que é passado para o módulo \textbf{ui}, facilitando a experiência com esse argumento de entrada.
+
+\hypertarget{estudo-de-caso}{%
+\chapter{\texorpdfstring{\textbf{Estudo de Caso}}{Estudo de Caso}}\label{estudo-de-caso}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{introduuxe7uxe3o-3}{%
+\section{\texorpdfstring{\textbf{Introdução}}{Introdução}}\label{introduuxe7uxe3o-3}}
+
+Vamos fazer um estudo de caso, para ajudá-los a fixar os conteúdos anteriores. Agora veremos um aplicativo Shiny mais rico que explora um conjunto de dados e reúne muitas das ideias que vimos até agora. Vamos fazer uma pequena análise de dados fora do shiny,em seguida, transformá-lo em um aplicativo, começando de forma simples e progressivamente acrescentando mais detalhes.
+
+Vamos complementar o Shiny com outros pacotes:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{tidyverse} para análise geral dos dados(uma coleção de pacotes R projetados para data science).
+\item
+  \texttt{shinydashboard} estrutura shiny dashboard.
+\item
+  \texttt{shinydashboardPlus} extensões do pacote shinydashboard.
+\item
+  \texttt{shinyjs} operações comuns em JavaScript via código R.
+\item
+  \texttt{ggplot2} para visualização gráfica.
+\item
+  \texttt{forcats} para lidar com variáveis categóricas.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install.packages("tidyverse")}
+\CommentTok{\# install.packages("ggplot2")}
+\CommentTok{\# install.packages("shinydashboard")}
+\CommentTok{\# install.packages("shinydashboardPlus")}
+\CommentTok{\# install.packages("shinyjs")}
+\CommentTok{\# install.packages("forcats")}
+
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(shiny)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(shinydashboard)}
+\FunctionTok{library}\NormalTok{(shinydashboardPlus)}
+\FunctionTok{library}\NormalTok{(shinyjs)}
+\FunctionTok{library}\NormalTok{(forcats)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{descriuxe7uxe3o-dos-dados}{%
+\section{\texorpdfstring{\textbf{Descrição dos dados}}{Descrição dos dados}}\label{descriuxe7uxe3o-dos-dados}}
+
+Vamos explorar/analisar os dados do Sistema Nacional de Vigilância de Lesões Eletrônicas (NEISS), coletados pela Comissão de Segurança de Produtos de Consumo. Este é um estudo de longo prazo que registra todos os acidentes observados em uma amostra representativa de hospitais nos Estados Unidos. É um conjunto de dados interessante para explorar porque todos já estão familiarizados com o domínio e cada observação é acompanhada por uma breve narrativa que explica como o acidente ocorreu. Você pode descobrir mais sobre este conjunto de dados \href{https://github.com/hadley/neiss}{aqui}.
+
+Vamos concentrar apenas nos dados do ano de 2017. \href{https://github.com/hadley/mastering-shiny/blob/master/neiss/data.R}{Aqui} você pode ver o código que foi usado para extrair os dados para a análise.
+
+Obtendo os dados para o computador:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dir.create}\NormalTok{(}\StringTok{\textquotesingle{}neiss\textquotesingle{}}\NormalTok{)}
+\NormalTok{download }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(name) \{}
+\NormalTok{ url }\OtherTok{\textless{}{-}} \StringTok{\textquotesingle{}https://github.com/hadley/mastering{-}shiny/raw/master/neiss/\textquotesingle{}}
+ \FunctionTok{download.file}\NormalTok{(}\FunctionTok{paste0}\NormalTok{(url, name), }\FunctionTok{paste0}\NormalTok{(}\StringTok{\textquotesingle{}neiss/\textquotesingle{}}\NormalTok{, name), }\AttributeTok{quiet =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{\}}
+\FunctionTok{download}\NormalTok{(}\StringTok{\textquotesingle{}injuries.tsv.gz\textquotesingle{}}\NormalTok{)}
+\FunctionTok{download}\NormalTok{(}\StringTok{\textquotesingle{}population.tsv\textquotesingle{}}\NormalTok{)}
+\FunctionTok{download}\NormalTok{(}\StringTok{\textquotesingle{}products.tsv\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+O dataset \texttt{injuries} tem cerca de 250.000 observações e 10 variáveis.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{injuries }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_tsv}\NormalTok{(}\StringTok{\textquotesingle{}neiss/injuries.tsv\textquotesingle{}}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(injuries)}
+\FunctionTok{dim}\NormalTok{(injuries)}
+\end{Highlighting}
+\end{Shaded}
+
+Descrição das colunas:
+
+\begin{itemize}
+\item
+  \texttt{trmt\_date} é a data em que a pessoa foi atendida no hospital(e não quando ocorreu o acidente).
+\item
+  \texttt{age} idade.
+\item
+  \texttt{sex} gênero.
+\item
+  \texttt{race} raça.
+\item
+  \texttt{body\_part} localização da lesão no corpo.
+\item
+  \texttt{location} local onde ocorreu o acidente.
+\item
+  \texttt{diag} diagnóstico básico da lesão (como fratura ou laceração).
+\item
+  \texttt{prod\_code} principal produto associado à lesão.
+\item
+  \texttt{weight} é o peso estatístico que fornece o número estimado de pessoas que sofreriam esse ferimento se este conjunto de dados fosse dimensionado para toda a população dos EUA.
+\item
+  \texttt{narrative} breve história sobre como ocorreu o acidente.
+\end{itemize}
+
+Vamos emparelhar esse dataset \texttt{injuries} com os outros dois datasets:
+
+\texttt{products} que permite que procuramos o nome do produto no código do produto:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{products }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_tsv}\NormalTok{(}\StringTok{\textquotesingle{}neiss/products.tsv\textquotesingle{}}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(products)}
+\end{Highlighting}
+\end{Shaded}
+
+E o outro dataset é o \texttt{population} que informa a população dos EUA em 2017 para cada combinação de idade e sexo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{population }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_tsv}\NormalTok{(}\StringTok{\textquotesingle{}neiss/population.tsv\textquotesingle{}}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(population)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{transformauxe7uxe3o-e-limpeza-dos-dados}{%
+\section{\texorpdfstring{\textbf{Transformação e limpeza dos dados}}{Transformação e limpeza dos dados}}\label{transformauxe7uxe3o-e-limpeza-dos-dados}}
+
+É uma boa prática antes de qualquer análise ou criação de um aplicativo Shiny, darmos uma atenção aos nossos dados. Verificar qual tipo de dado estamos lidando, se tem valores missings, se precisa criar ou remover variáveis, entre outras possibilidades de transformações e limpezas dos dados. Essa é a parte menos glamurosa de qualquer projeto, porém essa etapa é muito importante, pois garante um boa análise, uma boa visualização dos dados.
+
+Agora vamos fazer as transformações e limpezas necessárias aos dados.
+
+Vamos verificar os tipos de dados:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(injuries) }
+\FunctionTok{str}\NormalTok{(products)}
+\FunctionTok{str}\NormalTok{(population)}
+\end{Highlighting}
+\end{Shaded}
+
+Presença de valores missing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(injuries))}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(products))}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(population))}
+\end{Highlighting}
+\end{Shaded}
+
+Nos três datasets não há presença de valores missing. E para o nosso aplicativo não será necessário transformação/limpeza dos dados, só se ao decorrer do desenvolvimento da análise precisar.
+
+\hypertarget{explorauxe7uxe3o-dos-dados}{%
+\section{\texorpdfstring{\textbf{Exploração dos dados}}{Exploração dos dados}}\label{explorauxe7uxe3o-dos-dados}}
+
+Vamos explorar um pouco os dados, antes de criar o aplicativo.
+
+Vamos extrair um conjunto de dados dos dados originais, extrair apenas as lesões relacionadas aos esportes. E escolher um desses esporte para fazer a análise.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{esportes }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(injuries, prod\_code }\SpecialCharTok{==} \DecValTok{1200} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1205}\SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1211} \SpecialCharTok{|}
+\NormalTok{                   prod\_code }\SpecialCharTok{==} \DecValTok{1233} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1267} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1333} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{3265}\SpecialCharTok{|}
+\NormalTok{                     prod\_code }\SpecialCharTok{==} \DecValTok{3274} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5034} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5040} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5041}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Começaremos examinando apenas as lesões relacionada a um tipo de esporte: \textbf{basquete}. Vamos retirar os ferimentos associado a ele:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{basquete }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(esportes, prod\_code }\SpecialCharTok{==} \DecValTok{1205}\NormalTok{)}
+\FunctionTok{dim}\NormalTok{(basquete)}
+\end{Highlighting}
+\end{Shaded}
+
+Observando a localização, parte do corpo e o diagnóstico das lesões relacionadas ao basquete. Observe que o peso pela variável \texttt{weight} para que as contagens possam ser interpretadas como o total estimado de lesões em todo os EUA.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{basquete }\SpecialCharTok{\%\textgreater{}\%}  \FunctionTok{count}\NormalTok{(location, }\AttributeTok{wt =}\NormalTok{ weight, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }
+\NormalTok{basquete }\SpecialCharTok{\%\textgreater{}\%}  \FunctionTok{count}\NormalTok{(body\_part, }\AttributeTok{wt =}\NormalTok{ weight, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }
+\NormalTok{basquete }\SpecialCharTok{\%\textgreater{}\%}  \FunctionTok{count}\NormalTok{(diag, }\AttributeTok{wt =}\NormalTok{ weight, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+Percebemos que os ferimentos envolvendo basquete ocorrem com frequência em lugares de esportes, óbvio. As partes do corpo mais envolvidas são: tornozelo, dedo, joelho, cabeça; e os diagnósticos parecem bem variados.
+
+Podemos explorar o padrão de acordo com a idade e o sexo.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{padrao }\OtherTok{\textless{}{-}}\NormalTok{ basquete }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{count}\NormalTok{(age, sex, }\AttributeTok{wt =}\NormalTok{ weight)}
+
+\NormalTok{padrao }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(age, n, }\AttributeTok{colour =}\NormalTok{ sex)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{\textquotesingle{}Number of injuries\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tutorial-Shiny_files/figure-latex/unnamed-chunk-42-1.pdf}
+
+Vemos um pico atingindo entre 10 aos 20 anos de idade, e esse pico é maior ainda para os homens.
+
+Vamos examinar algumas das narrativas.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{basquete }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{sample\_n}\NormalTok{(}\DecValTok{10}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pull}\NormalTok{(narrative)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{desenvolvendo-o-aplicativo-shiny}{%
+\section{\texorpdfstring{\textbf{Desenvolvendo o aplicativo Shiny}}{Desenvolvendo o aplicativo Shiny}}\label{desenvolvendo-o-aplicativo-shiny}}
+
+Aqui, vou construir um protótipo simples do aplicativo Shiny, construindo passo a passo para que você possa entender o funcionamento da mecância básica.
+
+\textbf{Função UI:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extraindo um conjunto de dados do dataset products que representa os nomes e os códigos dos esportes}
+
+\NormalTok{produtcs1 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(products, prod\_code }\SpecialCharTok{==} \DecValTok{1200} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1205}\SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1211} 
+                    \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1233} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1267} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1333} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{3265} 
+                    \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{3274} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5034} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5040} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5041}\NormalTok{)}
+
+\NormalTok{prod\_codes }\OtherTok{\textless{}{-}} \FunctionTok{setNames}\NormalTok{(produtcs1}\SpecialCharTok{$}\NormalTok{prod\_code, produtcs1}\SpecialCharTok{$}\NormalTok{title)}
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{6}\NormalTok{,}
+           \FunctionTok{selectInput}\NormalTok{(}\StringTok{\textquotesingle{}code\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Esportes\textquotesingle{}}\NormalTok{, }\AttributeTok{choices =}\NormalTok{ prod\_codes))}
+\NormalTok{  ),}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{4}\NormalTok{, }\FunctionTok{tableOutput}\NormalTok{(}\StringTok{\textquotesingle{}diag\textquotesingle{}}\NormalTok{)),}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{4}\NormalTok{, }\FunctionTok{tableOutput}\NormalTok{(}\StringTok{\textquotesingle{}body\_part\textquotesingle{}}\NormalTok{)),}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{4}\NormalTok{, }\FunctionTok{tableOutput}\NormalTok{(}\StringTok{\textquotesingle{}location\textquotesingle{}}\NormalTok{))}
+\NormalTok{  ),}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{12}\NormalTok{, }\FunctionTok{plotOutput}\NormalTok{(}\StringTok{\textquotesingle{}plot\textquotesingle{}}\NormalTok{))}
+\NormalTok{  )}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+A função \texttt{setNames} e a função \texttt{selectInput} irá mostra o nome do esporte na UI e retorna o código ao \textbf{server}. O código vai criar uma página HTML, dividida em três linhas:
+
+\begin{itemize}
+\tightlist
+\item
+  primeira linha com uma coluna, que tem uma caixa de seleção para que o usuário possa escolher o esporte.
+\item
+  segunda linha com três colunas, que serão ocupadas pelas tabelas.
+\item
+  terceira linha com uma coluna, que será ocupada pelo gráfico.
+\end{itemize}
+
+\textbf{Função server:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session)\{}
+\NormalTok{  esporte\_escolhido }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(esportes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(prod\_code }\SpecialCharTok{==}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{code))}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{diag }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}
+    \FunctionTok{esporte\_escolhido}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}  \FunctionTok{count}\NormalTok{(diag, }\AttributeTok{wt =}\NormalTok{ weight, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{body\_part }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}
+    \FunctionTok{esporte\_escolhido}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(body\_part, }\AttributeTok{wt =}\NormalTok{ weight, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{location }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}
+    \FunctionTok{esporte\_escolhido}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}  \FunctionTok{count}\NormalTok{(location, }\AttributeTok{wt =}\NormalTok{ weight, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  padrao }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(\{esporte\_escolhido }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(age, sex, }\AttributeTok{wt =}\NormalTok{ weight)\})}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{plot }\OtherTok{\textless{}{-}} \FunctionTok{renderPlot}\NormalTok{(\{}
+    \FunctionTok{esporte\_escolhido}\NormalTok{ () }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{count}\NormalTok{(age, sex, }\AttributeTok{wt =}\NormalTok{ weight) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(age, n, }\AttributeTok{colour =}\NormalTok{ sex)) }\SpecialCharTok{+} 
+      \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+} 
+      \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{\textquotesingle{}Number of injuries\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+      \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{)}
+\NormalTok{  \})}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{adicionando-a-narrativa}{%
+\subsection{\texorpdfstring{\textbf{Adicionando a Narrativa}}{Adicionando a Narrativa}}\label{adicionando-a-narrativa}}
+
+Agora vamos adicionar uma maneira de acessar as narrativas. Adicionamos mais uma linha na função \textbf{ui}, com um botão de ação para desencadear uma nova história e exibir a narrativa em \texttt{textPutput()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{2}\NormalTok{, }\FunctionTok{actionButton}\NormalTok{(}\StringTok{\textquotesingle{}nar\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Narrative\textquotesingle{}}\NormalTok{)),}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{10}\NormalTok{, }\FunctionTok{textOutput}\NormalTok{(}\StringTok{\textquotesingle{}narrativa\textquotesingle{}}\NormalTok{))}
+\NormalTok{  )}
+\end{Highlighting}
+\end{Shaded}
+
+O \texttt{eventReative()} cria uma expresão reatica que só é atualizado quando o botão é clicado ou quando os dados subjacentes são alterados.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{narrative\_sample }\OtherTok{\textless{}{-}} \FunctionTok{eventReactive}\NormalTok{(}
+    \FunctionTok{list}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{nar, }\FunctionTok{selected}\NormalTok{()),}
+    \FunctionTok{selected}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{pull}\NormalTok{(narrative) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{output}\SpecialCharTok{$}\NormalTok{narrativa }\OtherTok{\textless{}{-}} \FunctionTok{renderText}\NormalTok{(}\FunctionTok{narrative\_sample}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+O código completo do nosso aplivativo:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{fluidPage}\NormalTok{(}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{6}\NormalTok{,}
+           \FunctionTok{selectInput}\NormalTok{(}\StringTok{\textquotesingle{}code\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Sports\textquotesingle{}}\NormalTok{, }\AttributeTok{choices =}\NormalTok{ prod\_codes))}
+\NormalTok{  ),}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{4}\NormalTok{, }\FunctionTok{tableOutput}\NormalTok{(}\StringTok{\textquotesingle{}diag\textquotesingle{}}\NormalTok{)),}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{4}\NormalTok{, }\FunctionTok{tableOutput}\NormalTok{(}\StringTok{\textquotesingle{}body\_part\textquotesingle{}}\NormalTok{)),}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{4}\NormalTok{, }\FunctionTok{tableOutput}\NormalTok{(}\StringTok{\textquotesingle{}location\textquotesingle{}}\NormalTok{))}
+\NormalTok{  ),}
+    \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{2}\NormalTok{, }\FunctionTok{actionButton}\NormalTok{(}\StringTok{\textquotesingle{}nar\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Narrative\textquotesingle{}}\NormalTok{)),}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{10}\NormalTok{, }\FunctionTok{textOutput}\NormalTok{(}\StringTok{\textquotesingle{}narrativa\textquotesingle{}}\NormalTok{))}
+\NormalTok{  ),}
+  \FunctionTok{fluidRow}\NormalTok{(}
+    \FunctionTok{column}\NormalTok{(}\DecValTok{12}\NormalTok{, }\FunctionTok{plotOutput}\NormalTok{(}\StringTok{\textquotesingle{}plot\textquotesingle{}}\NormalTok{)))}
+\NormalTok{)}
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session)\{}
+\NormalTok{   esporte\_escolhido }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(esportes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(prod\_code }\SpecialCharTok{==}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{code))}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{diag }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}
+    \FunctionTok{esporte\_escolhido}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}  \FunctionTok{count}\NormalTok{(diag, }\AttributeTok{wt =}\NormalTok{ weight, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{body\_part }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}
+    \FunctionTok{esporte\_escolhido}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(body\_part, }\AttributeTok{wt =}\NormalTok{ weight, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{location }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}
+    \FunctionTok{esporte\_escolhido}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}  \FunctionTok{count}\NormalTok{(location, }\AttributeTok{wt =}\NormalTok{ weight, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  padrao }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(\{esporte\_escolhido }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(age, sex, }\AttributeTok{wt =}\NormalTok{ weight)\})}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{plot }\OtherTok{\textless{}{-}} \FunctionTok{renderPlot}\NormalTok{(\{}
+    \FunctionTok{esporte\_escolhido}\NormalTok{ () }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{count}\NormalTok{(age, sex, }\AttributeTok{wt =}\NormalTok{ weight) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(age, n, }\AttributeTok{colour =}\NormalTok{ sex)) }\SpecialCharTok{+} 
+      \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+} 
+      \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{\textquotesingle{}Number of injuries\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+      \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{)}
+\NormalTok{  \})}
+\NormalTok{  narrative\_sample }\OtherTok{\textless{}{-}} \FunctionTok{eventReactive}\NormalTok{(}
+    \FunctionTok{list}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{nar, }\FunctionTok{esporte\_escolhido}\NormalTok{()),}
+    \FunctionTok{esporte\_escolhido}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{pull}\NormalTok{(narrative) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{narrativa }\OtherTok{\textless{}{-}} \FunctionTok{renderText}\NormalTok{(}\FunctionTok{narrative\_sample}\NormalTok{())}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+Essa é a primeira versão do aplicativo shiny:
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{www/img/versao1} 
+
+}
+
+\caption{Primeira versão do aplicativo}\label{fig:unnamed-chunk-49}
+\end{figure}
+
+\hypertarget{muxf3dulos-e-aparuxeancia}{%
+\chapter{\texorpdfstring{\textbf{Módulos e aparência}}{Módulos e aparência}}\label{muxf3dulos-e-aparuxeancia}}
+
+Já temos as funcionalidades básicas funcionando, agora podemos melhorar nosso aplicativo, vamos deixar o nosso código mais legível e de melhor compreensão, para isso vamos usar \textbf{módulos}. E depois salvar os módulos em um arquivo.
+
+Primeiro vamos construir a função \textbf{ui}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analise\_ui }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(id)\{}
+\NormalTok{  ns }\OtherTok{\textless{}{-}} \FunctionTok{NS}\NormalTok{(id)}
+\NormalTok{  prod\_codes }\OtherTok{\textless{}{-}} \FunctionTok{setNames}\NormalTok{(produtcs1}\SpecialCharTok{$}\NormalTok{prod\_code, produtcs1}\SpecialCharTok{$}\NormalTok{title)}
+  \FunctionTok{tabItem}\NormalTok{(}
+    \AttributeTok{tabName =} \StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{,}
+    \AttributeTok{class =} \StringTok{\textquotesingle{}active\textquotesingle{}}\NormalTok{,}
+    \FunctionTok{fluidRow}\NormalTok{(}
+      \FunctionTok{column}\NormalTok{(}\DecValTok{8}\NormalTok{,}
+             \FunctionTok{selectInput}\NormalTok{(}\FunctionTok{ns}\NormalTok{(}\StringTok{\textquotesingle{}code\textquotesingle{}}\NormalTok{), }\StringTok{\textquotesingle{}Sports\textquotesingle{}}\NormalTok{, }\AttributeTok{choices =}\NormalTok{ esport\_codes))}
+\NormalTok{    ),}
+    \FunctionTok{fluidRow}\NormalTok{(}
+      \FunctionTok{column}\NormalTok{(}\DecValTok{4}\NormalTok{, }\FunctionTok{tableOutput}\NormalTok{(}\FunctionTok{ns}\NormalTok{(}\StringTok{\textquotesingle{}diag\textquotesingle{}}\NormalTok{))),}
+      \FunctionTok{column}\NormalTok{(}\DecValTok{4}\NormalTok{, }\FunctionTok{tableOutput}\NormalTok{(}\FunctionTok{ns}\NormalTok{(}\StringTok{\textquotesingle{}body\_part\textquotesingle{}}\NormalTok{))),}
+      \FunctionTok{column}\NormalTok{(}\DecValTok{4}\NormalTok{, }\FunctionTok{tableOutput}\NormalTok{(}\FunctionTok{ns}\NormalTok{(}\StringTok{\textquotesingle{}location\textquotesingle{}}\NormalTok{)))}
+\NormalTok{    ),}
+    \FunctionTok{fluidRow}\NormalTok{(}
+      \FunctionTok{column}\NormalTok{(}\DecValTok{2}\NormalTok{, }\FunctionTok{actionButton}\NormalTok{(}\FunctionTok{ns}\NormalTok{(}\StringTok{\textquotesingle{}nar\textquotesingle{}}\NormalTok{), }\StringTok{\textquotesingle{}Narrative\textquotesingle{}}\NormalTok{)),}
+      \FunctionTok{column}\NormalTok{(}\DecValTok{10}\NormalTok{, }\FunctionTok{textOutput}\NormalTok{(}\FunctionTok{ns}\NormalTok{(}\StringTok{\textquotesingle{}narrativa\textquotesingle{}}\NormalTok{)))}
+\NormalTok{    ),}
+    \FunctionTok{fluidRow}\NormalTok{(}
+      \FunctionTok{column}\NormalTok{(}\DecValTok{12}\NormalTok{, }\FunctionTok{plotOutput}\NormalTok{(}\FunctionTok{ns}\NormalTok{(}\StringTok{\textquotesingle{}plot\textquotesingle{}}\NormalTok{)))}
+\NormalTok{    )}
+\NormalTok{  )}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Para a função \textbf{server} vamos usar uma função para reduzir as informações que aparecem nas tabelas, utilizando uma combinação de funções do pacote \href{https://forcats.tidyverse.org/}{forcats}. Essa função converter as variáveis para o tipo factor, ordena em frequência e agrupa os níveis após os 5 primeiros. A função automatiza esse processo para qualquer variável:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{func\_redu }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(df, var, }\AttributeTok{n =} \DecValTok{5}\NormalTok{) \{}
+\NormalTok{  df }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{mutate}\NormalTok{(\{\{var\}\} }\SpecialCharTok{:}\ErrorTok{=} \FunctionTok{fct\_lump}\NormalTok{(}\FunctionTok{fct\_infreq}\NormalTok{(\{\{var\}\}), }\AttributeTok{n =}\NormalTok{ n)) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(\{\{var\}\}) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{summarise}\NormalTok{(}\AttributeTok{n =} \FunctionTok{as.integer}\NormalTok{(}\FunctionTok{sum}\NormalTok{(weight)))}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Aplicando a função \texttt{func\_redu} no \textbf{server}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{analise\_server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, session, dados)\{}
+\NormalTok{  esporte\_escolhido }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(dados }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(prod\_code }\SpecialCharTok{==}\NormalTok{ input}\SpecialCharTok{$}\NormalTok{code))}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{diag }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}
+    \FunctionTok{func\_redu}\NormalTok{(}\FunctionTok{esporte\_escolhido}\NormalTok{(), diag), }\AttributeTok{width =} \StringTok{\textquotesingle{}100\%\textquotesingle{}}
+\NormalTok{  )}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{body\_part }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}
+    \FunctionTok{func\_redu}\NormalTok{(}\FunctionTok{esporte\_escolhido}\NormalTok{(), body\_part), }\AttributeTok{width =} \StringTok{\textquotesingle{}100\%\textquotesingle{}}
+\NormalTok{  )}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{location }\OtherTok{\textless{}{-}} \FunctionTok{renderTable}\NormalTok{(}
+    \FunctionTok{func\_redu}\NormalTok{(}\FunctionTok{esporte\_escolhido}\NormalTok{(), location), }\AttributeTok{width =} \StringTok{\textquotesingle{}100\%\textquotesingle{}}
+\NormalTok{  )}
+\NormalTok{  padrao }\OtherTok{\textless{}{-}} \FunctionTok{reactive}\NormalTok{(\{esporte\_escolhido }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{count}\NormalTok{(age, sex, }\AttributeTok{wt =}\NormalTok{ weight)\})}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{plot }\OtherTok{\textless{}{-}} \FunctionTok{renderPlot}\NormalTok{(\{}
+    \FunctionTok{esporte\_escolhido}\NormalTok{ () }\SpecialCharTok{\%\textgreater{}\%}
+      \FunctionTok{count}\NormalTok{(age, sex, }\AttributeTok{wt =}\NormalTok{ weight) }\SpecialCharTok{\%\textgreater{}\%} 
+      \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(age, n, }\AttributeTok{colour =}\NormalTok{ sex)) }\SpecialCharTok{+} 
+      \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+} 
+      \FunctionTok{labs}\NormalTok{(}\AttributeTok{y =} \StringTok{\textquotesingle{}Number of injuries\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+      \FunctionTok{labs}\NormalTok{(}\AttributeTok{x =} \StringTok{\textquotesingle{}Age\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+      \FunctionTok{ggtitle}\NormalTok{(}\StringTok{\textquotesingle{}Injuries\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
+      \FunctionTok{theme}\NormalTok{(}\AttributeTok{plot.title =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size =} \DecValTok{17}\NormalTok{))}
+\NormalTok{  \})}
+\NormalTok{  narrative\_sample }\OtherTok{\textless{}{-}} \FunctionTok{eventReactive}\NormalTok{(}
+    \FunctionTok{list}\NormalTok{(input}\SpecialCharTok{$}\NormalTok{nar, }\FunctionTok{esporte\_escolhido}\NormalTok{()),}
+    \FunctionTok{esporte\_escolhido}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{pull}\NormalTok{(narrative) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{sample}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{  )}
+\NormalTok{  output}\SpecialCharTok{$}\NormalTok{narrativa }\OtherTok{\textless{}{-}} \FunctionTok{renderText}\NormalTok{(}\FunctionTok{narrative\_sample}\NormalTok{())}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Agora salvamos o script no arquivo \texttt{modulos\_ui\_server.R} e depois construir o aplictaivo com os módulos que acabamos de fazer.
+
+\hypertarget{aplicativo-shiny-1}{%
+\section{\texorpdfstring{\textbf{Aplicativo Shiny}}{Aplicativo Shiny}}\label{aplicativo-shiny-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Carregando os pacotes}
+\FunctionTok{library}\NormalTok{(shiny)}
+\FunctionTok{library}\NormalTok{(shinydashboardPlus)}
+\FunctionTok{library}\NormalTok{(shinydashboard)}
+\FunctionTok{library}\NormalTok{(shinyjs)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+
+\CommentTok{\# Carregando módulos }
+\FunctionTok{source}\NormalTok{(}\StringTok{\textquotesingle{}modules/modulos\_ui\_server.R\textquotesingle{}}\NormalTok{, }\AttributeTok{encoding =} \StringTok{\textquotesingle{}UTF{-}8\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Carregando os dados }
+\NormalTok{injuries }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_tsv}\NormalTok{(}\StringTok{\textquotesingle{}neiss/injuries.tsv\textquotesingle{}}\NormalTok{)}
+\NormalTok{population }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_tsv}\NormalTok{(}\StringTok{\textquotesingle{}neiss/population.tsv\textquotesingle{}}\NormalTok{) }
+\NormalTok{products }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_tsv}\NormalTok{(}\StringTok{\textquotesingle{}neiss/products.tsv\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{esportes }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(injuries, prod\_code }\SpecialCharTok{==} \DecValTok{1200} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1205}\SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1211} \SpecialCharTok{|}
+\NormalTok{                     prod\_code }\SpecialCharTok{==} \DecValTok{1233} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1267} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1333} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{3265}\SpecialCharTok{|}
+\NormalTok{                     prod\_code }\SpecialCharTok{==} \DecValTok{3274} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5034} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5040} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5041}\NormalTok{)}
+
+\NormalTok{produtcs1 }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(products, prod\_code }\SpecialCharTok{==} \DecValTok{1200} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1205}\SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1211} 
+                    \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1233} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1267} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{1333} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{3265} 
+                    \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{3274} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5034} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5040} \SpecialCharTok{|}\NormalTok{ prod\_code }\SpecialCharTok{==} \DecValTok{5041}\NormalTok{)}
+
+\CommentTok{\# Construindo a UI e o SERVER}
+
+\NormalTok{ui }\OtherTok{\textless{}{-}} \FunctionTok{dashboardPage}\NormalTok{(}
+  \FunctionTok{dashboardHeader}\NormalTok{(}
+\NormalTok{    tags}\SpecialCharTok{$}\FunctionTok{li}\NormalTok{(}
+      \AttributeTok{class =} \StringTok{\textquotesingle{} dropdown\textquotesingle{}}\NormalTok{,}
+      \FunctionTok{h1}\NormalTok{(}\AttributeTok{class =} \StringTok{\textquotesingle{}title{-}header\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Sports Injuries\textquotesingle{}}\NormalTok{))}
+\NormalTok{  ),}
+  \FunctionTok{dashboardSidebar}\NormalTok{(}
+    \FunctionTok{sidebarMenu}\NormalTok{(}
+      \AttributeTok{id =} \StringTok{\textquotesingle{}tabs\textquotesingle{}}\NormalTok{,}
+      \FunctionTok{menuItem}\NormalTok{(}\StringTok{\textquotesingle{}Home\textquotesingle{}}\NormalTok{, }\AttributeTok{tabName =} \StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{, }\AttributeTok{icon =} \FunctionTok{icon}\NormalTok{(}\StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{)))}
+\NormalTok{  ),}
+  \FunctionTok{dashboardBody}\NormalTok{(}
+\NormalTok{    tags}\SpecialCharTok{$}\FunctionTok{link}\NormalTok{(}\AttributeTok{rel =} \StringTok{"stylesheet"}\NormalTok{, }\AttributeTok{type =} \StringTok{"text/css"}\NormalTok{, }\AttributeTok{href =} \StringTok{"style.css"}\NormalTok{),}
+    \FunctionTok{useShinyjs}\NormalTok{(),}
+    \FunctionTok{tabItems}\NormalTok{(}
+      \FunctionTok{analise\_ui}\NormalTok{(}\AttributeTok{id =} \StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{)))}
+\NormalTok{)}
+
+\NormalTok{server }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(input, output, dados) \{ }
+  \FunctionTok{callModule}\NormalTok{(}
+    \AttributeTok{module =}\NormalTok{ analise\_server,}
+    \AttributeTok{id =} \StringTok{\textquotesingle{}home\textquotesingle{}}\NormalTok{,}
+    \AttributeTok{dados =}\NormalTok{ esportes}
+\NormalTok{  )}
+\NormalTok{\}}
+\FunctionTok{shinyApp}\NormalTok{(}\AttributeTok{ui =}\NormalTok{ ui, }\AttributeTok{server =}\NormalTok{ server)}
+\end{Highlighting}
+\end{Shaded}
+
+No código acima carreguei os pacotes necessários para o desenvolvimento do aplicativo, a novidade aqui é o pacote \texttt{shinyjs}, que permite que você execute operações comuns de JavaScript úteis em aplicativos Shiny que irão melhorar muito seus aplicativos. Depois carrego os módulos e os dados.
+
+A linha de código \texttt{tags\$link(rel\ =\ \textquotesingle{}stylesheet\textquotesingle{},\ type\ =\ \textquotesingle{}text/css\textquotesingle{},\ href\ =\ \textquotesingle{}style\_shiny.css\textquotesingle{})} define o CSS do aplicativo, deixando-o no estilo que você desejar.
+
+Após aplicar o CSS no aplicativo e organizar os dados em módulos, o aplicativo shiny apresentará essa aparência:
+
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{www/img/apli_final} 
+
+}
+
+\caption{Aplicativo Shiny.}\label{fig:unnamed-chunk-54}
+\end{figure}
+
+A aparência do aplicativo Shiny ficou bem mais amigável e agradável. Ao decorrer de um desenvolvimento de aplicativo Shiny você tem uma variedade de funções, pacotes que te ajuda a deixar a construir o aplicativo do jeito que desejar, basta usar a sua imagimação e a sua criatividade e colocar a mão na massa.
+
+Abaixo vou listar alguns exemplos em Shiny para você se inspirar:
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://geom.shinyapps.io/careerpathfinder-beta}
+\item
+  \url{https://vac-lshtm.shinyapps.io/ncov_tracker}
+\item
+  \url{https://ladco.shinyapps.io/NetAssessApp/}
+\item
+  \url{https://connect.thinkr.fr/hexmake/}
+\item
+  \url{https://voronoys.shinyapps.io/voronoys/}
+\end{itemize}
+
+\hypertarget{extensuxf5es-shiny}{%
+\chapter{\texorpdfstring{\textbf{Extensões Shiny}}{Extensões Shiny}}\label{extensuxf5es-shiny}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+Uma lista de recursos, pacotes, livros que oferecem interface estendida ou componetes de servidor para R Shiny.
+
+\begin{itemize}
+\tightlist
+\item
+  \protect\hyperlink{comunidades}{Comunidades}
+\item
+  \protect\hyperlink{pacotes}{Pacotes}
+\item
+  \protect\hyperlink{livros}{Livros}
+\item
+  \protect\hyperlink{vuxeddeos}{Vídeos}
+\end{itemize}
+
+\hypertarget{comunidades}{%
+\section{\texorpdfstring{\textbf{Comunidades}}{Comunidades}}\label{comunidades}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://community.rstudio.com/latest}{RStudio Community - Shiny}
+\item
+  \href{https://support.rstudio.com/hc/en-us/sections/204025308-Shiny-Server}{Shiny Server Forum}
+\item
+  \href{https://www.r-bloggers.com/2020/05/powerful-package-for-machine-learning-hyperparameter-tuning-grid-random-search-shiny-app/}{R-bloggers}
+\item
+  \href{https://groups.google.com/g/shiny-discuss?pli=1}{Google Group}
+\item
+  \href{https://ropensci.org/}{rOpenSci}
+\item
+  \href{https://www.reddit.com/r/rshiny/}{R-Shiny on Reddit}
+\item
+  \href{https://rdotgov.wordpress.com/deploy-shiny/}{RGov - Government network for R/Shiny}
+\end{itemize}
+
+\hypertarget{pacotes}{%
+\section{\texorpdfstring{\textbf{Pacotes}}{Pacotes}}\label{pacotes}}
+
+\begin{itemize}
+\item
+  \href{http://rstudio.github.io/shinydashboard/}{shinydashboard} - Estrutura Shiny Dashboard.
+\item
+  \href{https://rstudio.github.io/fontawesome/}{fontawesome} - Insira facilmente ícones FontAwesome em documentos R Markdown e aplicativos Shiny.
+\item
+  \href{http://rstudio.github.io/shinythemes/}{shinythemes} - Temas de bootstrap para uso com no Shiny.
+\item
+  \href{https://nik01010.wordpress.com/}{dashboardthemes} - Um pacote R experimental para fornecer opções de tema personalizado para aplicativos Shinydashboard.
+\item
+  \href{http://trestletech.github.io/shinyAce/}{shinyAce} - Permite que os desenvolvedores de aplicativos Shiny usem o editor de texto \href{https://ace.c9.io/\#nav=about}{Ace} em seus aplicativos.
+\item
+  \href{https://deanattali.com/shinyjs/}{shinyjs} - Operações comuns em JavaScript no Gloss via código R.
+\item
+  \href{https://daattali.com/shiny/colourInput/}{colourpicker} - Widget seletor de cores que pode ser usado em diferentes contextos em R.
+\item
+  \href{https://github.com/AnalytixWare/ShinySky}{ShinySky} - Vários widgets/componentes de UI que não fazem parte do Shiny, por exemplo, alertas, botões estilizados.
+\item
+  \href{https://radiant-rstats.github.io/docs/}{radiant} - Análise de negócios usando R e Shiny.
+\item
+  \href{https://github.com/shinyTree/shinyTree}{shinyTree} - Permite que os desenvolvedores de aplicativos Shiny usem a biblioteca jsTree em seus aplicativos.
+\item
+  \href{https://mc-stan.org/users/interfaces/shinystan.html}{shinystan} - Fornece resumos visuais e numéricos dos parâmetros do modelo e diagnósticos de convergência para simulações MCMC.
+\item
+  \href{https://yang-tang.github.io/shinyjqui/}{shinyjqui} - Interações e efeitos de interface do jQuery para o Shiny.
+\item
+  \href{http://ijlyttle.github.io/bsplus/}{bsplus} - Complementos Shiny e R Markdown para Bootstrap 3.
+\item
+  \href{https://github.com/thomasp85/shinyFiles}{shinyFiles} - Estende a funcionalidade de Shiny fornecendo uma API para acesso do lado do cliente ao sistema de arquivos do servidor.
+\item
+  \href{https://github.com/ayayron/shinydnd}{shinyDND} - Crie elementos de arrastar e soltar no Shiny em R.
+\item
+  \href{https://github.com/daattali/shinyforms}{shinyforms} - Crie facilmente formulários do tipo questionário com o Shiny.
+\item
+  \href{https://github.com/XD-DENG/ECharts2Shiny}{ECharts2Shiny} - Insira gráficos interativos do ECharts no Shiny.
+\item
+  \href{https://merlinoa.github.io/shinyFeedback/}{shinyFeedback} - Exibe o feedback do usuário junto com as entradas laterais do Shiny.
+\item
+  \href{https://github.com/daattali/shinycssloaders}{shinycssloader} - Adiciona animações do carregador CSS às saídas do Shiny.
+\item
+  \href{https://github.com/wleepang/shiny-directory-input}{directoryInput} - Widget para seleção interativa de diretórios.
+\item
+  \href{https://ericrayanderson.github.io/shinymaterial/}{shinymaterial} - Implementa o Google Material Design em aplicativos Shiny.
+\item
+  \href{http://nickstrayer.me/shinysense/}{shinysense} - Série de módulos Shiny.
+\item
+  \href{https://dreamrs.github.io/shinyWidgets/index.html}{shinyWidgets} - Amplie os widgets de entrada disponíveis no Shiny.
+\item
+  \href{https://yonicd.github.io/ggedit/}{ggedit} - Um gadget Shiny para explorar objetos ggplot.
+\item
+  \href{https://rstudio.github.io/shinytest/}{shinytest} - Teste automatizado para aplicativos Shiny.
+\item
+  \href{https://rstudio.github.io/shinyloadtest/}{shinyloadtest} - Teste de carga para aplicativos Shiny.
+\item
+  \href{https://yonicd.github.io/reactor/}{reactor} - Teste de unidade para reatividade Shiny.
+\item
+  \href{https://daattali.com/shiny/timevis-demo/}{timevis} - Crie visualizações interativas de linha do tempo em R.
+\item
+  \href{https://github.com/MangoTheCat/shinytoastr}{shinytoastr} - Notificações no Shiny, via toastr.
+\item
+  \href{https://appsilon.github.io/shiny.collections/}{shiny.collections} - Colaboração ao vivo como o Google Docs no Shiny.
+\item
+  \href{https://rinterface.com/}{RinteRface} - Uma coleção de modelos HTML para Shiny.
+\item
+  \href{https://appsilon.github.io/shiny.semantic/}{shiny.semantic} - Wrapper de UI semântica para Shiny.
+\item
+  \href{https://nteetor.github.io/yonder/}{yonder} - Uma estrutura da web reativa construída em brilhante.
+\item
+  \href{https://emitanaka.org/shinycustomloader/}{shinycustomloader} - Adicione um carregador personalizado para R Shiny.
+\item
+  \href{https://dreamrs.github.io/shinybusy/}{shinybusy} - Indicador mínimo de ocupado para aplicativos Shiny.
+\item
+  \href{https://waiter.john-coene.com/\#/}{waiter} - Carregando telas para o Shiny.
+\item
+  \href{https://github.com/cwthom/shinyhelper}{shinyhelper} - Adiciona arquivos de ajuda de redução para aplicativos Shiny.
+\item
+  \href{https://paul.rbind.io/shinyauthr/}{shinyauthr} - Autenticação do lado do servidor usando módulos Shiny.
+\item
+  \href{https://curso-r.github.io/auth0/}{auth0} - Autenticação em aplicativos Shiny usando o serviço Auth0.
+\item
+  \href{https://rstudio.github.io/reactlog/}{reactlog} - Visão visual de um gráfico reativo de aplicativos Shiny.
+\item
+  \href{https://strboul.github.io/supreme/}{supreme} - Estrutura do aplicativo Shiny desenvolvidos com módulos.
+\item
+  \href{https://datastorm-open.github.io/shinymanager/}{shinymanager} - Autenticação simples e segura para aplicativos Shiny únicos usando um banco de dados SQLite.
+\item
+  \href{https://rinterface.github.io/shinydashboardPlus/}{shinydashboardPlus} - Extensões shinydashboard.
+\item
+  \href{https://github.com/daattali/shinyalert}{shinyalert} - Fornece uma simulação de um aplicativo Shiny que você pode controlar para automatizar os testes.
+\item
+  \href{https://ebailey78.github.io/shinyBS/}{shinyBS} - Adiciona componentes adicionais do Twitter Bootstrap ao Shiny.
+\item
+  \href{https://github.com/daattali/shinyscreenshot}{shinyscreenshot} - Capture screenshots de páginas inteiras ou partes de páginas em aplicativos Shiny.
+\item
+  \href{https://github.com/daattali/shinybrowser}{shinybrowser} - Descobre informações sobre o navegador de um usuário em aplicativos Shiny.
+\item
+  \href{https://github.com/daattali/shinydisconnect}{shinydisconnect} - Mostrar uma mensagem quando um aplicativo Shiny desconecta ou apresenta erros.
+\end{itemize}
+
+\hypertarget{livros}{%
+\section{\texorpdfstring{\textbf{Livros}}{Livros}}\label{livros}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://mastering-shiny.org/index.html}{Mastering Shiny: Build Interactive Apps, Reports, and Dashboards Powered by R}
+\item
+  \href{https://www.amazon.com/Web-Application-Development-using-Shiny/dp/1782174346}{Web Application and Development Using Shiny (2nd edition)}
+\item
+  \href{https://www.amazon.com/Learning-Shiny-Hernan-G-Resnizky/dp/1785280902}{Learing Shiny}
+\item
+  \href{https://book.javascript-for-r.com/}{JavaScript for R}
+\item
+  \href{https://unleash-shiny.rinterface.com/}{Outstanding User Interfaces with Shiny}
+  -\href{https://business-science.github.io/shiny-production-with-aws-book/index.html}{The Shiny AWS Book}
+\end{itemize}
+
+\hypertarget{vuxeddeos}{%
+\section{\texorpdfstring{\textbf{Vídeos}}{Vídeos}}\label{vuxeddeos}}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://shinydevseries.com/}{Shiny Developer Series} - Entrevistas com profissionais e desenvolvedores de Shiny e o ecossistema mais amplo de pacotes Shiny, além de transmissões ao vivo ocasionais do desenvolvimento de aplicativos Shiny em ação.
+\end{itemize}
+
+\hypertarget{referuxeancias}{%
+\chapter{\texorpdfstring{\textbf{Referências}}{Referências}}\label{referuxeancias}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{itemize}
+\item
+  Site do Shiny - \url{https://shiny.rstudio.com/}
+\item
+  Outras funções do pacote \texttt{shiny} que você pode incluir no seu aplicativo.\href{https://shiny.rstudio.com/reference/shiny/1.0.5/}{Shiny Package Functions}.
+\item
+  \url{https://github.com/nanxstats/awesome-shiny-extensions\#books}
+\end{itemize}
+
+  \bibliography{book.bib,packages.bib}
+
+\end{document}

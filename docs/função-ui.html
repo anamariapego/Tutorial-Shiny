@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 3 Função UI | Tutorial Básico de Shiny</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 3 Função UI | Tutorial Básico de Shiny" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 3 Função UI | Tutorial Básico de Shiny" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Author: Ana M. P. Pinheiro" />
+
+
+<meta name="date" content="2021-11-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="aplicativo-shiny.html"/>
+<link rel="next" href="função-server.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tutorial Shiny</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Pré-requisitos</a></li>
+<li class="chapter" data-level="1" data-path="introdução.html"><a href="introdução.html"><i class="fa fa-check"></i><b>1</b> Introdução</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introdução.html"><a href="introdução.html#o-que-é-shiny"><i class="fa fa-check"></i><b>1.1</b> <strong>O que é Shiny?</strong></a></li>
+<li class="chapter" data-level="1.2" data-path="introdução.html"><a href="introdução.html#alguns-recursos-do-shiny"><i class="fa fa-check"></i><b>1.2</b> <strong>Alguns recursos do Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="aplicativo-shiny.html"><a href="aplicativo-shiny.html"><i class="fa fa-check"></i><b>2</b> <strong>Aplicativo Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="aplicativo-shiny.html"><a href="aplicativo-shiny.html#construindo-um-aplicativo-shiny"><i class="fa fa-check"></i><b>2.1</b> <strong>Construindo um aplicativo Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="função-ui.html"><a href="função-ui.html"><i class="fa fa-check"></i><b>3</b> <strong>Função UI</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="função-ui.html"><a href="função-ui.html#comportamento-da-ui"><i class="fa fa-check"></i><b>3.1</b> <strong>Comportamento da UI</strong></a></li>
+<li class="chapter" data-level="3.2" data-path="função-ui.html"><a href="função-ui.html#inputs"><i class="fa fa-check"></i><b>3.2</b> <strong>Inputs</strong></a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="função-ui.html"><a href="função-ui.html#alguns-exemplos-de-inputs"><i class="fa fa-check"></i><b>3.2.1</b> <strong>Alguns exemplos de Inputs</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="função-server.html"><a href="função-server.html"><i class="fa fa-check"></i><b>4</b> <strong>Função Server</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="função-server.html"><a href="função-server.html#outputs"><i class="fa fa-check"></i><b>4.1</b> <strong>Outputs</strong></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="função-server.html"><a href="função-server.html#alguns-exemplos-de-outputs"><i class="fa fa-check"></i><b>4.1.1</b> <strong>Alguns exemplos de Outputs</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="uma-breve-história-da-programação-reativa.html"><a href="uma-breve-história-da-programação-reativa.html"><i class="fa fa-check"></i><b>5</b> <strong>Uma breve história da programação reativa</strong></a></li>
+<li class="chapter" data-level="6" data-path="programação-reativa.html"><a href="programação-reativa.html"><i class="fa fa-check"></i><b>6</b> <strong>Programação reativa</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="programação-reativa.html"><a href="programação-reativa.html#introdução-1"><i class="fa fa-check"></i><b>6.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="programação-reativa.html"><a href="programação-reativa.html#programação-reativa-1"><i class="fa fa-check"></i><b>6.2</b> <strong>Programação reativa</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="programação-reativa.html"><a href="programação-reativa.html#programação-declarativa-vs-imperativa"><i class="fa fa-check"></i><b>6.3</b> <strong>Programação declarativa vs imperativa</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="expressões-reativas.html"><a href="expressões-reativas.html"><i class="fa fa-check"></i><b>7</b> <strong>Expressões reativas</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="expressões-reativas.html"><a href="expressões-reativas.html#observers"><i class="fa fa-check"></i><b>7.1</b> <strong>Observers</strong></a></li>
+<li class="chapter" data-level="7.2" data-path="expressões-reativas.html"><a href="expressões-reativas.html#diferenças-entre-expressões-reativas-e-observers"><i class="fa fa-check"></i><b>7.2</b> <strong>Diferenças entre expressões reativas e Observers</strong></a></li>
+<li class="chapter" data-level="7.3" data-path="expressões-reativas.html"><a href="expressões-reativas.html#valores-reativos"><i class="fa fa-check"></i><b>7.3</b> <strong>Valores reativos</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="módulos-shiny.html"><a href="módulos-shiny.html"><i class="fa fa-check"></i><b>8</b> <strong>Módulos Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="módulos-shiny.html"><a href="módulos-shiny.html#introdução-2"><i class="fa fa-check"></i><b>8.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="8.2" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-simples"><i class="fa fa-check"></i><b>8.2</b> <strong>Módulo simples</strong></a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-ui"><i class="fa fa-check"></i><b>8.2.1</b> <strong>Módulo UI</strong></a></li>
+<li class="chapter" data-level="8.2.2" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-server"><i class="fa fa-check"></i><b>8.2.2</b> <strong>Módulo Server</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="módulos-shiny.html"><a href="módulos-shiny.html#entradas-e-saídas"><i class="fa fa-check"></i><b>8.3</b> <strong>Entradas e Saídas</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html"><i class="fa fa-check"></i><b>9</b> <strong>Estudo de Caso</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#introdução-3"><i class="fa fa-check"></i><b>9.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="9.2" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#descrição-dos-dados"><i class="fa fa-check"></i><b>9.2</b> <strong>Descrição dos dados</strong></a></li>
+<li class="chapter" data-level="9.3" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#transformação-e-limpeza-dos-dados"><i class="fa fa-check"></i><b>9.3</b> <strong>Transformação e limpeza dos dados</strong></a></li>
+<li class="chapter" data-level="9.4" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#exploração-dos-dados"><i class="fa fa-check"></i><b>9.4</b> <strong>Exploração dos dados</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#desenvolvendo-o-aplicativo-shiny"><i class="fa fa-check"></i><b>9.5</b> <strong>Desenvolvendo o aplicativo Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#adicionando-a-narrativa"><i class="fa fa-check"></i><b>9.5.1</b> <strong>Adicionando a Narrativa</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="módulos-e-aparência.html"><a href="módulos-e-aparência.html"><i class="fa fa-check"></i><b>10</b> <strong>Módulos e aparência</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="módulos-e-aparência.html"><a href="módulos-e-aparência.html#aplicativo-shiny-1"><i class="fa fa-check"></i><b>10.1</b> <strong>Aplicativo Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="extensões-shiny.html"><a href="extensões-shiny.html"><i class="fa fa-check"></i><b>11</b> <strong>Extensões Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="extensões-shiny.html"><a href="extensões-shiny.html#comunidades"><i class="fa fa-check"></i><b>11.1</b> <strong>Comunidades</strong></a></li>
+<li class="chapter" data-level="11.2" data-path="extensões-shiny.html"><a href="extensões-shiny.html#pacotes"><i class="fa fa-check"></i><b>11.2</b> <strong>Pacotes</strong></a></li>
+<li class="chapter" data-level="11.3" data-path="extensões-shiny.html"><a href="extensões-shiny.html#livros"><i class="fa fa-check"></i><b>11.3</b> <strong>Livros</strong></a></li>
+<li class="chapter" data-level="11.4" data-path="extensões-shiny.html"><a href="extensões-shiny.html#vídeos"><i class="fa fa-check"></i><b>11.4</b> <strong>Vídeos</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>12</b> <strong>Referências</strong></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/anamariapego/Tutorial-Shiny" target="blank">View book source</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tutorial Básico de Shiny</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="função-ui" class="section level1" number="3">
+<h1><span class="header-section-number"> 3</span> <strong>Função UI</strong></h1>
+<hr />
+<p>Vamos adicionar algumas entradas e saídas na função <strong>ui</strong>. Faremos um aplicativo bem simples que mostre os dataframes integrados incluídos no pacote de conjuntos de dados.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="função-ui.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb5-2"><a href="função-ui.html#cb5-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb5-3"><a href="função-ui.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">&#39;dataset&#39;</span>, <span class="at">label =</span> <span class="st">&#39;Datasets&#39;</span>, <span class="at">choices =</span> <span class="fu">ls</span>(<span class="st">&#39;package:datasets&#39;</span>)),</span>
+<span id="cb5-4"><a href="função-ui.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">verbatimTextOutput</span>(<span class="st">&#39;summary&#39;</span>),</span>
+<span id="cb5-5"><a href="função-ui.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tableOutput</span>(<span class="st">&#39;table&#39;</span>)</span>
+<span id="cb5-6"><a href="função-ui.html#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-7"><a href="função-ui.html#cb5-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {}</span>
+<span id="cb5-8"><a href="função-ui.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<p>O código acima retorna uma página contendo uma caixa de seleção dos conjuntos dos dados.</p>
+<p><em>Funções usadas no trecho acima:</em></p>
+<ul>
+<li><p><code>fluidPage()</code> é um controle de layout que configura a estrututa visual básica da página.</p></li>
+<li><p><code>selectInput()</code> é o controle de entrada que permite ao usuário interagir com o aplicativo fornecendo o valor. Nesse caso, é uma caixa de seleção que permite que o usuário escolha um dos conjuntos de dados embutidos que vêm no R.</p></li>
+<li><p><code>verbatimTextOutput()</code> e <code>tableOutput()</code> são controles de saída que dizem ao Shiny onde colocar a saída renderizada. <code>verbatimTextOutput()</code> exibe códigos e <code>tableOutput()</code> exibe tabelas.</p></li>
+</ul>
+<p>A <strong>ui</strong> é de fato um arquivo HTML. As funções, entradas e saídas de layout têm usos diferentes, mas são fundamentalmente os mesmos nos bastidores: são apenas maneiras sofisticadas de gerar HTML e, se você chamar qualquer uma delas fora de um aplicativo Shiny, verá uma página HTML impresso no console.</p>
+<p>Vemos apenas a entrada porque ainda não dissemos ao Shiny como a entrada e as saídas estão relacionadas.</p>
+<div id="comportamento-da-ui" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> <strong>Comportamento da UI</strong></h2>
+<p>Agora vamos dizer ao Shiny como a entrada e as saídas estão relacionadas e definir a função <strong>server</strong>.
+O Shiny usa programação reativa para tornar os aplicativos interativos. Que será apresentada mais a frente com mais detalhes.</p>
+<p>Diremos ao Shiny como preencher as saídas <code>summary</code> e <code>table</code> no aplicativo. Substitua sua função <strong>server</strong> vazia por esta:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="função-ui.html#cb6-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb6-2"><a href="função-ui.html#cb6-2" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>summary <span class="ot">&lt;-</span> <span class="fu">renderPrint</span>({</span>
+<span id="cb6-3"><a href="função-ui.html#cb6-3" aria-hidden="true" tabindex="-1"></a>    dataset <span class="ot">&lt;-</span> <span class="fu">get</span>(input<span class="sc">$</span>dataset, <span class="st">&#39;package:datasets&#39;</span>)</span>
+<span id="cb6-4"><a href="função-ui.html#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>(dataset)</span>
+<span id="cb6-5"><a href="função-ui.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb6-6"><a href="função-ui.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>table <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb6-7"><a href="função-ui.html#cb6-7" aria-hidden="true" tabindex="-1"></a>    dataset <span class="ot">&lt;-</span> <span class="fu">get</span>(input<span class="sc">$</span>dataset, <span class="st">&#39;package:datasets&#39;</span>)</span>
+<span id="cb6-8"><a href="função-ui.html#cb6-8" aria-hidden="true" tabindex="-1"></a>    dataset</span>
+<span id="cb6-9"><a href="função-ui.html#cb6-9" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb6-10"><a href="função-ui.html#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><em>Funções usadas no trecho acima:</em></p>
+<ul>
+<li><p><code>output$summary</code> indica que você está fornecendo como será sua saída do Shiny com esse <em>summary</em>.</p></li>
+<li><p><code>renderPrint</code> usa a função de renderização específica para envolver algum código fornecido por você. Cada função <code>render{Type}</code> é projetada para produzir um tipo específico de saída (por exemplo, texto, tabelas e gráficos) e geralmente é associada a uma função Output{type}.</p></li>
+</ul>
+<p>Por exemplo, neste aplicativo, <code>renderPrint()</code> é pareado com <code>verbatimTextOutput()</code> para exibir um resumo estatístico com texto de largura fixa e <code>renderTable()</code> é pareado com <code>tableOutput()</code> para mostrar os dados de entrada em uma tabela.</p>
+<p>Observe que o resumo e a tabela são atualizados sempre que você altera o conjunto de dados de entrada. Essa dependência é criada implicitamente porque nos referimos <code>input$dataset</code> nas funções de saída. <code>input$dataset</code> é preenchido com o valor atual do componente de <strong>ui</strong> com id dataset e fará com que as saídas sejam atualizadas automaticamente sempre que esse valor mudar.</p>
+<p>Esta é a essência da <strong>reatividade</strong>: <em>as saídas reagem automaticamente (recalculam) quando suas entradas mudam.</em></p>
+</div>
+<div id="inputs" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> <strong>Inputs</strong></h2>
+<p>Todas as funções de entrada tem o mesmo primeiro argumento: <code>inputId</code>. Este é o identificador usado para conectar o front-end ao back-end: se a UI tiver uma entrada com ID ‘name,’ a função do servidor irá acessá-la com <code>input$name</code>.</p>
+<p>O <code>inputId</code> tem duas restrições:</p>
+<ul>
+<li><p>Deve ser uma string simples que contém apenas letras, números e sublinhados (sem espaços, travessões, pontos ou outros caracteres especiais permitidos!). Nomeie-o como se fosse uma variável em R.</p></li>
+<li><p>Deve ser único. Se não for exclusivo, você não terá como referir-se a esse controle na função <strong>server</strong>.</p></li>
+</ul>
+<p>A maioria das funções de entrada tem um segundo parâmetro chamado <code>label</code>. Isso é usado para criar um rótulo legível para o controle.</p>
+<p>O terceiro parâmetro é normalmente <code>value</code>, que quando possível, permite definir o valor padrão. Os parâmetros restantes são exclusivos do controle.</p>
+<p><strong>Algumas funções padrões do Shiny:</strong></p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Funções</th>
+<th align="left">Ações</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">actionButton</td>
+<td align="left">botão de ação.</td>
+</tr>
+<tr class="even">
+<td align="left">checkboxGroupInput</td>
+<td align="left">um grupo de caixas de seleção.</td>
+</tr>
+<tr class="odd">
+<td align="left">checkboxInput</td>
+<td align="left">uma única caixa de seleção.</td>
+</tr>
+<tr class="even">
+<td align="left">dateInput</td>
+<td align="left">um calendário para ajudar na seleção de datas.</td>
+</tr>
+<tr class="odd">
+<td align="left">dateRangeInput</td>
+<td align="left">um par de calendários para selecionar um intervalo de datas.</td>
+</tr>
+<tr class="even">
+<td align="left">fileInput</td>
+<td align="left">um assistente de controle de upload de arquivo.</td>
+</tr>
+<tr class="odd">
+<td align="left">helpText</td>
+<td align="left">texto de ajuda que pode ser adicionado a um formulário de entrada.</td>
+</tr>
+<tr class="even">
+<td align="left">numericInput</td>
+<td align="left">um campo para inserir números.</td>
+</tr>
+<tr class="odd">
+<td align="left">radioButtons</td>
+<td align="left">um conjunto de botões de opção.</td>
+</tr>
+<tr class="even">
+<td align="left">selectInput</td>
+<td align="left">uma caixa com opções para selecionar.</td>
+</tr>
+<tr class="odd">
+<td align="left">sliderInput</td>
+<td align="left">uma barra deslizante.</td>
+</tr>
+<tr class="even">
+<td align="left">submitButton</td>
+<td align="left">um botão de envio.</td>
+</tr>
+<tr class="odd">
+<td align="left">textInput</td>
+<td align="left">um campo para inserir texto.</td>
+</tr>
+</tbody>
+</table>
+<div id="alguns-exemplos-de-inputs" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> <strong>Alguns exemplos de Inputs</strong></h3>
+<div id="textos-livres" class="section level4" number="3.2.1.1">
+<h4><span class="header-section-number">3.2.1.1</span> <strong>Textos livres</strong></h4>
+<p><code>textInput()</code> coleta uma pequena quantidade do texto.</p>
+<p><code>passwordInput()</code> coleta a senha.</p>
+<p><code>textAreaInput()</code> parágrafo de texto.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="função-ui.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb7-2"><a href="função-ui.html#cb7-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb7-3"><a href="função-ui.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">&#39;nome&#39;</span>, <span class="st">&#39;Qual é o seu nome?&#39;</span>),</span>
+<span id="cb7-4"><a href="função-ui.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">passwordInput</span>(<span class="st">&#39;senha&#39;</span>, <span class="st">&#39;Por favor inserir a senha:&#39;</span>),</span>
+<span id="cb7-5"><a href="função-ui.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textAreaInput</span>(<span class="st">&#39;anotacao&#39;</span>, <span class="st">&#39;Em que podemos ajudar?&#39;</span>)</span>
+<span id="cb7-6"><a href="função-ui.html#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="função-ui.html#cb7-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {}</span>
+<span id="cb7-8"><a href="função-ui.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+</div>
+<div id="entradas-numéricas" class="section level4" number="3.2.1.2">
+<h4><span class="header-section-number">3.2.1.2</span> <strong>Entradas numéricas</strong></h4>
+<p><code>numericInput()</code> cria uma caixa de texto restrita.</p>
+<p><code>sliderInput()</code> controle deslizante e aqui você pode definir um <em>intervalo</em> de valores.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="função-ui.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb8-2"><a href="função-ui.html#cb8-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb8-3"><a href="função-ui.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">numericInput</span>(<span class="st">&#39;num1&#39;</span>, <span class="st">&#39;Primeiro número&#39;</span>, <span class="at">value =</span> <span class="dv">0</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">50</span>),</span>
+<span id="cb8-4"><a href="função-ui.html#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">&#39;num2&#39;</span>, <span class="st">&#39;Segundo número&#39;</span>, <span class="at">value =</span> <span class="dv">25</span>, <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">50</span>),</span>
+<span id="cb8-5"><a href="função-ui.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">&#39;range&#39;</span>, <span class="st">&#39;Intervalo&#39;</span>, <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">20</span>), <span class="at">min =</span> <span class="dv">0</span>, <span class="at">max =</span> <span class="dv">50</span>)</span>
+<span id="cb8-6"><a href="função-ui.html#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-7"><a href="função-ui.html#cb8-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {}</span>
+<span id="cb8-8"><a href="função-ui.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+</div>
+<div id="datas" class="section level4" number="3.2.1.3">
+<h4><span class="header-section-number">3.2.1.3</span> <strong>Datas</strong></h4>
+<p><code>dateInput()</code> seleciona um único dia.</p>
+<p><code>dateRangeInput()</code> seleciona um intervalo de dois dias.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="função-ui.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb9-2"><a href="função-ui.html#cb9-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb9-3"><a href="função-ui.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateInput</span>(<span class="st">&#39;primeiro&#39;</span>, <span class="st">&#39;Quando você entrou no seu primeiro emprego?&#39;</span>),</span>
+<span id="cb9-4"><a href="função-ui.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateRangeInput</span>(<span class="st">&#39;tempo&#39;</span>, <span class="st">&#39;Por quanto tempo ficou nele?&#39;</span>)</span>
+<span id="cb9-5"><a href="função-ui.html#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="função-ui.html#cb9-6" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {}</span>
+<span id="cb9-7"><a href="função-ui.html#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<p>O formato de data, o idioma e o dia em que a semana começa são padronizados para os padrões dos EUA.
+Você pode mudar essas configurações, definindo o <code>format</code>, <code>language</code>e <code>weekstart</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="função-ui.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb10-2"><a href="função-ui.html#cb10-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb10-3"><a href="função-ui.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateInput</span>(<span class="st">&#39;primeiro&#39;</span>, <span class="st">&#39;Quando entrou no seu primeiro emprego?&#39;</span>, <span class="at">format =</span> <span class="st">&#39;dd-mm-yyyy&#39;</span>, <span class="at">language =</span> <span class="st">&#39;pt-BR&#39;</span>, <span class="at">weekstart=</span> <span class="dv">0</span>),</span>
+<span id="cb10-4"><a href="função-ui.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateRangeInput</span>(<span class="st">&#39;tempo&#39;</span>, <span class="st">&#39;Por quanto tempo ficou no emprego&#39;</span>, <span class="at">format =</span> <span class="st">&#39;dd-mm-yyyy&#39;</span>, <span class="at">language =</span> <span class="st">&#39;pt-BR&#39;</span>, <span class="at">weekstart=</span> <span class="dv">0</span>)</span>
+<span id="cb10-5"><a href="função-ui.html#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-6"><a href="função-ui.html#cb10-6" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {}</span>
+<span id="cb10-7"><a href="função-ui.html#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+</div>
+<div id="botões-de-ações" class="section level4" number="3.2.1.4">
+<h4><span class="header-section-number">3.2.1.4</span> <strong>Botões de ações</strong></h4>
+<p><code>actionButton()</code> ou <code>actionLink()</code>: permite que o usuário execute uma ação.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="função-ui.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb11-2"><a href="função-ui.html#cb11-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb11-3"><a href="função-ui.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">&#39;click&#39;</span>, <span class="st">&#39;Click me!&#39;</span>),</span>
+<span id="cb11-4"><a href="função-ui.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionLink</span>(<span class="st">&#39;click2&#39;</span>, <span class="st">&#39;Click me!&#39;</span>)</span>
+<span id="cb11-5"><a href="função-ui.html#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-6"><a href="função-ui.html#cb11-6" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {}</span>
+<span id="cb11-7"><a href="função-ui.html#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<p>Os links e botões de ações são naturalmente emparelhados com <code>observeEvent()</code> ou <code>eventReactive()</code> em sua função <strong>server</strong>.</p>
+<p>Você pode personalizar a aparência, utilizando o argumento <code>class</code>, usando <code>btn-primary</code>, <code>btn-success</code>, <code>btn-info</code>, <code>btn-warning</code>, ou <code>btn-danger</code>. Você também pode alterar o tamanho, com <code>btn-lg</code>, <code>btn-sm</code>, ou <code>btn-xs</code>. Finalmente, você pode fazer com que os botões ocupem toda a largura do elemento em que estão embutidos <code>btn-block</code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="função-ui.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb12-2"><a href="função-ui.html#cb12-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb12-3"><a href="função-ui.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb12-4"><a href="função-ui.html#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">actionButton</span>(<span class="st">&#39;click&#39;</span>, <span class="st">&#39;Click me!&#39;</span>, <span class="at">class =</span> <span class="st">&#39;btn-danger&#39;</span>),</span>
+<span id="cb12-5"><a href="função-ui.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">actionButton</span>(<span class="st">&#39;click2&#39;</span>, <span class="st">&#39;Click me!&#39;</span>, <span class="at">class =</span> <span class="st">&#39;btn-lg btn-success&#39;</span>)</span>
+<span id="cb12-6"><a href="função-ui.html#cb12-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb12-7"><a href="função-ui.html#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb12-8"><a href="função-ui.html#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">actionButton</span>(<span class="st">&#39;click3&#39;</span>, <span class="st">&#39;Click me!&#39;</span>, <span class="at">class =</span> <span class="st">&#39;btn-block&#39;</span>)</span>
+<span id="cb12-9"><a href="função-ui.html#cb12-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-10"><a href="função-ui.html#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-11"><a href="função-ui.html#cb12-11" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {}</span>
+<span id="cb12-12"><a href="função-ui.html#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<p>Vimos apenas alguns tipos de entradas <strong>ui</strong>. Tem muitas outras funções que você pode experimentar.(Mais contéudos no final do tutorial.)</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="aplicativo-shiny.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="função-server.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-funcao-ui.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Tutorial-Shiny.pdf", "Tutorial-Shiny.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

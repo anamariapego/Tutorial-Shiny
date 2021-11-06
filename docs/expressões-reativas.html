@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 7 Expressões reativas | Tutorial Básico de Shiny</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 7 Expressões reativas | Tutorial Básico de Shiny" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 7 Expressões reativas | Tutorial Básico de Shiny" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Author: Ana M. P. Pinheiro" />
+
+
+<meta name="date" content="2021-11-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="programação-reativa.html"/>
+<link rel="next" href="módulos-shiny.html"/>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Tutorial Shiny</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Pré-requisitos</a></li>
+<li class="chapter" data-level="1" data-path="introdução.html"><a href="introdução.html"><i class="fa fa-check"></i><b>1</b> Introdução</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introdução.html"><a href="introdução.html#o-que-é-shiny"><i class="fa fa-check"></i><b>1.1</b> <strong>O que é Shiny?</strong></a></li>
+<li class="chapter" data-level="1.2" data-path="introdução.html"><a href="introdução.html#alguns-recursos-do-shiny"><i class="fa fa-check"></i><b>1.2</b> <strong>Alguns recursos do Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="aplicativo-shiny.html"><a href="aplicativo-shiny.html"><i class="fa fa-check"></i><b>2</b> <strong>Aplicativo Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="aplicativo-shiny.html"><a href="aplicativo-shiny.html#construindo-um-aplicativo-shiny"><i class="fa fa-check"></i><b>2.1</b> <strong>Construindo um aplicativo Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="função-ui.html"><a href="função-ui.html"><i class="fa fa-check"></i><b>3</b> <strong>Função UI</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="função-ui.html"><a href="função-ui.html#comportamento-da-ui"><i class="fa fa-check"></i><b>3.1</b> <strong>Comportamento da UI</strong></a></li>
+<li class="chapter" data-level="3.2" data-path="função-ui.html"><a href="função-ui.html#inputs"><i class="fa fa-check"></i><b>3.2</b> <strong>Inputs</strong></a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="função-ui.html"><a href="função-ui.html#alguns-exemplos-de-inputs"><i class="fa fa-check"></i><b>3.2.1</b> <strong>Alguns exemplos de Inputs</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="função-server.html"><a href="função-server.html"><i class="fa fa-check"></i><b>4</b> <strong>Função Server</strong></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="função-server.html"><a href="função-server.html#outputs"><i class="fa fa-check"></i><b>4.1</b> <strong>Outputs</strong></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="função-server.html"><a href="função-server.html#alguns-exemplos-de-outputs"><i class="fa fa-check"></i><b>4.1.1</b> <strong>Alguns exemplos de Outputs</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="uma-breve-história-da-programação-reativa.html"><a href="uma-breve-história-da-programação-reativa.html"><i class="fa fa-check"></i><b>5</b> <strong>Uma breve história da programação reativa</strong></a></li>
+<li class="chapter" data-level="6" data-path="programação-reativa.html"><a href="programação-reativa.html"><i class="fa fa-check"></i><b>6</b> <strong>Programação reativa</strong></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="programação-reativa.html"><a href="programação-reativa.html#introdução-1"><i class="fa fa-check"></i><b>6.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="6.2" data-path="programação-reativa.html"><a href="programação-reativa.html#programação-reativa-1"><i class="fa fa-check"></i><b>6.2</b> <strong>Programação reativa</strong></a></li>
+<li class="chapter" data-level="6.3" data-path="programação-reativa.html"><a href="programação-reativa.html#programação-declarativa-vs-imperativa"><i class="fa fa-check"></i><b>6.3</b> <strong>Programação declarativa vs imperativa</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="expressões-reativas.html"><a href="expressões-reativas.html"><i class="fa fa-check"></i><b>7</b> <strong>Expressões reativas</strong></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="expressões-reativas.html"><a href="expressões-reativas.html#observers"><i class="fa fa-check"></i><b>7.1</b> <strong>Observers</strong></a></li>
+<li class="chapter" data-level="7.2" data-path="expressões-reativas.html"><a href="expressões-reativas.html#diferenças-entre-expressões-reativas-e-observers"><i class="fa fa-check"></i><b>7.2</b> <strong>Diferenças entre expressões reativas e Observers</strong></a></li>
+<li class="chapter" data-level="7.3" data-path="expressões-reativas.html"><a href="expressões-reativas.html#valores-reativos"><i class="fa fa-check"></i><b>7.3</b> <strong>Valores reativos</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="módulos-shiny.html"><a href="módulos-shiny.html"><i class="fa fa-check"></i><b>8</b> <strong>Módulos Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="módulos-shiny.html"><a href="módulos-shiny.html#introdução-2"><i class="fa fa-check"></i><b>8.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="8.2" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-simples"><i class="fa fa-check"></i><b>8.2</b> <strong>Módulo simples</strong></a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-ui"><i class="fa fa-check"></i><b>8.2.1</b> <strong>Módulo UI</strong></a></li>
+<li class="chapter" data-level="8.2.2" data-path="módulos-shiny.html"><a href="módulos-shiny.html#módulo-server"><i class="fa fa-check"></i><b>8.2.2</b> <strong>Módulo Server</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="módulos-shiny.html"><a href="módulos-shiny.html#entradas-e-saídas"><i class="fa fa-check"></i><b>8.3</b> <strong>Entradas e Saídas</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html"><i class="fa fa-check"></i><b>9</b> <strong>Estudo de Caso</strong></a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#introdução-3"><i class="fa fa-check"></i><b>9.1</b> <strong>Introdução</strong></a></li>
+<li class="chapter" data-level="9.2" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#descrição-dos-dados"><i class="fa fa-check"></i><b>9.2</b> <strong>Descrição dos dados</strong></a></li>
+<li class="chapter" data-level="9.3" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#transformação-e-limpeza-dos-dados"><i class="fa fa-check"></i><b>9.3</b> <strong>Transformação e limpeza dos dados</strong></a></li>
+<li class="chapter" data-level="9.4" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#exploração-dos-dados"><i class="fa fa-check"></i><b>9.4</b> <strong>Exploração dos dados</strong></a></li>
+<li class="chapter" data-level="9.5" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#desenvolvendo-o-aplicativo-shiny"><i class="fa fa-check"></i><b>9.5</b> <strong>Desenvolvendo o aplicativo Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="estudo-de-caso.html"><a href="estudo-de-caso.html#adicionando-a-narrativa"><i class="fa fa-check"></i><b>9.5.1</b> <strong>Adicionando a Narrativa</strong></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="módulos-e-aparência.html"><a href="módulos-e-aparência.html"><i class="fa fa-check"></i><b>10</b> <strong>Módulos e aparência</strong></a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="módulos-e-aparência.html"><a href="módulos-e-aparência.html#aplicativo-shiny-1"><i class="fa fa-check"></i><b>10.1</b> <strong>Aplicativo Shiny</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="extensões-shiny.html"><a href="extensões-shiny.html"><i class="fa fa-check"></i><b>11</b> <strong>Extensões Shiny</strong></a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="extensões-shiny.html"><a href="extensões-shiny.html#comunidades"><i class="fa fa-check"></i><b>11.1</b> <strong>Comunidades</strong></a></li>
+<li class="chapter" data-level="11.2" data-path="extensões-shiny.html"><a href="extensões-shiny.html#pacotes"><i class="fa fa-check"></i><b>11.2</b> <strong>Pacotes</strong></a></li>
+<li class="chapter" data-level="11.3" data-path="extensões-shiny.html"><a href="extensões-shiny.html#livros"><i class="fa fa-check"></i><b>11.3</b> <strong>Livros</strong></a></li>
+<li class="chapter" data-level="11.4" data-path="extensões-shiny.html"><a href="extensões-shiny.html#vídeos"><i class="fa fa-check"></i><b>11.4</b> <strong>Vídeos</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="referências.html"><a href="referências.html"><i class="fa fa-check"></i><b>12</b> <strong>Referências</strong></a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/anamariapego/Tutorial-Shiny" target="blank">View book source</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Tutorial Básico de Shiny</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="expressões-reativas" class="section level1" number="7">
+<h1><span class="header-section-number"> 7</span> <strong>Expressões reativas</strong></h1>
+<hr />
+<p>Em todo tipo de programação, é uma prática ruim ter código duplicado; pode ser um desperdício computacional e, mais importante, aumenta a dificuldade de manter ou depurar o código. No script R tradicional, usamos duas técnicas para lidar com código duplicado: capturamos o valor usando uma variável ou capturamos o cálculo com uma função. Infelizmente, nenhuma dessas abordagens funciona aqui, e precisamos de um novo mecanismo: <strong>expressões reativas</strong>.</p>
+<p>As <strong>expressões reativas</strong> são importantes porque fornecem ao Shiny mais informações para que ele possa fazer menos recomputações quando as entradas mudam, tornando os aplicativos mais eficientes, e tornam mais fácil para os humanos entenderem o aplicativo.</p>
+<p>Como entradas, você pode usar os resultados de uma expressão reativa em uma saída. Assim como as saídas, as expressões reativas dependem das entradas e sabem automaticamente quando precisam ser atualizadas.</p>
+<p>Você cria uma expressão reativa envolvendo um bloco de código <code>reactive({...})</code> e atribuindo a uma variável, e você usa uma expressão reativa chamando como uma função. Mas, embora pareça que você está chamando uma função, uma expressão reativa tem uma diferença importante: ela só é executada na primeira vez que é chamada e, em seguida, armazena seu resultado em cache até que precise ser atualizado.</p>
+<p>Observer o exemplo a seguir:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="expressões-reativas.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb17-2"><a href="expressões-reativas.html#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="expressões-reativas.html#cb17-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb17-4"><a href="expressões-reativas.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">&#39;dataset&#39;</span>, <span class="at">label =</span> <span class="st">&#39;Dataset&#39;</span>, <span class="at">choices =</span> <span class="fu">ls</span>(<span class="st">&#39;package:datasets&#39;</span>)),</span>
+<span id="cb17-5"><a href="expressões-reativas.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">verbatimTextOutput</span>(<span class="st">&#39;summary&#39;</span>),</span>
+<span id="cb17-6"><a href="expressões-reativas.html#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tableOutput</span>(<span class="st">&#39;table&#39;</span>)</span>
+<span id="cb17-7"><a href="expressões-reativas.html#cb17-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-8"><a href="expressões-reativas.html#cb17-8" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb17-9"><a href="expressões-reativas.html#cb17-9" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>summary <span class="ot">&lt;-</span> <span class="fu">renderPrint</span>({</span>
+<span id="cb17-10"><a href="expressões-reativas.html#cb17-10" aria-hidden="true" tabindex="-1"></a>    dataset <span class="ot">&lt;-</span> <span class="fu">get</span>(input<span class="sc">$</span>dataset, <span class="st">&#39;package:datasets&#39;</span>)</span>
+<span id="cb17-11"><a href="expressões-reativas.html#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>(dataset)</span>
+<span id="cb17-12"><a href="expressões-reativas.html#cb17-12" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb17-13"><a href="expressões-reativas.html#cb17-13" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>table <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb17-14"><a href="expressões-reativas.html#cb17-14" aria-hidden="true" tabindex="-1"></a>    dataset <span class="ot">&lt;-</span> <span class="fu">get</span>(input<span class="sc">$</span>dataset, <span class="st">&#39;package:datasets&#39;</span>)</span>
+<span id="cb17-15"><a href="expressões-reativas.html#cb17-15" aria-hidden="true" tabindex="-1"></a>    dataset</span>
+<span id="cb17-16"><a href="expressões-reativas.html#cb17-16" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb17-17"><a href="expressões-reativas.html#cb17-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-18"><a href="expressões-reativas.html#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<p>Podemos reduzir esse código atualizando o <code>server()</code> para usar expressões reativas. O aplicativo se comporta de forma idêntica, mas funciona com um pouco mais de eficiência, pois só precisa recuperar o conjunto de dados uma vez, não duas.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="expressões-reativas.html#cb18-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb18-2"><a href="expressões-reativas.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Criando a expressão reativa</span></span>
+<span id="cb18-3"><a href="expressões-reativas.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb18-4"><a href="expressões-reativas.html#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">get</span>(input<span class="sc">$</span>dataset, <span class="st">&#39;package:datasets&#39;</span>)</span>
+<span id="cb18-5"><a href="expressões-reativas.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb18-6"><a href="expressões-reativas.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>summary <span class="ot">&lt;-</span> <span class="fu">renderPrint</span>({</span>
+<span id="cb18-7"><a href="expressões-reativas.html#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">#  Use a expressão reativa chamando como uma função</span></span>
+<span id="cb18-8"><a href="expressões-reativas.html#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>(<span class="fu">dataset</span>())</span>
+<span id="cb18-9"><a href="expressões-reativas.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb18-10"><a href="expressões-reativas.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>table <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb18-11"><a href="expressões-reativas.html#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dataset</span>()</span>
+<span id="cb18-12"><a href="expressões-reativas.html#cb18-12" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb18-13"><a href="expressões-reativas.html#cb18-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div id="observers" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> <strong>Observers</strong></h2>
+<p>Você pode salvar um arquivo em uma unidade de rede compartilhada, enviar dados para uma API da web, atualizar um banco de dados ou imprimir uma mensagem de depuração no console. Essas ações não afetam a aparência do aplicativo Shiny, portanto, você não deve usar uma saída e uma função <code>render</code>. Em vez disso, você precisa usar uma função <strong>observer</strong>.</p>
+<p>Um <code>observer</code> é como uma expressão reativa, pois pode ler valores reativos e chamar expressões reativas, e será reexecutado automaticamente quando essas dependências forem alteradas. Mas, ao contrário das expressões reativas, não produz um resultado e não pode ser usado como entrada para outras expressões reativas. Assim, os observers são úteis apenas por seus efeitos colaterais.</p>
+<p>Outro contraste entre expressões reativas e observers é sua estratégia de execução. Expressões reativas usam avaliação preguiçosa; ou seja, quando suas dependências mudam, eles não são executados imediatamente, mas esperam até serem chamados por outra pessoa. Na verdade, se eles não forem chamados, eles nunca serão executados novamente. Em contraste, os observers usam avaliação ansiosa; assim que suas dependências mudam, eles se programam para uma nova execução.</p>
+<p><code>observeEvent()</code> retorna um objeto de classe de referência do observe.</p>
+<p><code>eventReactive()</code> retorna um objeto de expressão reativa</p>
+<p>Essas duas funções são muitos semelhantes e tem dois argumentos importantes:</p>
+<p><code>eventExpre</code> que é a entrada ou espressões da qual depender.</p>
+<p><code>handlerExpr</code> que é o código que será executado.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="expressões-reativas.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb19-2"><a href="expressões-reativas.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="expressões-reativas.html#cb19-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb19-4"><a href="expressões-reativas.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">&#39;nome&#39;</span>, <span class="st">&#39;Qual é o seu nome?&#39;</span>),</span>
+<span id="cb19-5"><a href="expressões-reativas.html#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="st">&#39;saudacao&#39;</span>)</span>
+<span id="cb19-6"><a href="expressões-reativas.html#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-7"><a href="expressões-reativas.html#cb19-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
+<span id="cb19-8"><a href="expressões-reativas.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  string <span class="ot">&lt;-</span> <span class="fu">reactive</span>(<span class="fu">paste0</span>(<span class="st">&#39;Hello &#39;</span>, input<span class="sc">$</span>nome, <span class="st">&#39;!&#39;</span>))</span>
+<span id="cb19-9"><a href="expressões-reativas.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-10"><a href="expressões-reativas.html#cb19-10" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>saudacao <span class="ot">&lt;-</span> <span class="fu">renderText</span>(<span class="fu">string</span>())</span>
+<span id="cb19-11"><a href="expressões-reativas.html#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>nome, {</span>
+<span id="cb19-12"><a href="expressões-reativas.html#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">message</span>(<span class="st">&#39;Saudacao realizada&#39;</span>)</span>
+<span id="cb19-13"><a href="expressões-reativas.html#cb19-13" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb19-14"><a href="expressões-reativas.html#cb19-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-15"><a href="expressões-reativas.html#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<p>Observe que a cada letra introduzida na caixa de texto a mensagem <em>Saudacao realizada</em> será enviada no console.</p>
+</div>
+<div id="diferenças-entre-expressões-reativas-e-observers" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> <strong>Diferenças entre expressões reativas e Observers</strong></h2>
+<p>As expressões reativas e os observers são semelhantes no sentido de que armazenam expressões que podem ser executadas, mas têm algumas diferenças fundamentais.</p>
+<ul>
+<li><p><strong>Observers</strong> respondem a eventos de descarga reativa , mas as expressões reativas não. Se você deseja que uma expressão reativa seja executada, ela deve ter um observador como descendente no gráfico de dependência reativa.</p></li>
+<li><p>As <strong>expressões reativas</strong> retornam valores, mas os observers não.</p></li>
+</ul>
+</div>
+<div id="valores-reativos" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> <strong>Valores reativos</strong></h2>
+<p>Os valores reativos contêm valores, que podem ser lidos por outros objetos reativos. O objeto <code>input</code> é um objeto <code>ReactiveValues</code> que se parece com uma lista e contém muitos valores reativos individuais. Os valores em <code>input</code> são definidos pela entrada do navegador da web.</p>
+<p>Existem dois tipos de valores reativos:</p>
+<ul>
+<li><p><code>reactiveVal()</code> cria um único valor reativo.</p></li>
+<li><p><code>reactiveValues()</code> cria Uma lista de valores reativos.</p></li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="expressões-reativas.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb20-2"><a href="expressões-reativas.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="expressões-reativas.html#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># reactiveVal()</span></span>
+<span id="cb20-4"><a href="expressões-reativas.html#cb20-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">reactiveVal</span>(<span class="dv">10</span>)</span>
+<span id="cb20-5"><a href="expressões-reativas.html#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span>
+<span id="cb20-6"><a href="expressões-reativas.html#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  reactiveVal: [1] &#39;10&#39;</span></span>
+<span id="cb20-7"><a href="expressões-reativas.html#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="expressões-reativas.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">x</span>(<span class="dv">20</span>)</span>
+<span id="cb20-9"><a href="expressões-reativas.html#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x)</span>
+<span id="cb20-10"><a href="expressões-reativas.html#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  reactiveVal: [1] &#39;20&#39;</span></span>
+<span id="cb20-11"><a href="expressões-reativas.html#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="expressões-reativas.html#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># reactiveValues()</span></span>
+<span id="cb20-13"><a href="expressões-reativas.html#cb20-13" aria-hidden="true" tabindex="-1"></a>l1 <span class="ot">&lt;-</span> <span class="fu">reactiveValues</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>)</span>
+<span id="cb20-14"><a href="expressões-reativas.html#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">isolate</span>(l1<span class="sc">$</span>a)</span>
+<span id="cb20-15"><a href="expressões-reativas.html#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#  [1] 1</span></span>
+<span id="cb20-16"><a href="expressões-reativas.html#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">isolate</span>(l1<span class="sc">$</span>b)</span>
+<span id="cb20-17"><a href="expressões-reativas.html#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">#  [1] 2</span></span></code></pre></div>
+<p>Eles têm interfaces ligeiramente diferentes para obter e definir valores. No entanto, embora pareçam diferentes, eles se comportam da mesma forma, portanto, você pode escolher entre eles com base na sua preferência.</p>
+<p>Observer o seguinte exemplo:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="expressões-reativas.html#cb21-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> x2 <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb21-2"><a href="expressões-reativas.html#cb21-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="dv">30</span></span>
+<span id="cb21-3"><a href="expressões-reativas.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(x1) <span class="co"># valor inalterado</span></span>
+<span id="cb21-4"><a href="expressões-reativas.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  [1] 20</span></span></code></pre></div>
+<p>Obervando o código acima, pode se dizer que são valores reativos?
+Se sua resposta é <em>NÃO</em>, parabéns você acertou. Os valores reativos sempre mantêm uma referência de volta para o mesmo valor, de modo que a modificação de qualquer cópia modifica todos os valores:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="expressões-reativas.html#cb22-1" aria-hidden="true" tabindex="-1"></a>z1 <span class="ot">&lt;-</span> z2 <span class="ot">&lt;-</span> <span class="fu">reactiveValues</span>(<span class="at">a =</span> <span class="dv">10</span>)</span>
+<span id="cb22-2"><a href="expressões-reativas.html#cb22-2" aria-hidden="true" tabindex="-1"></a>z2<span class="sc">$</span>a <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb22-3"><a href="expressões-reativas.html#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">isolate</span>(z1<span class="sc">$</span>a)</span>
+<span id="cb22-4"><a href="expressões-reativas.html#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] 20</span></span></code></pre></div>
+<p>Agora vamos combinar as funções <code>reactiveValues</code> e <code>observeEvent</code> que pode ser aplicados em alguns casos úteis, resolvendo problemas que não muitos desafiadores.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="expressões-reativas.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb23-2"><a href="expressões-reativas.html#cb23-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb23-3"><a href="expressões-reativas.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;Total de pontos:&#39;</span>,</span>
+<span id="cb23-4"><a href="expressões-reativas.html#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textOutput</span>(<span class="st">&#39;total&#39;</span>, <span class="at">inline =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-5"><a href="expressões-reativas.html#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">&#39;ponto5&#39;</span>, <span class="st">&#39;Adiciona 5 ponto&#39;</span>),</span>
+<span id="cb23-6"><a href="expressões-reativas.html#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">&#39;ponto10&#39;</span>, <span class="st">&#39;Adiciona 10 pontos&#39;</span>),</span>
+<span id="cb23-7"><a href="expressões-reativas.html#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="st">&#39;remove&#39;</span>, <span class="st">&#39;Remove 1 ponto&#39;</span>)</span>
+<span id="cb23-8"><a href="expressões-reativas.html#cb23-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb23-9"><a href="expressões-reativas.html#cb23-9" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session){</span>
+<span id="cb23-10"><a href="expressões-reativas.html#cb23-10" aria-hidden="true" tabindex="-1"></a>  value <span class="ot">&lt;-</span> <span class="fu">reactiveValues</span>(<span class="at">total =</span> <span class="dv">0</span>)</span>
+<span id="cb23-11"><a href="expressões-reativas.html#cb23-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-12"><a href="expressões-reativas.html#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>ponto5, {</span>
+<span id="cb23-13"><a href="expressões-reativas.html#cb23-13" aria-hidden="true" tabindex="-1"></a>    value<span class="sc">$</span>total <span class="ot">&lt;-</span> value<span class="sc">$</span>total <span class="sc">+</span> <span class="dv">5</span></span>
+<span id="cb23-14"><a href="expressões-reativas.html#cb23-14" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb23-15"><a href="expressões-reativas.html#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>ponto10, {</span>
+<span id="cb23-16"><a href="expressões-reativas.html#cb23-16" aria-hidden="true" tabindex="-1"></a>    value<span class="sc">$</span>total <span class="ot">&lt;-</span> value<span class="sc">$</span>total <span class="sc">+</span> <span class="dv">10</span></span>
+<span id="cb23-17"><a href="expressões-reativas.html#cb23-17" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb23-18"><a href="expressões-reativas.html#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">observeEvent</span>(input<span class="sc">$</span>remove, {</span>
+<span id="cb23-19"><a href="expressões-reativas.html#cb23-19" aria-hidden="true" tabindex="-1"></a>    value<span class="sc">$</span>total <span class="ot">&lt;-</span> value<span class="sc">$</span>total <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb23-20"><a href="expressões-reativas.html#cb23-20" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb23-21"><a href="expressões-reativas.html#cb23-21" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>total <span class="ot">&lt;-</span> <span class="fu">renderText</span>({</span>
+<span id="cb23-22"><a href="expressões-reativas.html#cb23-22" aria-hidden="true" tabindex="-1"></a>    value<span class="sc">$</span>total</span>
+<span id="cb23-23"><a href="expressões-reativas.html#cb23-23" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb23-24"><a href="expressões-reativas.html#cb23-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-25"><a href="expressões-reativas.html#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="expressões-reativas.html#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
+<p>No exemplo temos dois botões que permitem aumentar os valores e um botão que permite diminuir os valores. A função <code>reactiveValues</code> foi usada para armazena o valor atual e a função <code>observeEvent</code> para aumentar e diminuir o valor quando um botão é presioando. A principal complexidade adicional aqui é que o novo valor de <code>total()</code> depende do valor anterior.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="programação-reativa.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="módulos-shiny.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-expressao-reativa.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Tutorial-Shiny.pdf", "Tutorial-Shiny.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
