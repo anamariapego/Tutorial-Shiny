@@ -5,26 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 8 Módulos Shiny | Tutorial Básico de Shiny</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="description" content=" 8 Módulos Shiny | Tutorial Básico de Shiny" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 8 Módulos Shiny | Tutorial Básico de Shiny" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content=" 8 Módulos Shiny | Tutorial Básico de Shiny" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   
 
 <meta name="author" content="Author: Ana M. P. Pinheiro" />
@@ -239,10 +233,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <div id="introdução-2" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> <strong>Introdução</strong></h2>
-<p>Agora vamos falar sobre o sistema de módulos do Shiny, que permite extrair a interface do usuário acoplada e o código do servidor em componentes isolados e reutilizáveis, além de deixar seu aplicativo mais limpo e organizado.</p>
-<p>À medida que os aplicativos Shiny ficam maiores e mais complicados, usamos módulos para gerenciar a complexidade crescente do código do aplicativo Shiny.</p>
-<p>Um módulo é um par de funções <strong>ui</strong> e funções <strong>server</strong>. A mágica dos módulos vem porque essas funções são construídas de uma maneira especial que cria um “namespace.” Até agora, ao escrever um aplicativo, os nomes dos controles <code>id</code> são globais: todas as partes de sua função <strong>server</strong> podem ver todas as partes de sua ui. Os módulos oferecem a capacidade de criar controles que só podem ser vistos de dentro do módulo. Isso é chamado de namespace porque cria “espaços” de “nomes” que são isolados do resto do aplicativo.</p>
-<p>Módulos Shiny têm duas grandes vantagens:</p>
+<p>Agora vamos falar sobre o sistema de módulos do shiny, que permite extrair a função <strong>ui</strong> acoplada e o código <strong>server</strong> em componentes isolados e reutilizáveis, além de deixar seu aplicativo mais limpo e organizado.</p>
+<p>À medida que os aplicativos shiny ficam maiores e mais complicados, usamos módulos para gerenciar a complexidade crescente do código do aplicativo.</p>
+<p>Um módulo é um par de funções <strong>ui</strong> e <strong>server</strong>. A mágica dos módulos vem porque essas funções são construídas de uma maneira especial que cria um “namespace.” Até agora, ao escrever um aplicativo, os nomes dos controles <code>id</code> são globais: todas as partes de sua função <strong>server</strong> podem ver todas as partes da função <strong>ui</strong>. Os módulos oferecem a capacidade de criar controles que só podem ser vistos de dentro do módulo. Isso é chamado de namespace porque cria “espaços” de “nomes” que são isolados do resto do aplicativo.</p>
+<p>Módulos shiny têm duas grandes vantagens:</p>
 <ul>
 <li><p>O namespacing torna mais fácil entender como seu aplicativo funciona porque você pode escrever, analisar e testar componentes individuais de forma isolada.</p></li>
 <li><p>Como os módulos são funções, eles ajudam a reutilizar o código; tudo o que você pode fazer com uma função, você pode fazer com um módulo.</p></li>
@@ -269,12 +263,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>A função de interface do usuário do módulo que gera a especificação <code>ui</code>.</p></li>
 <li><p>A função de servidor do módulo que executa o código dentro da função <code>server</code>.</p></li>
 </ul>
-<p>As duas funções possuem formulários padrão. Ambos pegam um argumento <code>id</code> e o usam para definir o namespace do módulo. Para criar um módulo, precisamos extrair o código da <strong>ui</strong> do aplicativo e do servidor e colocá-lo na ui do módulo.</p>
+<p>As duas funções possuem formulários padrão. Ambos pegam um argumento <code>id</code> e o usam para definir o namespace do módulo. Para criar um módulo, precisamos extrair o código da <strong>ui</strong> e do server do aplicativo e colocá-los na arquivo do módulo.</p>
 <div id="módulo-ui" class="section level3" number="8.2.1">
 <h3><span class="header-section-number">8.2.1</span> <strong>Módulo UI</strong></h3>
-<p>No módulo UI existem duas etapas:</p>
+<p>No módulo <strong>ui</strong> existem duas etapas:</p>
 <ul>
-<li><p>Coloca o código <strong>ui</strong> dentro de uma função que tenha um argumento <code>id</code>.</p></li>
+<li><p>Coloca o código dentro de uma função que tenha um argumento <code>id</code>.</p></li>
 <li><p>Envolva cada ID exsitente em uma chamada <code>NS()</code>.</p></li>
 </ul>
 <p><strong>Obs:</strong> a função <code>NS()</code> cria IDs com namepace a partir de IDs vazios, os aplicativos Shiny usam IDs para identificar entradas e saídas. Esses IDs devem ser exclusivos em um aplicativo, pois o uso acidental do mesmo ID de entrada/saída mais de uma vez resultará em um comportamento inesperado. A solução tradicional para evitar conflitos de nomes são os namespaces; um namespace está para um ID como um diretório está para um arquivo. Use a função <code>NS()</code> para transformar um ID simples em um espaço de nomes, combinando-os com os intermediários <code>ns.sep</code>.</p>
@@ -317,8 +311,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.3</span> <strong>Entradas e Saídas</strong></h2>
 <p>Os módulos podem representar entrada, saída ou ambos. Eles podem ser tão simples quanto uma única saída ou tão complicados quanto uma interface com várias guias repleta de controles/saídas orientados por múltiplas expressões reativas e observers.</p>
 <p>Ás vezes, um módulo com apenas um argumento <code>id</code> para o módulo <strong>ui</strong> e o <strong>server</strong> é útil porque permite isolar o código complexo em seu próprio arquivo. Isso é particularmente útil para aplicativos que agregam componentes independentes, como um painel corporativo onde cada guia mostra relatórios personalizados para cada linha de negócios. Aqui, os módulos permitem que você desenvolva cada peça em seu próprio arquivo sem ter que se preocupar com o conflito de IDs entre os componentes.</p>
-<p>Muitas vezes, no entanto, o módulo <strong>ui</strong> e o <strong>server</strong> precisarão de argumentos adicionais. Adicionar argumentos à <strong>ui</strong> do módulo oferece maior controle sobre a aparência do módulo, permitindo que você use o mesmo módulo em mais lugares em seu aplicativo. Mas a <strong>ui</strong> do módulo é apenas uma função R regular, portanto, há relativamente pouco a aprender que seja específico do Shiny. Ao contrário do código Shiny regular, conectar módulos requer que você seja explícito sobre entradas e saídas. Inicialmente, isso vai parecer cansativo. E é certamente mais trabalhoso do que a associação de forma livre usual de Shiny. Mas os módulos impõem linhas específicas de comunicação por um motivo: eles são um pouco mais trabalhosos de criar, mas muito mais fáceis de entender e permitem que você crie aplicativos substancialmente mais complexos.</p>
-<p>Para ver como as entradas e saídas funcionam, vamos fazer um aplicativo simples, mas que ilustra alguns dos princípios básicos. Vamos criar um módulo que permite ao usuário selecionar um conjunto de dados a partir dos dados integradosfornecidos pelo pacote de conjuntos de dados.</p>
+<p>Muitas vezes, no entanto, o módulo <strong>ui</strong> e o <strong>server</strong> precisarão de argumentos adicionais. Adicionar argumentos à <strong>ui</strong> do módulo oferece maior controle sobre a aparência do módulo, permitindo que você use o mesmo em mais lugares em seu aplicativo. Mas a <strong>ui</strong> é apenas uma função R regular, portanto, há relativamente pouco a aprender que seja específico do shiny. Ao contrário do código shiny regular, conectar módulos requer que você seja explícito sobre entradas e saídas. Inicialmente, isso vai parecer cansativo. E é certamente mais trabalhoso do que a associação de forma livre usual de shiny. Mas os módulos impõem linhas específicas de comunicação por um motivo: eles são um pouco mais trabalhosos de criar, mas muito mais fáceis de entender e permitem que você crie aplicativos substancialmente mais complexos.</p>
+<p>Para ver como as entradas e saídas funcionam, vamos fazer um aplicativo simples, mas que ilustra alguns dos princípios básicos. Vamos criar um módulo que permite ao usuário selecionar um conjunto de dados a partir dos dados integrados fornecidos pelo pacote de conjuntos de dados.</p>
 <p><strong>Obs</strong>: a função de um módulo <strong>ui</strong> deve ser um nome que é o sufixo <code>Input</code>, <code>Output</code> ou <code>UI</code>; por exemplo, <code>datasetInput</code>, <code>selecNumOutput</code>, ou <code>analiseUI</code>.</p>
 <p>Módulo UI:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="módulos-shiny.html#cb28-1" aria-hidden="true" tabindex="-1"></a>datasetInput <span class="ot">&lt;-</span> <span class="cf">function</span>(id, <span class="at">filter =</span> <span class="cn">NULL</span>) {</span>

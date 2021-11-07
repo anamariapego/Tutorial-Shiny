@@ -4,7 +4,7 @@
   
 Em todo tipo de programação, é uma prática ruim ter código duplicado; pode ser um desperdício computacional e, mais importante, aumenta a dificuldade de manter ou depurar o código. No script R tradicional, usamos duas técnicas para lidar com código duplicado: capturamos o valor usando uma variável ou capturamos o cálculo com uma função. Infelizmente, nenhuma dessas abordagens funciona aqui, e precisamos de um novo mecanismo: **expressões reativas**.
 
-As **expressões reativas** são importantes porque fornecem ao Shiny mais informações para que ele possa fazer menos recomputações quando as entradas mudam, tornando os aplicativos mais eficientes, e tornam mais fácil para os humanos entenderem o aplicativo.
+As **expressões reativas** são importantes porque fornecem ao shiny mais informações para que ele possa fazer menos recomputações quando as entradas mudam, tornando os aplicativos mais eficientes, e tornam mais fácil para os humanos entenderem o aplicativo.
 
 Como entradas, você pode usar os resultados de uma expressão reativa em uma saída. Assim como as saídas, as expressões reativas dependem das entradas e sabem automaticamente quando precisam ser atualizadas.
 
@@ -58,7 +58,7 @@ server <- function(input, output, session) {
 
 ## **Observers**
 
-Você pode  salvar um arquivo em uma unidade de rede compartilhada, enviar dados para uma API da web, atualizar um banco de dados ou imprimir uma mensagem de depuração no console. Essas ações não afetam a aparência do aplicativo Shiny, portanto, você não deve usar uma saída e uma função `render`. Em vez disso, você precisa usar uma função **observer**.
+Você pode salvar um arquivo em uma unidade de rede compartilhada, enviar dados para uma API da web, atualizar um banco de dados ou imprimir uma mensagem de depuração no console. Essas ações não afetam a aparência do aplicativo shiny, portanto, você não deve usar uma saída e uma função `render`. Em vez disso, você precisa usar uma função **observer**.
 
 
 Um `observer` é como uma expressão reativa, pois pode ler valores reativos e chamar expressões reativas, e será reexecutado automaticamente quando essas dependências forem alteradas. Mas, ao contrário das expressões reativas, não produz um resultado e não pode ser usado como entrada para outras expressões reativas. Assim, os observers são úteis apenas por seus efeitos colaterais.
@@ -115,7 +115,7 @@ Existem dois tipos de valores reativos:
 
 - `reactiveVal()` cria um único valor reativo. 
 
-- `reactiveValues()` cria Uma lista de valores reativos. 
+- `reactiveValues()` cria uma lista de valores reativos. 
 
 
 ```{r, results='hide'}
@@ -198,4 +198,4 @@ shinyApp(ui = ui, server = server)
 ```
 
 
-No exemplo temos dois botões que permitem aumentar os valores e um botão que permite diminuir os valores. A função `reactiveValues` foi usada para armazena o valor atual e a função `observeEvent` para aumentar e diminuir o valor quando um botão é presioando. A principal complexidade adicional aqui é que o novo valor de `total()` depende do valor anterior.
+No exemplo temos dois botões que permitem aumentar os valores e um botão que permite diminuir os valores. A função `reactiveValues` foi usada para armazena o valor atual e a função `observeEvent` para aumentar ou diminuir o valor quando um botão é presioando. A principal complexidade adicional aqui é que o novo valor de `total()` depende do valor anterior.

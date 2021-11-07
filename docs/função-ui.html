@@ -5,26 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 3 Função UI | Tutorial Básico de Shiny</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="description" content=" 3 Função UI | Tutorial Básico de Shiny" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 3 Função UI | Tutorial Básico de Shiny" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content=" 3 Função UI | Tutorial Básico de Shiny" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   
 
 <meta name="author" content="Author: Ana M. P. Pinheiro" />
@@ -250,16 +244,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Funções usadas no trecho acima:</em></p>
 <ul>
 <li><p><code>fluidPage()</code> é um controle de layout que configura a estrututa visual básica da página.</p></li>
-<li><p><code>selectInput()</code> é o controle de entrada que permite ao usuário interagir com o aplicativo fornecendo o valor. Nesse caso, é uma caixa de seleção que permite que o usuário escolha um dos conjuntos de dados embutidos que vêm no R.</p></li>
-<li><p><code>verbatimTextOutput()</code> e <code>tableOutput()</code> são controles de saída que dizem ao Shiny onde colocar a saída renderizada. <code>verbatimTextOutput()</code> exibe códigos e <code>tableOutput()</code> exibe tabelas.</p></li>
+<li><p><code>selectInput()</code> é o controle de entrada que permite ao usuário interagir com o aplicativo fornecendo um valor. Nesse caso, é uma caixa de seleção que permite que o usuário escolha um dos conjuntos de dados embutidos que vêm no R.</p></li>
+<li><p><code>verbatimTextOutput()</code> e <code>tableOutput()</code> são controles de saída que dizem ao shiny onde colocar a saída renderizada. <code>verbatimTextOutput()</code> exibe códigos e <code>tableOutput()</code> exibe tabelas.</p></li>
 </ul>
-<p>A <strong>ui</strong> é de fato um arquivo HTML. As funções, entradas e saídas de layout têm usos diferentes, mas são fundamentalmente os mesmos nos bastidores: são apenas maneiras sofisticadas de gerar HTML e, se você chamar qualquer uma delas fora de um aplicativo Shiny, verá uma página HTML impresso no console.</p>
-<p>Vemos apenas a entrada porque ainda não dissemos ao Shiny como a entrada e as saídas estão relacionadas.</p>
+<p>A <strong>ui</strong> é de fato um arquivo HTML. As funções, entradas e saídas de layout têm usos diferentes, mas são fundamentalmente os mesmos nos bastidores: são apenas maneiras sofisticadas de gerar HTML e, se você chamar qualquer uma delas fora de um aplicativo shiny, verá uma página HTML impresso no console.</p>
+<p>Vimos apenas a entrada porque ainda não dissemos ao shiny como a entrada e as saídas estão relacionadas.</p>
 <div id="comportamento-da-ui" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> <strong>Comportamento da UI</strong></h2>
-<p>Agora vamos dizer ao Shiny como a entrada e as saídas estão relacionadas e definir a função <strong>server</strong>.
-O Shiny usa programação reativa para tornar os aplicativos interativos. Que será apresentada mais a frente com mais detalhes.</p>
-<p>Diremos ao Shiny como preencher as saídas <code>summary</code> e <code>table</code> no aplicativo. Substitua sua função <strong>server</strong> vazia por esta:</p>
+<p>Agora vamos dizer ao shiny como a entrada e as saídas estão relacionadas e definir a função <strong>server</strong>.
+O shiny usa programação reativa para tornar os aplicativos interativos, que será apresentada mais a frente com mais detalhes.</p>
+<p>Diremos ao shiny como preencher as saídas <code>summary</code> e <code>table</code> no aplicativo. Substitua sua função <strong>server</strong> vazia por esta:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="função-ui.html#cb6-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session) {</span>
 <span id="cb6-2"><a href="função-ui.html#cb6-2" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>summary <span class="ot">&lt;-</span> <span class="fu">renderPrint</span>({</span>
 <span id="cb6-3"><a href="função-ui.html#cb6-3" aria-hidden="true" tabindex="-1"></a>    dataset <span class="ot">&lt;-</span> <span class="fu">get</span>(input<span class="sc">$</span>dataset, <span class="st">&#39;package:datasets&#39;</span>)</span>
@@ -272,24 +266,24 @@ O Shiny usa programação reativa para tornar os aplicativos interativos. Que se
 <span id="cb6-10"><a href="função-ui.html#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p><em>Funções usadas no trecho acima:</em></p>
 <ul>
-<li><p><code>output$summary</code> indica que você está fornecendo como será sua saída do Shiny com esse <em>summary</em>.</p></li>
-<li><p><code>renderPrint</code> usa a função de renderização específica para envolver algum código fornecido por você. Cada função <code>render{Type}</code> é projetada para produzir um tipo específico de saída (por exemplo, texto, tabelas e gráficos) e geralmente é associada a uma função Output{type}.</p></li>
+<li><p><code>output$summary</code> indica que você está fornecendo como será sua saída do shiny com esse <em>summary</em>.</p></li>
+<li><p><code>renderPrint</code> usa a função de renderização específica para envolver algum código fornecido por você. Cada função <code>render{Type}</code> é projetada para produzir um tipo específico de saída (por exemplo, textos, tabelas e gráficos) e geralmente é associada a uma função {type}Output.</p></li>
 </ul>
 <p>Por exemplo, neste aplicativo, <code>renderPrint()</code> é pareado com <code>verbatimTextOutput()</code> para exibir um resumo estatístico com texto de largura fixa e <code>renderTable()</code> é pareado com <code>tableOutput()</code> para mostrar os dados de entrada em uma tabela.</p>
-<p>Observe que o resumo e a tabela são atualizados sempre que você altera o conjunto de dados de entrada. Essa dependência é criada implicitamente porque nos referimos <code>input$dataset</code> nas funções de saída. <code>input$dataset</code> é preenchido com o valor atual do componente de <strong>ui</strong> com id dataset e fará com que as saídas sejam atualizadas automaticamente sempre que esse valor mudar.</p>
+<p>Observe que o resumo e a tabela são atualizados sempre que você altera o conjunto de dados de entrada. Essa dependência é criada implicitamente porque nos referimos <code>input$dataset</code> nas funções de saída, <code>input$dataset</code> é preenchido com o valor atual do componente de <strong>ui</strong> com id dataset e fará com que as saídas sejam atualizadas automaticamente sempre que esse valor mudar.</p>
 <p>Esta é a essência da <strong>reatividade</strong>: <em>as saídas reagem automaticamente (recalculam) quando suas entradas mudam.</em></p>
 </div>
 <div id="inputs" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> <strong>Inputs</strong></h2>
-<p>Todas as funções de entrada tem o mesmo primeiro argumento: <code>inputId</code>. Este é o identificador usado para conectar o front-end ao back-end: se a UI tiver uma entrada com ID ‘name,’ a função do servidor irá acessá-la com <code>input$name</code>.</p>
+<p>Todas as funções de entrada tem o mesmo primeiro argumento: <code>inputId</code>. Este é o identificador usado para conectar o front-end ao back-end: se a <strong>ui</strong> tiver uma entrada com ID ‘name,’ a função do servidor irá acessá-la com <code>input$name</code>.</p>
 <p>O <code>inputId</code> tem duas restrições:</p>
 <ul>
-<li><p>Deve ser uma string simples que contém apenas letras, números e sublinhados (sem espaços, travessões, pontos ou outros caracteres especiais permitidos!). Nomeie-o como se fosse uma variável em R.</p></li>
+<li><p>Deve ser uma string simples que contém apenas letras, números e sublinhados (sem espaços, travessões, pontos ou outros caracteres especiais permitidos). Nomeie-se como se fosse uma variável em R.</p></li>
 <li><p>Deve ser único. Se não for exclusivo, você não terá como referir-se a esse controle na função <strong>server</strong>.</p></li>
 </ul>
 <p>A maioria das funções de entrada tem um segundo parâmetro chamado <code>label</code>. Isso é usado para criar um rótulo legível para o controle.</p>
 <p>O terceiro parâmetro é normalmente <code>value</code>, que quando possível, permite definir o valor padrão. Os parâmetros restantes são exclusivos do controle.</p>
-<p><strong>Algumas funções padrões do Shiny:</strong></p>
+<p><strong>Algumas funções padrões do shiny:</strong></p>
 <table>
 <colgroup>
 <col width="50%" />
@@ -388,7 +382,7 @@ O Shiny usa programação reativa para tornar os aplicativos interativos. Que se
 <div id="datas" class="section level4" number="3.2.1.3">
 <h4><span class="header-section-number">3.2.1.3</span> <strong>Datas</strong></h4>
 <p><code>dateInput()</code> seleciona um único dia.</p>
-<p><code>dateRangeInput()</code> seleciona um intervalo de dois dias.</p>
+<p><code>dateRangeInput()</code> seleciona um intervalo dias.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="função-ui.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb9-2"><a href="função-ui.html#cb9-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
 <span id="cb9-3"><a href="função-ui.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateInput</span>(<span class="st">&#39;primeiro&#39;</span>, <span class="st">&#39;Quando você entrou no seu primeiro emprego?&#39;</span>),</span>

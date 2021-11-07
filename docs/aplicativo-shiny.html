@@ -5,26 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 2 Aplicativo Shiny | Tutorial Básico de Shiny</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="description" content=" 2 Aplicativo Shiny | Tutorial Básico de Shiny" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 2 Aplicativo Shiny | Tutorial Básico de Shiny" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content=" 2 Aplicativo Shiny | Tutorial Básico de Shiny" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   
 
 <meta name="author" content="Author: Ana M. P. Pinheiro" />
@@ -255,12 +249,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A função <strong>server</strong> monitora a função <strong>ui</strong>.Sempre que houver uma mudança na <strong>ui</strong>, o <strong>server</strong> seguirá algumas instruções (executará algum código R) de acordo e atualizará a exibição dos visuais. Esta é a ideia básica da expressão reativa, que é uma característica distinta do Shiny.</p>
 <div id="construindo-um-aplicativo-shiny" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> <strong>Construindo um aplicativo Shiny</strong></h2>
-<p>Inicialmente vamos criar um aplicativo shiny simples, o Shiny usa programação reativa para atualizar automaticamente as saídas quando as entradas mudam (vamos ver mais a frente sobre esse conceito e entender seu funcionalidade).</p>
+<p>Inicialmente vamos criar um aplicativo shiny simples, o shiny usa programação reativa para atualizar automaticamente as saídas quando as entradas mudam (vamos ver mais a frente sobre esse conceito e entender seu funcionalidade).</p>
 <p>Instalação do pacote shiny:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="aplicativo-shiny.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&#39;shiny&#39;)</span></span></code></pre></div>
 <p>Carregue o pacote em sua sessão atual do R.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="aplicativo-shiny.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span></code></pre></div>
-<p>Agora vamos criar um novo diretório e colocar no nome de <code>app.R</code>, esse arquivo será usado para dizer ao Shiny como o aplicativo deve ficar e como deve se comportar.</p>
+<p>Agora vamos criar um novo diretório e colocar no nome de <code>app.R</code>, esse arquivo será usado para dizer ao shiny como o aplicativo deve ficar e como deve se comportar.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="aplicativo-shiny.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb4-2"><a href="aplicativo-shiny.html#cb4-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
 <span id="cb4-3"><a href="aplicativo-shiny.html#cb4-3" aria-hidden="true" tabindex="-1"></a>   <span class="st">&#39;Hello, world!&#39;</span></span>
@@ -269,10 +263,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-6"><a href="aplicativo-shiny.html#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-7"><a href="aplicativo-shiny.html#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
 <ul>
-<li><p><code>library(shiny)</code> carrega o pacote Shiny.</p></li>
+<li><p><code>library(shiny)</code> carrega o pacote shiny.</p></li>
 <li><p>A <strong>ui</strong> nesse caso é uma página HTML contendo “Hello World!”</p></li>
 <li><p>A função <strong>server</strong> está vazia, no momento, então o aplicativo não faz nada.</p></li>
-<li><p><code>shiny(ui = ui, server = server)</code> cria e inicia o aplicativo Shiny a partir do <strong>ui</strong> e do <strong>server</strong>.</p></li>
+<li><p><code>shiny(ui = ui, server = server)</code> cria e inicia o aplicativo Shiny.</p></li>
 </ul>
 <p>Você pode clica em <code>Run App</code> na barra de ferramenta para executar o aplicativo ou usar o atalho <code>Ctrl</code>+<code>shift</code>+ <code>Enter</code>.</p>
 <p>Pronto, você criou seu primeiro aplicativo em Shiny.</p>

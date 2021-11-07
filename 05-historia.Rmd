@@ -5,7 +5,6 @@
 Antes de falarmos da proromação reativa vamos saber um pouco da sua história:
 
 
-
 > Se você quiser aprender mais sobre programação reativa em outras linguagens, um pouco de história pode ser útil. Você pode ver a gênese da programação reativa há mais de 40 anos no VisiCalc , a primeira planilha:
 
 > Imaginei um quadro-negro mágico no qual, se você apagasse um número e escrevesse algo novo, todos os outros números mudariam automaticamente, como um processador de texto com números.

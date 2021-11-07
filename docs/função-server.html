@@ -5,26 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 4 Função Server | Tutorial Básico de Shiny</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="description" content=" 4 Função Server | Tutorial Básico de Shiny" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 4 Função Server | Tutorial Básico de Shiny" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content=" 4 Função Server | Tutorial Básico de Shiny" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   
 
 <meta name="author" content="Author: Ana M. P. Pinheiro" />
@@ -237,14 +231,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="função-server" class="section level1" number="4">
 <h1><span class="header-section-number"> 4</span> <strong>Função Server</strong></h1>
 <hr />
-<p>A função do <strong>server</strong> contém três parâmetros: <code>input</code>, <code>output</code>, e <code>session</code>. Como você mesmo nunca chama a função do <strong>server</strong>, nunca criará esses objetos sozinhos. Em vez disso, eles são criados pelo Shiny quando a sessão começa, conectando-se de volta a uma sessão específica. Como qualquer outra função do R, quando a função <strong>server</strong> é chamada, ela cria um novo ambiente local que é independente de todas as outras chamadas da função. Isso permite que cada sessão tenha um estado único, além de isolar as variáveis criadas dentro da função. É por isso que quase toda a programação reativa que você fará no Shiny estará dentro da função <strong>server</strong>.</p>
+<p>A função do <strong>server</strong> contém três parâmetros: <code>input</code>, <code>output</code>, e <code>session</code>. Como você mesmo nunca chama a função <strong>server</strong>, nunca criará esses objetos sozinhos. Em vez disso, eles são criados pelo shiny quando a sessão começa, conectando-se de volta a uma sessão específica. Como qualquer outra função do R, quando a função <strong>server</strong> é chamada, ela cria um novo ambiente local que é independente de todas as outras chamadas da função. Isso permite que cada sessão tenha um estado único, além de isolar as variáveis criadas dentro da função. É por isso que quase toda a programação reativa que você fará no shiny estará dentro da função <strong>server</strong>.</p>
 <ul>
 <li><p>O <code>input</code> é um objeto semelhante a uma lista que contém todos os dados de entradas enviados do navegador, nomeandos de acordo com o ID de entrada.</p></li>
 <li><p>O <code>output</code> é bem semelhante ao input; também tem um objeto semelhante a uma lista nomeado de acordo com o ID de saída. A principal diferença é que você o usa para enviar saída em vez de receber entrada. Você sempre usa o objeto <code>output</code> em conjunto com uma função <code>render</code>.</p></li>
 </ul>
 <div id="outputs" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> <strong>Outputs</strong></h2>
-<p>As saídas na <strong>ui</strong> criam espaços reservados que posteriormente são preenchidos pela função <strong>server</strong>. Como as entradas, as saídas recebem um ID exclusivo como primeiro argumento: se sua especificação de UI criar uma saída com ID ‘plot,’ você a acessará na função de <strong>server</strong> com <code>output$plot</code>.</p>
+<p>As saídas na <strong>ui</strong> criam espaços reservados que posteriormente são preenchidos pela função <strong>server</strong>. Como as entradas, as saídas recebem um ID exclusivo como primeiro argumento: se sua especificação de <strong>ui</strong> criar uma saída com ID ‘plot,’ você a acessará na função de <strong>server</strong> com <code>output$plot</code>.</p>
 <p>Cada função <code>output</code> no front-end é acoplada a uma função <code>render</code> no back-end. Existem três tipos principais de saída, correspondendo às três coisas que você geralmente inclui em um relatório: <strong>textos</strong>, <strong>tabelas</strong> e <strong>gráficos</strong>.</p>
 <p>Os pares de funções <code>output</code> e <code>render</code> que trabalham juntos para adicionar saída de R para o aplicativo shiny:</p>
 <table>

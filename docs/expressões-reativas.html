@@ -5,26 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 7 Expressões reativas | Tutorial Básico de Shiny</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="description" content=" 7 Expressões reativas | Tutorial Básico de Shiny" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 7 Expressões reativas | Tutorial Básico de Shiny" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content=" 7 Expressões reativas | Tutorial Básico de Shiny" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   
 
 <meta name="author" content="Author: Ana M. P. Pinheiro" />
@@ -238,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number"> 7</span> <strong>Expressões reativas</strong></h1>
 <hr />
 <p>Em todo tipo de programação, é uma prática ruim ter código duplicado; pode ser um desperdício computacional e, mais importante, aumenta a dificuldade de manter ou depurar o código. No script R tradicional, usamos duas técnicas para lidar com código duplicado: capturamos o valor usando uma variável ou capturamos o cálculo com uma função. Infelizmente, nenhuma dessas abordagens funciona aqui, e precisamos de um novo mecanismo: <strong>expressões reativas</strong>.</p>
-<p>As <strong>expressões reativas</strong> são importantes porque fornecem ao Shiny mais informações para que ele possa fazer menos recomputações quando as entradas mudam, tornando os aplicativos mais eficientes, e tornam mais fácil para os humanos entenderem o aplicativo.</p>
+<p>As <strong>expressões reativas</strong> são importantes porque fornecem ao shiny mais informações para que ele possa fazer menos recomputações quando as entradas mudam, tornando os aplicativos mais eficientes, e tornam mais fácil para os humanos entenderem o aplicativo.</p>
 <p>Como entradas, você pode usar os resultados de uma expressão reativa em uma saída. Assim como as saídas, as expressões reativas dependem das entradas e sabem automaticamente quando precisam ser atualizadas.</p>
 <p>Você cria uma expressão reativa envolvendo um bloco de código <code>reactive({...})</code> e atribuindo a uma variável, e você usa uma expressão reativa chamando como uma função. Mas, embora pareça que você está chamando uma função, uma expressão reativa tem uma diferença importante: ela só é executada na primeira vez que é chamada e, em seguida, armazena seu resultado em cache até que precise ser atualizado.</p>
 <p>Observer o exemplo a seguir:</p>
@@ -276,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-13"><a href="expressões-reativas.html#cb18-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <div id="observers" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> <strong>Observers</strong></h2>
-<p>Você pode salvar um arquivo em uma unidade de rede compartilhada, enviar dados para uma API da web, atualizar um banco de dados ou imprimir uma mensagem de depuração no console. Essas ações não afetam a aparência do aplicativo Shiny, portanto, você não deve usar uma saída e uma função <code>render</code>. Em vez disso, você precisa usar uma função <strong>observer</strong>.</p>
+<p>Você pode salvar um arquivo em uma unidade de rede compartilhada, enviar dados para uma API da web, atualizar um banco de dados ou imprimir uma mensagem de depuração no console. Essas ações não afetam a aparência do aplicativo shiny, portanto, você não deve usar uma saída e uma função <code>render</code>. Em vez disso, você precisa usar uma função <strong>observer</strong>.</p>
 <p>Um <code>observer</code> é como uma expressão reativa, pois pode ler valores reativos e chamar expressões reativas, e será reexecutado automaticamente quando essas dependências forem alteradas. Mas, ao contrário das expressões reativas, não produz um resultado e não pode ser usado como entrada para outras expressões reativas. Assim, os observers são úteis apenas por seus efeitos colaterais.</p>
 <p>Outro contraste entre expressões reativas e observers é sua estratégia de execução. Expressões reativas usam avaliação preguiçosa; ou seja, quando suas dependências mudam, eles não são executados imediatamente, mas esperam até serem chamados por outra pessoa. Na verdade, se eles não forem chamados, eles nunca serão executados novamente. Em contraste, os observers usam avaliação ansiosa; assim que suas dependências mudam, eles se programam para uma nova execução.</p>
 <p><code>observeEvent()</code> retorna um objeto de classe de referência do observe.</p>
@@ -315,7 +309,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Existem dois tipos de valores reativos:</p>
 <ul>
 <li><p><code>reactiveVal()</code> cria um único valor reativo.</p></li>
-<li><p><code>reactiveValues()</code> cria Uma lista de valores reativos.</p></li>
+<li><p><code>reactiveValues()</code> cria uma lista de valores reativos.</p></li>
 </ul>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="expressões-reativas.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb20-2"><a href="expressões-reativas.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -373,7 +367,7 @@ Se sua resposta é <em>NÃO</em>, parabéns você acertou. Os valores reativos s
 <span id="cb23-24"><a href="expressões-reativas.html#cb23-24" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb23-25"><a href="expressões-reativas.html#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-26"><a href="expressões-reativas.html#cb23-26" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(<span class="at">ui =</span> ui, <span class="at">server =</span> server)</span></code></pre></div>
-<p>No exemplo temos dois botões que permitem aumentar os valores e um botão que permite diminuir os valores. A função <code>reactiveValues</code> foi usada para armazena o valor atual e a função <code>observeEvent</code> para aumentar e diminuir o valor quando um botão é presioando. A principal complexidade adicional aqui é que o novo valor de <code>total()</code> depende do valor anterior.</p>
+<p>No exemplo temos dois botões que permitem aumentar os valores e um botão que permite diminuir os valores. A função <code>reactiveValues</code> foi usada para armazena o valor atual e a função <code>observeEvent</code> para aumentar ou diminuir o valor quando um botão é presioando. A principal complexidade adicional aqui é que o novo valor de <code>total()</code> depende do valor anterior.</p>
 
 </div>
 </div>

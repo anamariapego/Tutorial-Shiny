@@ -23,22 +23,22 @@ O código acima retorna uma página contendo uma caixa de seleção dos conjunto
 
 * `fluidPage()` é um controle de layout que configura a estrututa visual básica da página. 
 
-* `selectInput()` é o controle de entrada que permite ao usuário interagir com o aplicativo fornecendo o valor. Nesse caso, é uma caixa de seleção que permite que o usuário escolha um dos conjuntos de dados embutidos que vêm no R. 
+* `selectInput()` é o controle de entrada que permite ao usuário interagir com o aplicativo fornecendo um valor. Nesse caso, é uma caixa de seleção que permite que o usuário escolha um dos conjuntos de dados embutidos que vêm no R. 
 
-* `verbatimTextOutput()` e `tableOutput()` são controles de saída que dizem ao Shiny onde colocar a saída renderizada. `verbatimTextOutput()` exibe códigos e `tableOutput()` exibe tabelas. 
+* `verbatimTextOutput()` e `tableOutput()` são controles de saída que dizem ao shiny onde colocar a saída renderizada. `verbatimTextOutput()` exibe códigos e `tableOutput()` exibe tabelas. 
 
 
- A **ui** é de fato um arquivo HTML. As funções, entradas e saídas de layout têm usos diferentes, mas são fundamentalmente os mesmos nos bastidores: são apenas maneiras sofisticadas de gerar HTML e, se você chamar qualquer uma delas fora de um aplicativo Shiny, verá uma página HTML impresso no console.
+ A **ui** é de fato um arquivo HTML. As funções, entradas e saídas de layout têm usos diferentes, mas são fundamentalmente os mesmos nos bastidores: são apenas maneiras sofisticadas de gerar HTML e, se você chamar qualquer uma delas fora de um aplicativo shiny, verá uma página HTML impresso no console.
 
-Vemos apenas a entrada porque ainda não dissemos ao Shiny como a entrada e as saídas estão relacionadas.
+Vimos apenas a entrada porque ainda não dissemos ao shiny como a entrada e as saídas estão relacionadas.
 
 
 ## **Comportamento da UI**
 
-Agora vamos dizer ao Shiny como a entrada e as saídas estão relacionadas e definir a função **server**. 
-O Shiny usa programação reativa para tornar os aplicativos interativos. Que será apresentada mais a frente com mais detalhes.
+Agora vamos dizer ao shiny como a entrada e as saídas estão relacionadas e definir a função **server**. 
+O shiny usa programação reativa para tornar os aplicativos interativos, que será apresentada mais a frente com mais detalhes.
 
-Diremos ao Shiny como preencher as saídas `summary` e `table` no aplicativo. Substitua sua função **server** vazia por esta:
+Diremos ao shiny como preencher as saídas `summary` e `table` no aplicativo. Substitua sua função **server** vazia por esta:
 
 
 ```{r, results='hide'}
@@ -57,23 +57,23 @@ server <- function(input, output, session) {
 
 *Funções usadas no trecho acima:*
 
-* `output$summary` indica que você está fornecendo como será sua saída do Shiny com esse *summary*. 
+* `output$summary` indica que você está fornecendo como será sua saída do shiny com esse *summary*. 
 
-* `renderPrint` usa a função de renderização específica para envolver algum código fornecido por você. Cada função `render{Type}` é projetada para produzir um tipo específico de saída (por exemplo, texto, tabelas e gráficos) e geralmente é associada a uma função Output{type}.
+* `renderPrint` usa a função de renderização específica para envolver algum código fornecido por você. Cada função `render{Type}` é projetada para produzir um tipo específico de saída (por exemplo, textos, tabelas e gráficos) e geralmente é associada a uma função {type}Output.
 
 Por exemplo, neste aplicativo, `renderPrint()` é pareado com `verbatimTextOutput()` para exibir um resumo estatístico com texto de largura fixa e `renderTable()` é pareado com `tableOutput()` para mostrar os dados de entrada em uma tabela.
 
-Observe que o resumo e a tabela são atualizados sempre que você altera o conjunto de dados de entrada. Essa dependência é criada implicitamente porque nos referimos `input$dataset` nas funções de saída. `input$dataset` é preenchido com o valor atual do componente de **ui** com id dataset e fará com que as saídas sejam atualizadas automaticamente sempre que esse valor mudar. 
+Observe que o resumo e a tabela são atualizados sempre que você altera o conjunto de dados de entrada. Essa dependência é criada implicitamente porque nos referimos `input$dataset` nas funções de saída, `input$dataset` é preenchido com o valor atual do componente de **ui** com id dataset e fará com que as saídas sejam atualizadas automaticamente sempre que esse valor mudar. 
 
 Esta é a essência da **reatividade**: *as saídas reagem automaticamente (recalculam) quando suas entradas mudam.*
 
 ## **Inputs**
 
-Todas as funções de entrada tem o mesmo primeiro argumento: `inputId`. Este é o identificador usado para conectar o front-end ao back-end: se a UI tiver uma entrada com ID 'name', a função do servidor irá acessá-la com `input$name`.
+Todas as funções de entrada tem o mesmo primeiro argumento: `inputId`. Este é o identificador usado para conectar o front-end ao back-end: se a **ui** tiver uma entrada com ID 'name', a função do servidor irá acessá-la com `input$name`.
 
 O `inputId` tem duas restrições:
 
-* Deve ser uma string simples que contém apenas letras, números e sublinhados (sem espaços, travessões, pontos ou outros caracteres especiais permitidos!). Nomeie-o como se fosse uma variável em R.
+* Deve ser uma string simples que contém apenas letras, números e sublinhados (sem espaços, travessões, pontos ou outros caracteres especiais permitidos). Nomeie-se como se fosse uma variável em R.
 
 * Deve ser único. Se não for exclusivo, você não terá como referir-se a esse controle na função **server**. 
 
@@ -81,7 +81,7 @@ A maioria das funções de entrada tem um segundo parâmetro chamado `label`. Is
 
 O terceiro parâmetro é normalmente `value`, que quando possível, permite definir o valor padrão. Os parâmetros restantes são exclusivos do controle.
 
-**Algumas funções padrões do Shiny:**
+**Algumas funções padrões do shiny:**
 
 
 Funções            | Ações
@@ -147,7 +147,7 @@ shinyApp(ui = ui, server = server)
 
 `dateInput()` seleciona um único dia.
 
-`dateRangeInput()` seleciona um intervalo de dois dias.
+`dateRangeInput()` seleciona um intervalo dias.
 
 
 ```{r, results='hide'}

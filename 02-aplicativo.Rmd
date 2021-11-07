@@ -29,7 +29,7 @@ A função **server**  monitora a função **ui**.Sempre que houver uma mudança
 
 ## **Construindo um aplicativo Shiny**
 
-Inicialmente vamos criar um aplicativo shiny simples, o Shiny usa programação reativa para atualizar automaticamente as saídas quando as entradas mudam (vamos ver mais a frente sobre esse conceito e entender seu funcionalidade). 
+Inicialmente vamos criar um aplicativo shiny simples, o shiny usa programação reativa para atualizar automaticamente as saídas quando as entradas mudam (vamos ver mais a frente sobre esse conceito e entender seu funcionalidade). 
 
 Instalação do pacote shiny: 
 
@@ -47,7 +47,7 @@ library(shiny)
 ```
 
 
-Agora vamos criar um novo diretório e colocar no nome de `app.R`, esse arquivo será usado para dizer ao Shiny como o aplicativo deve ficar e como deve se comportar. 
+Agora vamos criar um novo diretório e colocar no nome de `app.R`, esse arquivo será usado para dizer ao shiny como o aplicativo deve ficar e como deve se comportar. 
 
 
 ```{r, message=FALSE, results='hide'}
@@ -61,13 +61,13 @@ shinyApp(ui = ui, server = server)
 ```
 
 
-* `library(shiny)` carrega o pacote  Shiny. 
+* `library(shiny)` carrega o pacote  shiny. 
 
 * A  **ui** nesse caso é uma página HTML contendo "Hello World!".
 
 * A função **server** está vazia, no momento, então o aplicativo não faz nada.
 
-* `shiny(ui = ui, server = server)` cria e inicia o aplicativo Shiny a partir do **ui** e do **server**.
+* `shiny(ui = ui, server = server)` cria e inicia o aplicativo Shiny.
 
 Você pode clica em `Run App` na barra de ferramenta para executar o aplicativo ou usar o atalho `Ctrl`+`shift`+ `Enter`.
 

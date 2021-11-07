@@ -4,9 +4,9 @@
 
 ## **Introdução**
 
-Vamos fazer um estudo de caso, para ajudá-los a fixar os conteúdos anteriores. Agora veremos um aplicativo Shiny mais rico que explora um conjunto de dados e reúne muitas das ideias que vimos até agora. Vamos fazer uma pequena análise de dados fora do shiny,em seguida, transformá-lo em um aplicativo, começando de forma simples e progressivamente acrescentando mais detalhes.  
+Vamos fazer um estudo de caso, para ajudá-lo a fixar os conteúdos estudados anteriormente. Agora veremos um aplicativo shiny mais rico que explora um conjunto de dados e reúne muitas das ideias que vimos até agora. Vamos fazer uma pequena análise de dados fora do shiny, em seguida, transformá-lo em um aplicativo, começando de forma simples e progressivamente acrescentando mais detalhes.  
 
-Vamos complementar o Shiny com outros pacotes: 
+Vamos complementar o shiny com outros pacotes: 
 
 - `tidyverse` para análise geral dos dados(uma coleção de pacotes R projetados para data science).
 - `shinydashboard` estrutura shiny dashboard. 
@@ -55,7 +55,7 @@ download('products.tsv')
 ```
 
 
-O dataset `injuries` tem cerca de 250.000 observações e 10 variáveis.
+O dataset `injuries` tem aproximadamente 250.000 observações e 10 variáveis.
 
 
 ```{r, results='hide', warning=FALSE, message=FALSE}
@@ -109,7 +109,7 @@ head(population)
 
 ## **Transformação e limpeza dos dados**
 
-É uma boa prática antes de qualquer análise ou criação de um aplicativo Shiny, darmos uma atenção aos nossos dados. Verificar qual tipo de dado estamos lidando, se tem valores missings, se precisa criar ou remover variáveis, entre outras possibilidades de transformações e limpezas dos dados. Essa é a parte menos glamurosa de qualquer projeto, porém essa etapa é muito importante, pois garante um boa análise, uma boa visualização dos dados. 
+É uma boa prática antes de qualquer análise ou criação de um aplicativo shiny, darmos uma atenção aos nossos dados. Verificar qual tipo de dado estamos lidando, se tem valores missings, se precisa criar ou remover variáveis, entre outras possibilidades de transformações e limpezas dos dados. Essa é a parte menos glamurosa de qualquer projeto, porém essa etapa é muito importante, pois garante um boa análise e uma boa visualização dos dados. 
 
 Agora vamos fazer as transformações e limpezas necessárias aos dados.
 
@@ -140,7 +140,7 @@ Nos três datasets não há presença de valores missing. E para o nosso aplicat
 
 Vamos explorar um pouco os dados, antes de criar o aplicativo.
 
-Vamos extrair um conjunto de dados dos dados originais, extrair apenas as lesões relacionadas aos esportes. E escolher um desses esporte para fazer a análise. 
+Vamos extrair um subconjunto dos dados originais, apenas as lesões relacionadas aos esportes. E escolher um desses esporte para fazer a análise. 
 
 
 ```{r, results='hide'}
@@ -201,9 +201,9 @@ basquete %>%
 
 ## **Desenvolvendo o aplicativo Shiny**
 
-Aqui, vou construir um protótipo simples do aplicativo Shiny, construindo passo a passo para que você possa entender o funcionamento da mecância básica. 
+Aqui, vou construir um protótipo simples do aplicativo shiny, construindo passo a passo para que você possa entender o funcionamento da mecância básica. 
 
-**Função UI:**
+**Função ui:**
 
 
 ```{r, results='hide'}
@@ -231,7 +231,7 @@ ui <- fluidPage(
 ```
 
 
-A função `setNames` e a função `selectInput` irá mostra o nome do esporte na UI e retorna o código ao **server**. O código vai criar uma página HTML, dividida em três linhas: 
+A função `setNames` e a função `selectInput` irá mostra o nome do esporte na **ui** e retorna o código ao **server**. O código vai criar uma página HTML, dividida em três linhas: 
 
 - primeira linha com uma coluna, que tem uma caixa de seleção para que o usuário possa escolher o esporte. 
 - segunda linha com três colunas, que serão ocupadas pelas tabelas.
@@ -279,7 +279,7 @@ fluidRow(
 ```
 
 
-O `eventReative()` cria uma expresão reatica que só é atualizado quando o botão é clicado ou quando os dados subjacentes  são alterados. 
+O `eventReative()` cria uma expresão reativa que só é atualizado quando o botão é clicado ou quando os dados subjacentes são alterados. 
 
 
 ```{r, results='hide', eval = FALSE} 

@@ -142,7 +142,7 @@ shinyApp(ui = ui, server = server)
 ```
 
 
-No código acima carreguei os pacotes necessários para o desenvolvimento do aplicativo, a novidade aqui é o pacote `shinyjs`, que permite que você execute operações comuns de JavaScript úteis em aplicativos Shiny que irão melhorar muito seus aplicativos. Depois carrego os módulos e os dados. 
+No código acima carreguei os pacotes necessários para o desenvolvimento do aplicativo, a novidade aqui é o pacote `shinyjs`, que permite que você execute operações comuns de JavaScript úteis em aplicativos shiny que irão melhorar o aplicativo. Depois carregamos os módulos e os dados. 
 
 A linha de código `tags$link(rel = 'stylesheet', type = 'text/css', href = 'style_shiny.css')` define o CSS do aplicativo, deixando-o no estilo que você desejar. 
 
@@ -154,9 +154,9 @@ knitr::include_graphics('www/img/apli_final.png')
 ```
 
 
-A aparência do aplicativo Shiny ficou bem mais amigável e agradável. Ao decorrer de um desenvolvimento de aplicativo Shiny você tem uma variedade de funções, pacotes que te ajuda a deixar a construir o aplicativo do jeito que desejar, basta usar a sua imagimação e a sua criatividade e colocar a mão na massa. 
+A aparência do aplicativo shiny ficou bem mais amigável e agradável. Ao decorrer de um desenvolvimento de aplicativo shiny você tem uma variedade de funções, pacotes que te ajuda a deixar a construir o aplicativo do jeito que desejar, basta usar a sua imaginação e a sua criatividade e colocar a mão na massa. 
 
-Abaixo vou listar alguns exemplos em Shiny para você se inspirar: 
+Abaixo tem alguns exemplos em Shiny para você se inspirar: 
 
 - https://geom.shinyapps.io/careerpathfinder-beta
 - https://vac-lshtm.shinyapps.io/ncov_tracker

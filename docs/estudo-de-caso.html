@@ -5,26 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 9 Estudo de Caso | Tutorial Básico de Shiny</title>
-  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  <meta name="description" content=" 9 Estudo de Caso | Tutorial Básico de Shiny" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 9 Estudo de Caso | Tutorial Básico de Shiny" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content=" 9 Estudo de Caso | Tutorial Básico de Shiny" />
   
-  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
-The HTML output format for this example is bookdown::gitbook,
-set in the _output.yml file.</p>" />
+  
   
 
 <meta name="author" content="Author: Ana M. P. Pinheiro" />
@@ -239,8 +233,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <div id="introdução-3" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> <strong>Introdução</strong></h2>
-<p>Vamos fazer um estudo de caso, para ajudá-los a fixar os conteúdos anteriores. Agora veremos um aplicativo Shiny mais rico que explora um conjunto de dados e reúne muitas das ideias que vimos até agora. Vamos fazer uma pequena análise de dados fora do shiny,em seguida, transformá-lo em um aplicativo, começando de forma simples e progressivamente acrescentando mais detalhes.</p>
-<p>Vamos complementar o Shiny com outros pacotes:</p>
+<p>Vamos fazer um estudo de caso, para ajudá-lo a fixar os conteúdos estudados anteriormente. Agora veremos um aplicativo shiny mais rico que explora um conjunto de dados e reúne muitas das ideias que vimos até agora. Vamos fazer uma pequena análise de dados fora do shiny, em seguida, transformá-lo em um aplicativo, começando de forma simples e progressivamente acrescentando mais detalhes.</p>
+<p>Vamos complementar o shiny com outros pacotes:</p>
 <ul>
 <li><code>tidyverse</code> para análise geral dos dados(uma coleção de pacotes R projetados para data science).</li>
 <li><code>shinydashboard</code> estrutura shiny dashboard.</li>
@@ -277,7 +271,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb32-6"><a href="estudo-de-caso.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">download</span>(<span class="st">&#39;injuries.tsv.gz&#39;</span>)</span>
 <span id="cb32-7"><a href="estudo-de-caso.html#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">download</span>(<span class="st">&#39;population.tsv&#39;</span>)</span>
 <span id="cb32-8"><a href="estudo-de-caso.html#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">download</span>(<span class="st">&#39;products.tsv&#39;</span>)</span></code></pre></div>
-<p>O dataset <code>injuries</code> tem cerca de 250.000 observações e 10 variáveis.</p>
+<p>O dataset <code>injuries</code> tem aproximadamente 250.000 observações e 10 variáveis.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="estudo-de-caso.html#cb33-1" aria-hidden="true" tabindex="-1"></a>injuries <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(<span class="st">&#39;neiss/injuries.tsv&#39;</span>)</span>
 <span id="cb33-2"><a href="estudo-de-caso.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(injuries)</span>
 <span id="cb33-3"><a href="estudo-de-caso.html#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(injuries)</span></code></pre></div>
@@ -304,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="transformação-e-limpeza-dos-dados" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> <strong>Transformação e limpeza dos dados</strong></h2>
-<p>É uma boa prática antes de qualquer análise ou criação de um aplicativo Shiny, darmos uma atenção aos nossos dados. Verificar qual tipo de dado estamos lidando, se tem valores missings, se precisa criar ou remover variáveis, entre outras possibilidades de transformações e limpezas dos dados. Essa é a parte menos glamurosa de qualquer projeto, porém essa etapa é muito importante, pois garante um boa análise, uma boa visualização dos dados.</p>
+<p>É uma boa prática antes de qualquer análise ou criação de um aplicativo shiny, darmos uma atenção aos nossos dados. Verificar qual tipo de dado estamos lidando, se tem valores missings, se precisa criar ou remover variáveis, entre outras possibilidades de transformações e limpezas dos dados. Essa é a parte menos glamurosa de qualquer projeto, porém essa etapa é muito importante, pois garante um boa análise e uma boa visualização dos dados.</p>
 <p>Agora vamos fazer as transformações e limpezas necessárias aos dados.</p>
 <p>Vamos verificar os tipos de dados:</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="estudo-de-caso.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(injuries) </span>
@@ -319,7 +313,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exploração-dos-dados" class="section level2" number="9.4">
 <h2><span class="header-section-number">9.4</span> <strong>Exploração dos dados</strong></h2>
 <p>Vamos explorar um pouco os dados, antes de criar o aplicativo.</p>
-<p>Vamos extrair um conjunto de dados dos dados originais, extrair apenas as lesões relacionadas aos esportes. E escolher um desses esporte para fazer a análise.</p>
+<p>Vamos extrair um subconjunto dos dados originais, apenas as lesões relacionadas aos esportes. E escolher um desses esporte para fazer a análise.</p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="estudo-de-caso.html#cb38-1" aria-hidden="true" tabindex="-1"></a>esportes <span class="ot">&lt;-</span> <span class="fu">subset</span>(injuries, prod_code <span class="sc">==</span> <span class="dv">1200</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1205</span><span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1211</span> <span class="sc">|</span></span>
 <span id="cb38-2"><a href="estudo-de-caso.html#cb38-2" aria-hidden="true" tabindex="-1"></a>                   prod_code <span class="sc">==</span> <span class="dv">1233</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1267</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1333</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">3265</span><span class="sc">|</span></span>
 <span id="cb38-3"><a href="estudo-de-caso.html#cb38-3" aria-hidden="true" tabindex="-1"></a>                     prod_code <span class="sc">==</span> <span class="dv">3274</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">5034</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">5040</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">5041</span>)</span></code></pre></div>
@@ -349,8 +343,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="desenvolvendo-o-aplicativo-shiny" class="section level2" number="9.5">
 <h2><span class="header-section-number">9.5</span> <strong>Desenvolvendo o aplicativo Shiny</strong></h2>
-<p>Aqui, vou construir um protótipo simples do aplicativo Shiny, construindo passo a passo para que você possa entender o funcionamento da mecância básica.</p>
-<p><strong>Função UI:</strong></p>
+<p>Aqui, vou construir um protótipo simples do aplicativo shiny, construindo passo a passo para que você possa entender o funcionamento da mecância básica.</p>
+<p><strong>Função ui:</strong></p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="estudo-de-caso.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraindo um conjunto de dados do dataset products que representa os nomes e os códigos dos esportes</span></span>
 <span id="cb43-2"><a href="estudo-de-caso.html#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-3"><a href="estudo-de-caso.html#cb43-3" aria-hidden="true" tabindex="-1"></a>produtcs1 <span class="ot">&lt;-</span> <span class="fu">subset</span>(products, prod_code <span class="sc">==</span> <span class="dv">1200</span> <span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1205</span><span class="sc">|</span> prod_code <span class="sc">==</span> <span class="dv">1211</span> </span>
@@ -372,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb43-19"><a href="estudo-de-caso.html#cb43-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">12</span>, <span class="fu">plotOutput</span>(<span class="st">&#39;plot&#39;</span>))</span>
 <span id="cb43-20"><a href="estudo-de-caso.html#cb43-20" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb43-21"><a href="estudo-de-caso.html#cb43-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>A função <code>setNames</code> e a função <code>selectInput</code> irá mostra o nome do esporte na UI e retorna o código ao <strong>server</strong>. O código vai criar uma página HTML, dividida em três linhas:</p>
+<p>A função <code>setNames</code> e a função <code>selectInput</code> irá mostra o nome do esporte na <strong>ui</strong> e retorna o código ao <strong>server</strong>. O código vai criar uma página HTML, dividida em três linhas:</p>
 <ul>
 <li>primeira linha com uma coluna, que tem uma caixa de seleção para que o usuário possa escolher o esporte.</li>
 <li>segunda linha com três colunas, que serão ocupadas pelas tabelas.</li>
@@ -408,7 +402,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb45-2"><a href="estudo-de-caso.html#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">2</span>, <span class="fu">actionButton</span>(<span class="st">&#39;nar&#39;</span>, <span class="st">&#39;Narrative&#39;</span>)),</span>
 <span id="cb45-3"><a href="estudo-de-caso.html#cb45-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">10</span>, <span class="fu">textOutput</span>(<span class="st">&#39;narrativa&#39;</span>))</span>
 <span id="cb45-4"><a href="estudo-de-caso.html#cb45-4" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p>O <code>eventReative()</code> cria uma expresão reatica que só é atualizado quando o botão é clicado ou quando os dados subjacentes são alterados.</p>
+<p>O <code>eventReative()</code> cria uma expresão reativa que só é atualizado quando o botão é clicado ou quando os dados subjacentes são alterados.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="estudo-de-caso.html#cb46-1" aria-hidden="true" tabindex="-1"></a>narrative_sample <span class="ot">&lt;-</span> <span class="fu">eventReactive</span>(</span>
 <span id="cb46-2"><a href="estudo-de-caso.html#cb46-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">list</span>(input<span class="sc">$</span>nar, <span class="fu">selected</span>()),</span>
 <span id="cb46-3"><a href="estudo-de-caso.html#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">selected</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(narrative) <span class="sc">%&gt;%</span> <span class="fu">sample</span>(<span class="dv">1</span>)</span>

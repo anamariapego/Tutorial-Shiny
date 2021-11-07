@@ -4,13 +4,13 @@
 
 ## **Introdução**
 
-Agora vamos falar sobre o sistema de módulos do Shiny, que permite extrair a interface do usuário acoplada e o código do servidor em componentes isolados e reutilizáveis, além de deixar seu aplicativo mais limpo e organizado.
+Agora vamos falar sobre o sistema de módulos do shiny, que permite extrair a função **ui** acoplada e o código **server** em componentes isolados e reutilizáveis, além de deixar seu aplicativo mais limpo e organizado.
 
-À medida que os aplicativos Shiny ficam maiores e mais complicados, usamos módulos para gerenciar a complexidade crescente do código do aplicativo Shiny.
+À medida que os aplicativos shiny ficam maiores e mais complicados, usamos módulos para gerenciar a complexidade crescente do código do aplicativo.
 
-Um módulo é um par de funções **ui** e funções **server**. A mágica dos módulos vem porque essas funções são construídas de uma maneira especial que cria um “namespace”. Até agora, ao escrever um aplicativo, os nomes dos controles `id`  são globais: todas as partes de sua função **server** podem ver todas as partes de sua ui. Os módulos oferecem a capacidade de criar controles que só podem ser vistos de dentro do módulo. Isso é chamado de namespace porque cria “espaços” de “nomes” que são isolados do resto do aplicativo.
+Um módulo é um par de funções **ui** e **server**. A mágica dos módulos vem porque essas funções são construídas de uma maneira especial que cria um “namespace”. Até agora, ao escrever um aplicativo, os nomes dos controles `id`  são globais: todas as partes de sua função **server** podem ver todas as partes da função **ui**. Os módulos oferecem a capacidade de criar controles que só podem ser vistos de dentro do módulo. Isso é chamado de namespace porque cria “espaços” de “nomes” que são isolados do resto do aplicativo.
 
-Módulos Shiny têm duas grandes vantagens: 
+Módulos shiny têm duas grandes vantagens: 
 
 - O namespacing torna mais fácil entender como seu aplicativo funciona porque você pode escrever, analisar e testar componentes individuais de forma isolada. 
 
@@ -47,13 +47,13 @@ Como um aplicativo, o módulo é composto por duas partes:
 
 - A função de servidor do módulo que executa o código dentro da função `server`.
 
-As duas funções possuem formulários padrão. Ambos pegam um argumento `id` e o usam para definir o namespace do módulo. Para criar um módulo, precisamos extrair o código da **ui** do aplicativo e do servidor e colocá-lo na ui do módulo.
+As duas funções possuem formulários padrão. Ambos pegam um argumento `id` e o usam para definir o namespace do módulo. Para criar um módulo, precisamos extrair o código da **ui** e do server do aplicativo e colocá-los na arquivo do módulo.
 
 ### **Módulo UI**
 
-No módulo UI existem duas etapas:
+No módulo **ui** existem duas etapas:
 
-- Coloca o código **ui** dentro de uma função que tenha um argumento `id`.
+- Coloca o código dentro de uma função que tenha um argumento `id`.
 
 - Envolva cada ID exsitente em uma chamada `NS()`.
 
@@ -118,9 +118,9 @@ Os módulos podem representar entrada, saída ou ambos. Eles podem ser tão simp
 
 Ás vezes, um módulo com apenas um argumento `id` para o módulo **ui** e o **server** é útil porque permite isolar o código complexo em seu próprio arquivo. Isso é particularmente útil para aplicativos que agregam componentes independentes, como um painel corporativo onde cada guia mostra relatórios personalizados para cada linha de negócios. Aqui, os módulos permitem que você desenvolva cada peça em seu próprio arquivo sem ter que se preocupar com o conflito de IDs entre os componentes.
 
-Muitas vezes, no entanto, o módulo **ui** e o **server** precisarão de argumentos adicionais. Adicionar argumentos à **ui** do módulo oferece maior controle sobre a aparência do módulo, permitindo que você use o mesmo módulo em mais lugares em seu aplicativo. Mas a **ui** do módulo é apenas uma função R regular, portanto, há relativamente pouco a aprender que seja específico do Shiny. Ao contrário do código Shiny regular, conectar módulos requer que você seja explícito sobre entradas e saídas. Inicialmente, isso vai parecer cansativo. E é certamente mais trabalhoso do que a associação de forma livre usual de Shiny. Mas os módulos impõem linhas específicas de comunicação por um motivo: eles são um pouco mais trabalhosos de criar, mas muito mais fáceis de entender e permitem que você crie aplicativos substancialmente mais complexos.
+Muitas vezes, no entanto, o módulo **ui** e o **server** precisarão de argumentos adicionais. Adicionar argumentos à **ui** do módulo oferece maior controle sobre a aparência do módulo, permitindo que você use o mesmo em mais lugares em seu aplicativo. Mas a **ui** é apenas uma função R regular, portanto, há relativamente pouco a aprender que seja específico do shiny. Ao contrário do código shiny regular, conectar módulos requer que você seja explícito sobre entradas e saídas. Inicialmente, isso vai parecer cansativo. E é certamente mais trabalhoso do que a associação de forma livre usual de shiny. Mas os módulos impõem linhas específicas de comunicação por um motivo: eles são um pouco mais trabalhosos de criar, mas muito mais fáceis de entender e permitem que você crie aplicativos substancialmente mais complexos.
 
-Para ver como as entradas e saídas funcionam, vamos fazer um aplicativo simples, mas que ilustra alguns dos princípios básicos. Vamos criar um módulo que permite ao usuário selecionar um conjunto de dados a partir dos dados integradosfornecidos pelo pacote de conjuntos de dados. 
+Para ver como as entradas e saídas funcionam, vamos fazer um aplicativo simples, mas que ilustra alguns dos princípios básicos. Vamos criar um módulo que permite ao usuário selecionar um conjunto de dados a partir dos dados integrados fornecidos pelo pacote de conjuntos de dados. 
 
 **Obs**: a função de um módulo **ui** deve ser um nome que é o sufixo `Input`, `Output` ou `UI`; por exemplo, `datasetInput`, `selecNumOutput`, ou `analiseUI`. 
 

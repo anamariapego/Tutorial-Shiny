@@ -2,7 +2,7 @@
 
 ---
 
-A função  do **server** contém três parâmetros: `input`, `output`, e `session`. Como você mesmo nunca chama a função do **server**, nunca criará esses objetos sozinhos. Em vez disso, eles são criados pelo Shiny quando a sessão começa, conectando-se de volta a uma sessão específica. Como qualquer outra função do R, quando a função **server** é chamada, ela cria um novo ambiente local que é independente de todas as outras chamadas da função. Isso permite que cada sessão tenha um estado único, além de isolar as variáveis criadas dentro da função. É por isso que quase toda a programação reativa que você fará no Shiny estará dentro da função **server**.
+A função  do **server** contém três parâmetros: `input`, `output`, e `session`. Como você mesmo nunca chama a função **server**, nunca criará esses objetos sozinhos. Em vez disso, eles são criados pelo shiny quando a sessão começa, conectando-se de volta a uma sessão específica. Como qualquer outra função do R, quando a função **server** é chamada, ela cria um novo ambiente local que é independente de todas as outras chamadas da função. Isso permite que cada sessão tenha um estado único, além de isolar as variáveis criadas dentro da função. É por isso que quase toda a programação reativa que você fará no shiny estará dentro da função **server**.
 
 * O `input` é um objeto semelhante a uma lista que contém todos os dados de entradas enviados do navegador, nomeandos de acordo com o ID de entrada. 
 
@@ -11,7 +11,7 @@ A função  do **server** contém três parâmetros: `input`, `output`, e `sessi
 
 ## **Outputs**
 
-As saídas na **ui** criam espaços reservados que posteriormente são preenchidos pela função **server**. Como as entradas, as saídas recebem um ID exclusivo como primeiro argumento: se sua especificação de UI criar uma saída com ID 'plot', você a acessará na função de **server** com `output$plot`.
+As saídas na **ui** criam espaços reservados que posteriormente são preenchidos pela função **server**. Como as entradas, as saídas recebem um ID exclusivo como primeiro argumento: se sua especificação de **ui** criar uma saída com ID 'plot', você a acessará na função de **server** com `output$plot`.
 
 Cada função `output` no front-end é acoplada a uma função `render` no back-end. Existem três tipos principais de saída, correspondendo às três coisas que você geralmente inclui em um relatório: **textos**, **tabelas** e **gráficos**. 
 

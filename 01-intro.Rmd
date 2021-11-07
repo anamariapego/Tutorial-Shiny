@@ -32,4 +32,5 @@
 
 * Usa um modelo de [Programação Reativa](https://en.wikipedia.org/wiki/Reactive_programming) que elimina o código de manipulação de eventos confuso, para que você possa se concentrar no código que realmente importa.
 
-[Folha de dica do Shiny](https://www.rstudio.com/wp-content/uploads/2015/02/shiny-cheatsheet.pdf), este é um ótimo recurso para ajudar a você relembrar alguns dos principais componentes de um aplicativo Shiny. 
+Este é um ótimo recurso para ajudar a você relembrar alguns dos principais componentes de um aplicativo Shiny:
+![Folha de dica do Shiny](www/img/cheatsheet.png)

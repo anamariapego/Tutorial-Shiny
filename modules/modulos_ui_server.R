@@ -1,3 +1,13 @@
+# Função para converter variável para o tipo factor, ordena em frequência e agrupa os níveis
+# após os 5 primeiros. 
+
+func_redu <- function(df, var, n = 5) {
+  df %>%
+    mutate({{var}} := fct_lump(fct_infreq({{var}}), n = n)) %>%
+    group_by({{var}}) %>%
+    summarise(frequency = as.integer(sum(weight)))
+}
+
 
 analise_ui <- function(id){
   ns <- NS(id)
@@ -24,14 +34,6 @@ analise_ui <- function(id){
       column(12, plotOutput(ns('plot')))
     )
   )
-}
-
-
-func_redu <- function(df, var, n = 5) {
-  df %>%
-    mutate({{var}} := fct_lump(fct_infreq({{var}}), n = n)) %>%
-    group_by({{var}}) %>%
-    summarise(n = as.integer(sum(weight)))
 }
 
 
