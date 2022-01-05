@@ -6,5 +6,5 @@ O presente tutorial apresentar um guia básico para quem deseja iniciar os estud
 Você conhecerá as principais funcionalidades e funções do pacote e será capaz de desenvolver um aplicativo shiny.
 
 <div>
-    <img src="www/img/shiny.png" width="450" align="center">
+    <img src="www/img/shinylogo.png" width="450" align="center">
 </div>
