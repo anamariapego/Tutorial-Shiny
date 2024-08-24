@@ -1,10 +1,13 @@
 # Tutorial Básico em Shiny
 
-**Shiny** ->  é um framework  para  a criação de aplicativos da web usando código *R*.
+Este repositório contém um tutorial básico desenvolvido durante meu primeiro estágio, com o objetivo de aprender a utilizar o Shiny, um framework para a criação de aplicativos web utilizando a linguagem R.
 
-O presente tutorial apresentar um guia básico para quem deseja iniciar os estudos sobre *shiny*. 
-Você conhecerá as principais funcionalidades e funções do pacote e será capaz de desenvolver um aplicativo shiny.
+### Objetivo
+O tutorial visa fornecer um guia introdutório para aqueles que desejam iniciar seus estudos em Shiny. Ao seguir este tutorial, você irá:
+
+* Conhecer as principais funcionalidades e funções do pacote Shiny.
+* Aprender a criar e desenvolver um aplicativo básico utilizando Shiny.
 
 <div>
-    <img src="www/img/shinylogo.png" width="450" align="center">
+    <img src="https://github.com/user-attachments/assets/86f8baaa-a29b-419b-b13f-447dd8a63e84" width="500" align="center">
 </div>
